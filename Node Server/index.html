@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.deep_purple-indigo.min.css" />
+    <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+</head>
+
+<body>
+    <div class="mdl-grid">
+        <ul id="messages" class="demo-list-item mdl-list mdl-cell mdl-cell--12-col"></ul>
+    </div>
+    <form action="">
+        <div class="mdl-grid">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--11-col">
+                <label class="mdl-textfield__label" for="m">Message...</label>
+                <input id="m" class="mdl-textfield__input" type="text" autocomplete="off" />
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--1-col">Send</button>
+        </div>
+    </form>
+    <!-- <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> -->
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+    var socket = new WebSocket('ws://localhost:3000/');
+
+    socket.onopen = function() {
+        console.log("Socket opened.");
+    };
+
+    socket.onclose = function(event) {
+        if (event.wasClean) {
+            console.log('Connection closed');
+        } else {
+            console.log('Connection broken'); // например, "убит" процесс сервера
+        }
+        console.log('Code: ' + event.code + ' reason: ' + event.reason);
+    };
+
+    socket.onmessage = function(event) {
+
+        try {
+            var json = JSON.parse(event.data)
+        } catch (e) {
+            console.log('This doesn\'t look like a valid JSON: ', event.data);
+        }
+
+        if (json['type'] == 'history') {
+            console.log('-> history')
+            json['data'].forEach(function(message) {
+                appendMessage(message)
+            })
+
+        } else if (json['type'] == 'message') {
+            console.log('-> message')
+            appendMessage(json['data'])
+
+        } else {
+            console.log('unknown object: ' + json)
+        }
+    };
+
+    socket.onerror = function(error) {
+        console.log("Ошибка " + error.message);
+    };
+
+    $('form').submit(function() {
+        var message = $('#m').val()
+        if (message && message.length) {
+            socket.send(message);
+            $('#m').val('')
+            return false;
+        }
+        return false
+    });
+
+    // var socket = io();
+
+    // $('form').submit(function(){
+    //   var message = $('#m').val()
+    //   if (message && message.length) {
+    //     socket.emit('chat message', message);
+    //     $('#m').val('');
+    //     return false;
+    //   }
+    //   return false
+    // });
+
+    // socket.on('chat message', function(msg){
+    //   console.log("<- " + msg)
+    //   appendMessage(msg)
+    // });
+
+    // socket.on('chat history', function(messages){
+    //   console.log("<- history")
+    //   messages.forEach(function(msg) {
+    //     appendMessage(msg)
+    //   })
+    // });
+
+    var appendMessage = function(message) {
+        var item = $('<li class="mdl-list__item">').text(message).append('<span class="mdl-list__item-primary-content">').append('<i class="material-icons mdl-list__item-icon">person</i>')
+        $('#messages').append(item)
+    }
+    </script>
+</body>
+
+</html>
