@@ -22,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="703"/>
+            <point key="canvasLocation" x="601" y="703"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdc-Ji-C8j">
@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4z6-TG-kyM"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Lcv-fI-hjv"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVy-20-YQ2" userLabel="First Responder" sceneMemberID="firstResponder"/>

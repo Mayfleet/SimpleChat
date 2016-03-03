@@ -28,7 +28,8 @@ wsServer.on('request', function (request) {
             } else if (data['type'] == 'message') {
                 processMessage(data);
                 clients.forEach(function (client) {
-                    sendMessage(client, data)
+                    sendMessage(client, data);
+                    sendDebugReport(client);
                 });
             }
         }
@@ -53,6 +54,15 @@ function processMessage(data) {
 
 function sendMessage(client, data) {
     client.sendUTF(JSON.stringify(data));
+}
+
+function sendDebugReport(client) {
+    var debugReport = {
+        'type': 'message',
+        'senderId': 'Server',
+        'text': 'users: ' + clients.length + ', messages: ' + history.length
+    };
+    client.sendUTF(JSON.stringify(debugReport));
 }
 
 function sendHistory(client) {

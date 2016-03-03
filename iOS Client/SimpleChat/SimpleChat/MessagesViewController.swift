@@ -6,6 +6,7 @@
 //  Copyright © 2016 Maxim Pervushin. All rights reserved.
 //
 
+import UIKit
 import JSQMessagesViewController
 
 class MessagesViewController: JSQMessagesViewController {
@@ -14,8 +15,8 @@ class MessagesViewController: JSQMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        senderId = "SimpleChat"
-        senderDisplayName = "Simple Chat"
+        senderId = "iOS App"
+        senderDisplayName = "iOS App"
         dataSource.onChange = {
             dispatch_async(dispatch_get_main_queue(), {
                 self.collectionView?.reloadData()
@@ -43,8 +44,26 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
 
+//    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString? {
+//        let message = dataSource.messages[indexPath.row]
+//        return NSAttributedString(string: message.senderId())
+//    }
+
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = dataSource.messages[indexPath.row]
+        return NSAttributedString(string: message.senderId())
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.messages.count
+    }
+
+//    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+//        return 20
+//    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 20
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

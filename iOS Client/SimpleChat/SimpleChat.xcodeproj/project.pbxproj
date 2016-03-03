@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		73BC604E99A06BD57EEDF46B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6AA04C39E64D7804D9D2 /* Message.swift */; };
 		73BC60DB4C6C777B0209E69C /* MessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC660EB97D45B76B905243 /* MessagesDataSource.swift */; };
 		809E65295E0AE684B77F845B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CF27FCD359A31F8AA5C9F /* Pods.framework */; };
 		C509AE3C1C8848960014C5DB /* Node Server in Resources */ = {isa = PBXBuildFile; fileRef = C509AE3B1C8848960014C5DB /* Node Server */; };
@@ -22,7 +21,6 @@
 		72D93E3165B62EDDFB545E48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		73BC61F952741DE71804FEB7 /* Web Client */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = "Web Client"; path = "../../Web Client"; sourceTree = "<group>"; };
 		73BC660EB97D45B76B905243 /* MessagesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDataSource.swift; sourceTree = "<group>"; };
-		73BC6AA04C39E64D7804D9D2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		797CF27FCD359A31F8AA5C9F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE3C81E4E95E87DA4A1C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C509AE3B1C8848960014C5DB /* Node Server */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Node Server"; path = "/Users/maximpervushin/Desktop/GH/SimpleChat/iOS Client/../Node Server"; sourceTree = "<absolute>"; };
@@ -85,7 +83,6 @@
 				C515DCEC1C85A25B004A7BD0 /* LaunchScreen.storyboard */,
 				C515DCEF1C85A25B004A7BD0 /* Info.plist */,
 				C515DCF51C85C336004A7BD0 /* MessagesViewController.swift */,
-				73BC6AA04C39E64D7804D9D2 /* Message.swift */,
 				73BC660EB97D45B76B905243 /* MessagesDataSource.swift */,
 			);
 			path = SimpleChat;
@@ -224,7 +221,6 @@
 			files = (
 				C515DCF61C85C336004A7BD0 /* MessagesViewController.swift in Sources */,
 				C515DCE41C85A25B004A7BD0 /* AppDelegate.swift in Sources */,
-				73BC604E99A06BD57EEDF46B /* Message.swift in Sources */,
 				73BC60DB4C6C777B0209E69C /* MessagesDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
