@@ -1,0 +1,8 @@
+{
+  "name": "chat-server",
+  "version": "1.0.0",
+  "description": "Chat Server",
+  "dependencies": {
+    "websocket": "^1.0.22"
+  }
+}
