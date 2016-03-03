@@ -2,16 +2,14 @@ var WebSocketServer = require('websocket').server;
 var http = require('http');
 var fs = require('fs');
 
-var server = http.createServer(function (request, response) {
-});
-server.listen(3000, function () {
-});
+var server = http.createServer();
+server.listen(3000);
 
 wsServer = new WebSocketServer({
     httpServer: server
 });
 
-var history = [{"senderId": "Admin", "text": "Welcome to the Simple Chat!", "type": "message"}];
+var history = [{'senderId': 'Admin', 'text': 'Welcome to the Simple Chat!', 'type': 'message'}];
 var clients = [];
 
 wsServer.on('request', function (request) {
