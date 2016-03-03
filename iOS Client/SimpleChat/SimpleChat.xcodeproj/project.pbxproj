@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		73BC604E99A06BD57EEDF46B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6AA04C39E64D7804D9D2 /* Message.swift */; };
 		809E65295E0AE684B77F845B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CF27FCD359A31F8AA5C9F /* Pods.framework */; };
+		C509AE3C1C8848960014C5DB /* Node Server in Resources */ = {isa = PBXBuildFile; fileRef = C509AE3B1C8848960014C5DB /* Node Server */; };
 		C515DCE41C85A25B004A7BD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C515DCE31C85A25B004A7BD0 /* AppDelegate.swift */; };
 		C515DCE91C85A25B004A7BD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C515DCE71C85A25B004A7BD0 /* Main.storyboard */; };
 		C515DCEB1C85A25B004A7BD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C515DCEA1C85A25B004A7BD0 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		73BC6AA04C39E64D7804D9D2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		797CF27FCD359A31F8AA5C9F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE3C81E4E95E87DA4A1C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C509AE3B1C8848960014C5DB /* Node Server */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Node Server"; path = "/Users/maximpervushin/Desktop/GH/SimpleChat/iOS Client/../Node Server"; sourceTree = "<absolute>"; };
 		C515DCE01C85A25B004A7BD0 /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C515DCE31C85A25B004A7BD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C515DCE81C85A25B004A7BD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		C515DCD71C85A25B004A7BD0 = {
 			isa = PBXGroup;
 			children = (
+				C509AE3B1C8848960014C5DB /* Node Server */,
 				C515DCE21C85A25B004A7BD0 /* SimpleChat */,
 				C515DCE11C85A25B004A7BD0 /* Products */,
 				4EBC88E474C202FC291DD39F /* Pods */,
@@ -152,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C509AE3C1C8848960014C5DB /* Node Server in Resources */,
 				C515DCEE1C85A25B004A7BD0 /* LaunchScreen.storyboard in Resources */,
 				C515DCEB1C85A25B004A7BD0 /* Assets.xcassets in Resources */,
 				C515DCE91C85A25B004A7BD0 /* Main.storyboard in Resources */,

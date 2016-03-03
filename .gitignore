@@ -64,3 +64,4 @@ fastlane/screenshots
 Podfile.lock
 iOS Client/Pods
 Node Server/node_modules
+iOS Client/.idea

@@ -13,7 +13,7 @@ import SwiftyJSON
 class MessagesViewController: JSQMessagesViewController {
 
     var socket: WebSocket!
-    var messages = [Message]()
+    var messages = [JSQMessageData]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +30,8 @@ class MessagesViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
-//        if messages[indexPath.row].senderId() == senderId {
-        if indexPath.row % 2 == 0 {
+        if messages[indexPath.row].senderId() == senderId {
+//        if indexPath.row % 2 == 0 {
             return JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.5))
         } else {
             return JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.blueColor().colorWithAlphaComponent(0.5))
@@ -39,8 +39,8 @@ class MessagesViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        //        if messages[indexPath.row].senderId() == senderId {
-        if indexPath.row % 2 == 0 {
+        if messages[indexPath.row].senderId() == senderId {
+//        if indexPath.row % 2 == 0 {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "AvatarOutgoing"), diameter: 30)
         } else {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "AvatarIncoming"), diameter: 30)
@@ -55,8 +55,8 @@ class MessagesViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
 
         let message = messages[indexPath.item]
-//        if message.senderId() == senderId {
-        if indexPath.row % 2 == 0 {
+        if message.senderId() == senderId {
+//        if indexPath.row % 2 == 0 {
             cell.textView?.textColor = UIColor.blackColor()
         } else {
             cell.textView?.textColor = UIColor.whiteColor()
@@ -66,7 +66,47 @@ class MessagesViewController: JSQMessagesViewController {
     }
 
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        socket.writeString(text)
+        //socket.writeString(text)
+        sendText(text)
+    }
+}
+
+extension MessagesViewController {
+
+//    private func sendAuthentication() {
+//        guard let package = JSON(["type": "authentication", "senderId": senderId]).rawString() else {
+//            return
+//        }
+//        print("> " + package)
+//        socket.writeString(package)
+//    }
+
+    private func sendText(text: String) {
+        guard let package = JSON(["type": "message", "senderId": senderId, "text": text]).rawString() else {
+            return
+        }
+        print("> " + package)
+        socket.writeString(package)
+    }
+
+    private func processMessage(json: JSON) {
+        if let messageSenderId = json["senderId"].string,
+        messageSenderDisplayName = json["senderId"].string,
+        messageText = json["text"].string {
+            let message = JSQMessage(senderId: messageSenderId, displayName: messageSenderDisplayName, text: messageText)
+            messages.append(message)
+        } else {
+            print("ERROR: Unable to parse message")
+        }
+    }
+
+    private func processHistory(json: JSON) {
+        if let messages = json["messages"].array {
+            for message in messages {
+                processMessage(message)
+            }
+            print("messages: \(messages)")
+        }
     }
 }
 
@@ -74,6 +114,7 @@ extension MessagesViewController: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         print("connected")
+//        sendAuthentication()
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -85,20 +126,14 @@ extension MessagesViewController: WebSocketDelegate {
 
         switch json["type"] {
         case "history":
-            let data = json["data"]
-            for message in data {
-                let sender = messages.count % 2 == 1 ? "SimpleChat" : "Empty"
-                messages.append(Message(text: message.1.string!, sender: sender, imageUrl: nil))
-            }
+            processHistory(json)
             dispatch_async(dispatch_get_main_queue(), {
                 () -> Void in
                 self.collectionView?.reloadData()
             })
-            print("messages: \(messages)")
             break
         case "message":
-            let sender = messages.count % 2 == 1 ? "SimpleChat" : "Empty"
-            messages.append(Message(text: json["data"].string!, sender: sender, imageUrl: nil))
+            processMessage(json)
             dispatch_async(dispatch_get_main_queue(), {
                 () -> Void in
                 self.collectionView?.reloadData()
