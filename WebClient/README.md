@@ -11,3 +11,11 @@ Install Grunt's command line interface
 Install dependencies for the development environment
 
     npm install
+
+To build the project use the following command
+
+    grunt
+
+To start automatic build system and web server with automatic page reloading use the following command
+
+    grunt server
