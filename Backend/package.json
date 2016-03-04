@@ -1,6 +1,6 @@
 {
     "name": "chat-server",
-    "description": "Chat Server",
+    "description": "SimpleChat Backend",
     "version": "1.0.0",
     "private": true,
     "main": "index.js",
