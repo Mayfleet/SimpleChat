@@ -5,10 +5,16 @@
     "private": true,
     "main": "index.js",
     "scripts": {
-        "start": "nodemon ."
+        "start": "nodemon .",
+        "test": "mocha test",
+        "debugTest": "DEBUG=* mocha test"
     },
     "dependencies": {
-        "websocket": "^1.0.22"
+        "lodash": "^4.6.1",
+        "websocket": "^1.0.22",
+
+        "chai": "^1.10.0",
+        "mocha": "^2.0.1"
     },
     "devDependencies": {
         "nodemon": "*"
