@@ -1,8 +1,16 @@
 {
-  "name": "chat-server",
-  "version": "1.0.0",
-  "description": "Chat Server",
-  "dependencies": {
-    "websocket": "^1.0.22"
-  }
+    "name": "chat-server",
+    "description": "Chat Server",
+    "version": "1.0.0",
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ."
+    },
+    "dependencies": {
+        "websocket": "^1.0.22"
+    },
+    "devDependencies": {
+        "nodemon": "*"
+    }
 }
