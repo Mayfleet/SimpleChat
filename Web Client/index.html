@@ -1,98 +1,159 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.deep_purple-indigo.min.css"/>
-    <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-</head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Chat Web Client</title>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    <style>
+        #main-panel {
+            top: 5vh;
+            bottom: 5vh;
+            padding: 0;
+        }
+        #messages-container {
+            height: 75vh;
+            overflow-y: scroll;
+        }
+        .sender-header {
+            width: 10%;
+        }
+    </style>
+
+</head>
 <body>
-<div class="mdl-grid">
-    <ul id="messages" class="demo-list-item mdl-list mdl-cell mdl-cell--12-col"></ul>
-</div>
-<form action="">
-    <div class="mdl-grid">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--11-col">
-            <label class="mdl-textfield__label" for="m">Message...</label>
-            <input id="messageText" class="mdl-textfield__input" type="text" autocomplete="off"/>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="main-panel" class="panel panel-default col-md-10 col-md-offset-1">
+
+            <div class="panel-heading">
+                <h4>Messages:</h4>
+            </div>
+
+            <div id="messages-container" class="panel-body">
+                <table class="table table-responsive">
+                    <tbody id="messages"></tbody>
+                </table>
+
+            </div>
+
+            <div class="panel-footer">
+                <form action="">
+                    <div class="input-group">
+                        <input id="message" type="text" class="form-control" placeholder="Message...">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send"></span></button>
+        </span>
+                    </div>
+                </form>
+            </div>
+
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--1-col">
-            Send
-        </button>
     </div>
-</form>
-<!-- <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> -->
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</div>
+
 <script>
+
+    var webApp = {
+        senderId: 'Web App'
+    };
+
+    $('form').submit(function () {
+        var messageInput = $('#message');
+        sendTextMessage(messageInput.val());
+        messageInput.val('');
+        return false
+    });
+
     var socket = new WebSocket('ws://localhost:3000/');
 
     socket.onopen = function () {
-        console.log("Socket opened.");
+        console.log('Connection opened.');
     };
 
     socket.onclose = function (event) {
         if (event.wasClean) {
-            console.log('Connection closed');
+            console.log('Connection closed.');
         } else {
-            console.log('Connection broken');
+            console.log('Connection broken.');
         }
-        console.log('Code: ' + event.code + ' reason: ' + event.reason);
     };
 
     socket.onerror = function (error) {
-        console.log("Error: " + error.message);
+        console.log('Connection error: ' + error.message);
     };
 
     socket.onmessage = function (event) {
-
         try {
             var json = JSON.parse(event.data)
         } catch (e) {
-            console.log('This doesn\'t look like a valid JSON: ', event.data);
+            console.log('Invalid JSON: ', event.data);
         }
-
         if (json['type'] == 'history') {
             processHistory(json)
         } else if (json['type'] == 'message') {
             processMessage(json)
-
         } else {
             console.log('unknown object: ' + json)
         }
     };
 
-    $('form').submit(function () {
-        sendText($('#messageText').val());
-        $('#messageText').val('');
-        return false;
-    });
+    function sendTextMessage(message) {
+        if (!message || message.length == 0) {
+            return
+        }
+
+        socket.send(JSON.stringify({'type': 'message', 'senderId': webApp.senderId, 'text': message}));
+    }
 
     function processHistory(data) {
         console.log('> history');
         data['messages'].forEach(function (message) {
-            processMessage(message);
-        })
+            appendMessage(message);
+        });
+        scrollMessagesToBottom();
     }
-
     function processMessage(data) {
         console.log('> message: ' + data);
-        appendMessage(data['text'])
+        appendMessage(data);
+        scrollMessagesToBottom();
     }
 
-    function sendText(text) {
-        if (text && text.length) {
-            var data = {'type': 'message', 'senderId': 'WebApp', 'text': text};
-            socket.send(JSON.stringify(data));
+    function appendMessage(message) {
+        var senderId = message['senderId'];
+        var row = $('<tr>');
+        if (webApp.senderId == senderId) {
+            $(row).addClass('text-primary');
         }
+        var header = $('<th scope="row" class="sender-header text-right">').text(senderId + ':');
+        row.append(header);
+        var column = $('<td>').text(message['text']);
+        row.append(column);
+        $('#messages').append(row);
     }
 
-    var appendMessage = function (message) {
-        var item = $('<li class="mdl-list__item">').text(message).append('<span class="mdl-list__item-primary-content">').append('<i class="material-icons mdl-list__item-icon">person</i>')
-        $('#messages').append(item)
+    function scrollMessagesToBottom() {
+        $('#messages-container').animate({scrollTop: $('#messages').height()}, '500');
     }
+
 </script>
-</body>
 
+</body>
 </html>
