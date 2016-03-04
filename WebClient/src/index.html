@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Chat Web Client</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    <style>
+        #main-panel {
+            top: 5vh;
+            bottom: 5vh;
+            padding: 0;
+        }
+        #messages-container {
+            height: 75vh;
+            overflow-y: scroll;
+        }
+        .sender-header {
+            width: 10%;
+        }
+        .noborder {
+            border: none !important;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div id="main-panel" class="panel panel-default col-md-10 col-md-offset-1">
+
+            <div class="panel-heading">
+                <h4>Messages:</h4>
+            </div>
+
+            <div id="messages-container" class="panel-body">
+                <table class="table table-responsive table-condensed">
+                    <tbody id="messages"></tbody>
+                </table>
+
+            </div>
+
+            <div class="panel-footer">
+                <form action="">
+                    <div class="input-group">
+                        <input id="message" type="text" class="form-control" placeholder="Message...">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send"></span></button>
+        </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var webApp = {
+        senderId: 'Web App',
+        history: []
+    };
+
+    $('form').submit(function () {
+        var messageInput = $('#message');
+        sendTextMessage(messageInput.val());
+        messageInput.val('');
+        return false
+    });
+
+    var socket = new WebSocket('ws://localhost:3000/');
+
+    socket.onopen = function () {
+        console.log('Connection opened.');
+    };
+
+    socket.onclose = function (event) {
+        if (event.wasClean) {
+            console.log('Connection closed.');
+        } else {
+            console.log('Connection broken.');
+        }
+    };
+
+    socket.onerror = function (error) {
+        console.log('Connection error: ' + error.message);
+    };
+
+    socket.onmessage = function (event) {
+        try {
+            var json = JSON.parse(event.data)
+        } catch (e) {
+            console.log('Invalid JSON: ', event.data);
+        }
+        if (json['type'] == 'history') {
+            processHistory(json)
+        } else if (json['type'] == 'message') {
+            processMessage(json)
+        } else {
+            console.log('unknown object: ' + json)
+        }
+    };
+
+    function sendTextMessage(message) {
+        if (!message || message.length == 0) {
+            return
+        }
+
+        socket.send(JSON.stringify({'type': 'message', 'senderId': webApp.senderId, 'text': message}));
+    }
+
+    function processHistory(data) {
+        webApp.history = [];
+        console.log('> history');
+        data['messages'].forEach(function (message) {
+            appendMessage(message);
+        });
+        scrollMessagesToBottom();
+    }
+
+    function processMessage(data) {
+        console.log('> message: ' + data);
+        appendMessage(data);
+        scrollMessagesToBottom();
+    }
+
+    function appendMessage(message) {
+        var senderId = message['senderId'];
+        var row = $('<tr>');
+        if (webApp.senderId == senderId) {
+            $(row).addClass('text-primary');
+        }
+        var header = $('<th scope="row" class="sender-header text-right">').text(senderId + ':');
+        row.append(header);
+        var column = $('<td>').text(message['text']);
+        row.append(column);
+
+
+        $('#messages').append(row);
+
+        if (webApp.history.length > 0) {
+            var previous = webApp.history[webApp.history.length - 1];
+            var previousSenderId = previous['senderId'];
+            if (previousSenderId == senderId) {
+                $(header).addClass('noborder');
+                $(column).addClass('noborder');
+                $(header).text('');
+            }
+        }
+
+        webApp.history.push(message);
+    }
+
+    function scrollMessagesToBottom() {
+        $('#messages-container').animate({scrollTop: $('#messages').height()}, '500');
+    }
+
+</script>
+
+</body>
+</html>
