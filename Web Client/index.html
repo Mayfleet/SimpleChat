@@ -34,6 +34,9 @@
         .sender-header {
             width: 10%;
         }
+        .noborder {
+            border: none !important;
+        }
     </style>
 
 </head>
@@ -48,7 +51,7 @@
             </div>
 
             <div id="messages-container" class="panel-body">
-                <table class="table table-responsive">
+                <table class="table table-responsive table-condensed">
                     <tbody id="messages"></tbody>
                 </table>
 
@@ -72,7 +75,8 @@
 <script>
 
     var webApp = {
-        senderId: 'Web App'
+        senderId: 'Web App',
+        history: []
     };
 
     $('form').submit(function () {
@@ -124,12 +128,14 @@
     }
 
     function processHistory(data) {
+        webApp.history = [];
         console.log('> history');
         data['messages'].forEach(function (message) {
             appendMessage(message);
         });
         scrollMessagesToBottom();
     }
+
     function processMessage(data) {
         console.log('> message: ' + data);
         appendMessage(data);
@@ -146,7 +152,21 @@
         row.append(header);
         var column = $('<td>').text(message['text']);
         row.append(column);
+
+
         $('#messages').append(row);
+
+        if (webApp.history.length > 0) {
+            var previous = webApp.history[webApp.history.length - 1];
+            var previousSenderId = previous['senderId'];
+            if (previousSenderId == senderId) {
+                $(header).addClass('noborder');
+                $(column).addClass('noborder');
+                $(header).text('');
+            }
+        }
+
+        webApp.history.push(message);
     }
 
     function scrollMessagesToBottom() {
