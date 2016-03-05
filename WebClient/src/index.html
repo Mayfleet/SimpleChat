@@ -22,13 +22,18 @@
             crossorigin="anonymous"></script>
 
     <style>
+
+        #notice {
+            margin-top: 20px;
+        }
+
         #main-panel {
-            top: 5vh;
-            bottom: 5vh;
+            /*top: 5vh;*/
+            /*bottom: 5vh;*/
             padding: 0;
         }
         #messages-container {
-            height: 75vh;
+            height: 60vh;
             overflow-y: scroll;
         }
         .sender-header {
@@ -43,7 +48,13 @@
 <body>
 
 <div class="container-fluid">
+
     <div class="row">
+
+        <div id="notice" class="alert alert-info col-md-10 col-md-offset-1" role="alert">
+            You can specify custom server in address box like that #server=ws://mf-simple-chat.herokuapp.com:80/
+        </div>
+
         <div id="main-panel" class="panel panel-default col-md-10 col-md-offset-1">
 
             <div class="panel-heading">
@@ -86,7 +97,15 @@
         return false
     });
 
-    var socket = new WebSocket('ws://localhost:3000/');
+    function getHashValue(key) {
+        var matches = location.hash.match(new RegExp(key+'=([^&]*)'));
+        return matches ? matches[1] : null;
+    }
+
+    var backendUrl = getHashValue('server');
+    server = backendUrl || 'ws://localhost:3000/';
+
+    var socket = new WebSocket(backendUrl);
 
     socket.onopen = function () {
         console.log('Connection opened.');
