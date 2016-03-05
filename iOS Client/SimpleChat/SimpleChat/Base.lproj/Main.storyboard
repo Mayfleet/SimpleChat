@@ -45,13 +45,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="[Server Backend URL]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wc3-tc-teF">
                                             <rect key="frame" x="16" y="26" width="576" height="9"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tGV-s2-KV4">
                                             <rect key="frame" x="16" y="8" width="576" height="14"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -83,7 +83,13 @@
                             <outlet property="delegate" destination="nHv-hX-U8T" id="sYe-Ls-HGV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Servers" id="qa6-g9-gq6"/>
+                    <navigationItem key="navigationItem" title="Servers" id="qa6-g9-gq6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HUJ-q8-ffO">
+                            <connections>
+                                <action selector="addServerButtonAction:" destination="nHv-hX-U8T" id="ZAE-1y-hsG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShowMessages" id="PYD-dg-XIf"/>
                     </connections>

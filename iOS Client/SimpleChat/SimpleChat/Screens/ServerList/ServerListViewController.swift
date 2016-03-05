@@ -7,6 +7,34 @@ import UIKit
 
 class ServerListViewController: UITableViewController {
 
+    @IBAction func addServerButtonAction(sender: AnyObject) {
+        let alert = UIAlertController(title: "Add Server", message: nil, preferredStyle: .Alert)
+
+        alert.addTextFieldWithConfigurationHandler({
+            textField in
+            textField.placeholder = "Name"
+        })
+
+        alert.addTextFieldWithConfigurationHandler({
+            textField in
+            textField.placeholder = "Backend URL"
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: {
+            _ in
+
+            let serverName = alert.textFields?[0].text
+            let serverBackendURLString = alert.textFields?[1].text
+            if self.dataSource.addServerWithName(serverName, backendURLString: serverBackendURLString) {
+                let newIndexPath = NSIndexPath(forRow: self.dataSource.servers.count - 1, inSection: 0)
+                self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+            }
+        }))
+
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     let dataSource = ServerListDataSource()
 
     override func viewDidLoad() {
@@ -40,6 +68,12 @@ class ServerListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(ServerCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ServerCell
         cell.server = dataSource.servers[indexPath.row]
         return cell
+    }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            dataSource.removeServerAtIndex(indexPath.row)
+        }
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

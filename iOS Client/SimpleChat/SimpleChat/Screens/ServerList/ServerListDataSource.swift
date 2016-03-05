@@ -7,7 +7,25 @@ import Foundation
 
 class ServerListDataSource: NSObject {
 
-    public var onChange: (Void -> Void)?
+    var onChange: (Void -> Void)?
+
+    func addServerWithName(name: String?, backendURLString: String?) -> Bool {
+        if let
+        name = name,
+        backendURLString = backendURLString,
+        backendURL = NSURL(string: backendURLString) {
+
+            servers.append(Server(name: name, backendURL: backendURL))
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func removeServerAtIndex(index: Int) -> Bool {
+        servers.removeAtIndex(index)
+        return true
+    }
 
     private (set) var servers = [Server]()
 
