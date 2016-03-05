@@ -10,18 +10,23 @@ import JSQMessagesViewController
 
 class MessagesDataSource: NSObject {
 
-    public var onChange: (Void -> Void)?
+    public var onChange: (Void -> Void)? {
+        didSet {
+            onChange?()
+        }
+    }
+
+    public var server: Server? {
+        didSet {
+            initializeConnection()
+        }
+    }
+
     private (set) var messages = [JSQMessageData]()
 
     override init() {
         super.init()
-        if let url = NSURL(string: "ws://localhost:3000/") {
-            webSocket = WebSocket(url: url, protocols: ["http"])
-            webSocket?.delegate = self
-            scheduleReconnection()
-        } else {
-            print("Error: invalid url")
-        }
+        initializeConnection()
     }
 
     func sendText(senderId: String, text: String) {
@@ -43,6 +48,22 @@ class MessagesDataSource: NSObject {
 
     private var webSocket: WebSocket?
     private var reconnectionTimer: NSTimer?
+
+    private func initializeConnection() {
+        reconnectionTimer?.invalidate()
+        reconnectionTimer = nil
+        webSocket?.disconnect()
+        webSocket = nil
+        messages = [JSQMessageData]()
+        if let server = server {
+            webSocket = WebSocket(url: server.backendURL, protocols: ["http"])
+            webSocket?.delegate = self
+            scheduleReconnection()
+        } else {
+            print("ERROR: Invalid server.")
+        }
+        onChange?()
+    }
 
     private func scheduleReconnection() {
         if nil == reconnectionTimer {

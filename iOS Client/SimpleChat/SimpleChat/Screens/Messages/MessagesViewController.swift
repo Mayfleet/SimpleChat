@@ -13,6 +13,15 @@ class MessagesViewController: JSQMessagesViewController {
 
     let dataSource = MessagesDataSource()
 
+    public var server: Server? {
+        set {
+            dataSource.server = newValue
+        }
+        get {
+            return dataSource.server
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         senderId = "iOS App"
