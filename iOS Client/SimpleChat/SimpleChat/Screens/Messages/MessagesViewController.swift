@@ -13,7 +13,7 @@ class MessagesViewController: JSQMessagesViewController {
 
     let dataSource = MessagesDataSource()
 
-    public var server: Server? {
+    var server: Server? {
         set {
             dataSource.server = newValue
         }
@@ -24,8 +24,8 @@ class MessagesViewController: JSQMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        senderId = "iOS App"
-        senderDisplayName = "iOS App"
+        senderId = "iOS App #\(arc4random_uniform(1000) + 1)"
+        senderDisplayName = senderId
         dataSource.onChange = {
             dispatch_async(dispatch_get_main_queue(), {
                 self.collectionView?.reloadData()
