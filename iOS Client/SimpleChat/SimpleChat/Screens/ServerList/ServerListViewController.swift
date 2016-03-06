@@ -7,6 +7,8 @@ import UIKit
 
 class ServerListViewController: UITableViewController {
 
+    // MARK: - ServerListViewController @IB
+
     @IBAction func addServerButtonAction(sender: AnyObject) {
         let alert = UIAlertController(title: "Add Server", message: nil, preferredStyle: .Alert)
 
@@ -26,8 +28,8 @@ class ServerListViewController: UITableViewController {
 
             let serverName = alert.textFields?[0].text
             let serverBackendURLString = alert.textFields?[1].text
-            if self.dataSource.addServerWithName(serverName, backendURLString: serverBackendURLString) {
-                let newIndexPath = NSIndexPath(forRow: self.dataSource.servers.count - 1, inSection: 0)
+            if self.logic.addServerWithName(serverName, backendURLString: serverBackendURLString) {
+                let newIndexPath = NSIndexPath(forRow: self.logic.servers.count - 1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             }
         }))
@@ -35,12 +37,9 @@ class ServerListViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    let dataSource = ServerListDataSource()
+    // MARK: - ServerListViewController
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource.onChange = dataChanged
-    }
+    private let logic = ServerListLogic()
 
     private func dataChanged() {
         dispatch_async(dispatch_get_main_queue(), {
@@ -48,11 +47,16 @@ class ServerListViewController: UITableViewController {
         })
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        logic.onChange = dataChanged
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let
-        messagesViewController = segue.destinationViewController as? MessagesViewController,
+        messagesViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            messagesViewController.server = dataSource.servers[selectedIndexPath.row]
+            messagesViewController.server = logic.servers[selectedIndexPath.row]
         }
     }
 
@@ -61,18 +65,18 @@ class ServerListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.servers.count
+        return logic.servers.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ServerCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ServerCell
-        cell.server = dataSource.servers[indexPath.row]
+        cell.server = logic.servers[indexPath.row]
         return cell
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            dataSource.removeServerAtIndex(indexPath.row)
+            logic.removeServerAtIndex(indexPath.row)
         }
     }
 

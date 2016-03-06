@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		73BC606A95F2F93C80E214A3 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E2E33146CF7ABC71DF8 /* MessagesViewController.swift */; };
+		73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */; };
 		73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */; };
-		73BC62538AE9A62EAE8724D6 /* ServerListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListDataSource.swift */; };
+		73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */; };
 		73BC63FFCC098A9A7459D856 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* Server.swift */; };
-		73BC6872AAC39F168473CBC5 /* MessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* MessagesDataSource.swift */; };
+		73BC6872AAC39F168473CBC5 /* ChatLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* ChatLogic.swift */; };
 		73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ServerCell.swift */; };
 		809E65295E0AE684B77F845B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CF27FCD359A31F8AA5C9F /* Pods.framework */; };
 		C509AE3C1C8848960014C5DB /* Node Server in Resources */ = {isa = PBXBuildFile; fileRef = C509AE3B1C8848960014C5DB /* Node Server */; };
@@ -27,9 +27,9 @@
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListViewController.swift; sourceTree = "<group>"; };
-		73BC6B601FD9C5CA9A669A2A /* ServerListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListDataSource.swift; sourceTree = "<group>"; };
-		73BC6CA84191648242329081 /* MessagesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesDataSource.swift; sourceTree = "<group>"; };
-		73BC6E2E33146CF7ABC71DF8 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListLogic.swift; sourceTree = "<group>"; };
+		73BC6CA84191648242329081 /* ChatLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogic.swift; sourceTree = "<group>"; };
+		73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		797CF27FCD359A31F8AA5C9F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE3C81E4E95E87DA4A1C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C509AE3B1C8848960014C5DB /* Node Server */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Node Server"; path = "/Users/maximpervushin/Desktop/GH/SimpleChat/iOS Client/../Node Server"; sourceTree = "<absolute>"; };
@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */,
-				73BC6B601FD9C5CA9A669A2A /* ServerListDataSource.swift */,
+				73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */,
 				73BC63E79C9695929C45E267 /* ServerCell.swift */,
 			);
 			path = ServerList;
@@ -83,8 +83,8 @@
 		73BC6305DF99F4D62D1723F7 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				73BC6CA84191648242329081 /* MessagesDataSource.swift */,
-				73BC6E2E33146CF7ABC71DF8 /* MessagesViewController.swift */,
+				73BC6CA84191648242329081 /* ChatLogic.swift */,
+				73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -264,10 +264,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C515DCE41C85A25B004A7BD0 /* AppDelegate.swift in Sources */,
-				73BC6872AAC39F168473CBC5 /* MessagesDataSource.swift in Sources */,
-				73BC606A95F2F93C80E214A3 /* MessagesViewController.swift in Sources */,
+				73BC6872AAC39F168473CBC5 /* ChatLogic.swift in Sources */,
+				73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */,
 				73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */,
-				73BC62538AE9A62EAE8724D6 /* ServerListDataSource.swift in Sources */,
+				73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */,
 				73BC63FFCC098A9A7459D856 /* Server.swift in Sources */,
 				73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */,
 			);

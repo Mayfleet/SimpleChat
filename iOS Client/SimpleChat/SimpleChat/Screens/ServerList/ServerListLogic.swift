@@ -5,7 +5,7 @@
 
 import Foundation
 
-class ServerListDataSource: NSObject {
+class ServerListLogic: NSObject {
 
     var onChange: (Void -> Void)?
 

@@ -8,7 +8,7 @@ import Starscream
 import SwiftyJSON
 import JSQMessagesViewController
 
-class MessagesDataSource: NSObject {
+class ChatLogic: NSObject {
 
     public var onChange: (Void -> Void)? {
         didSet {
@@ -99,7 +99,7 @@ class MessagesDataSource: NSObject {
     }
 }
 
-extension MessagesDataSource: WebSocketDelegate {
+extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         reconnectionTimer?.invalidate()
