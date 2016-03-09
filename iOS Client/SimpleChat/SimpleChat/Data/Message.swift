@@ -8,14 +8,26 @@ import JSQMessagesViewController
 
 class Message: NSObject, JSQMessageData {
 
-    var sender_: String
-    var text_: String
-    var date_: NSDate
+    private var id_: String
+    private var sender_: String
+    private var text_: String
+    private var clientDate_: NSDate
+    private var serverDate_: NSDate?
 
-    init(sender: String, text: String, date: NSDate) {
+    init(id: String, sender: String, text: String, clientDate: NSDate, serverDate: NSDate?) {
+        self.id_ = id
         self.sender_ = sender
         self.text_ = text
-        self.date_ = date
+        self.clientDate_ = clientDate
+        self.serverDate_ = serverDate
+    }
+
+    var id: String {
+        return id_
+    }
+
+    var serverDate: NSDate? {
+        return serverDate_
     }
 
     // MARK: JSQMessageData
@@ -29,7 +41,7 @@ class Message: NSObject, JSQMessageData {
     }
 
     func date() -> NSDate! {
-        return date_
+        return clientDate_
     }
 
     func isMediaMessage() -> Bool {
@@ -43,4 +55,28 @@ class Message: NSObject, JSQMessageData {
     func text() -> String! {
         return text_
     }
+}
+
+enum MessageKey: String {
+    case Sender = "senderId"
+    case Text = "text"
+}
+
+extension Message {
+
+    convenience init?(dictionary: [String: AnyObject]?) {
+        if let
+        sender = dictionary?["senderId"] as? String,
+        text = dictionary?["text"] as? String {
+
+            // TODO: Get id from dictionary
+            // TODO: Get client date from dictionary
+            // TODO: Get server date from dictionary
+
+            self.init(id: NSUUID().UUIDString, sender: sender, text: text, clientDate: NSDate(), serverDate: nil)
+        } else {
+            return nil
+        }
+    }
+
 }

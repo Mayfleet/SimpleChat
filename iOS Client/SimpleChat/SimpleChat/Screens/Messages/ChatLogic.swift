@@ -15,7 +15,7 @@ class ChatLogic: NSObject {
         }
     }
 
-    var onStatusChange: ((status: String) -> Void)?
+    var onStatusChange: ((status:String) -> Void)?
 
     var server: Server?
 
@@ -69,14 +69,10 @@ class ChatLogic: NSObject {
     }
 
     private func processMessage(json: JSON) {
-        if let messageSender = json["senderId"].string,
-        messageText = json["text"].string {
-            // TODO: Parse date
-            let message = Message(sender: messageSender, text: messageText, date: NSDate())
-            print("timeIntervalSince1970: \(NSDate().timeIntervalSince1970)")
+        if let message = Message(dictionary: json.dictionaryObject) {
             messages.append(message)
         } else {
-            print("ERROR: Unable to parse message")
+            print("Unable to parse message: \(json.dictionaryObject)")
         }
     }
 
