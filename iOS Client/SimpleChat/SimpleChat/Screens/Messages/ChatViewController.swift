@@ -28,6 +28,8 @@ class ChatViewController: JSQMessagesViewController {
         super.viewDidLoad()
         senderId = "iOS App #\(arc4random_uniform(1000) + 1)"
         senderDisplayName = senderId
+        inputToolbar?.contentView?.leftBarButtonItemWidth = 0
+        inputToolbar?.contentView?.leftContentPadding = 0
         logic.onChange = {
             dispatch_async(dispatch_get_main_queue(), {
                 self.collectionView?.reloadData()

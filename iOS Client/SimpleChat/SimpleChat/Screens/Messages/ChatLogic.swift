@@ -9,15 +9,15 @@ import SwiftyJSON
 
 class ChatLogic: NSObject {
 
-    public var onChange: (Void -> Void)? {
+    var onChange: (Void -> Void)? {
         didSet {
             onChange?()
         }
     }
 
-    public var onStatusChange: ((status: String) -> Void)?
+    var onStatusChange: ((status: String) -> Void)?
 
-    public var server: Server?
+    var server: Server?
 
     private (set) var messages = [Message]()
 
@@ -59,11 +59,11 @@ class ChatLogic: NSObject {
 
     @objc private func checkConnection() {
         if let webSocket = webSocket where !webSocket.isConnected {
-            onStatusChange?(status: "Disconnected")
+            onStatusChange?(status: "Offline")
             print("Connection: offline. reconnecting...")
             webSocket.connect()
         } else {
-            onStatusChange?(status: "Connected")
+            onStatusChange?(status: "Online")
             print("Connection: online.")
         }
     }
@@ -73,6 +73,7 @@ class ChatLogic: NSObject {
         messageText = json["text"].string {
             // TODO: Parse date
             let message = Message(sender: messageSender, text: messageText, date: NSDate())
+            print("timeIntervalSince1970: \(NSDate().timeIntervalSince1970)")
             messages.append(message)
         } else {
             print("ERROR: Unable to parse message")
@@ -94,10 +95,12 @@ extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         print("Connected to: \(socket.origin)")
+        onStatusChange?(status: "Online")
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
+        onStatusChange?(status: "Offline")
     }
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
