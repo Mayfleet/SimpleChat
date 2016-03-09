@@ -66,3 +66,7 @@ iOS Client/Pods
 Node Server/node_modules
 iOS Client/.idea
 Web Client/node_modules
+
+# Utility directories
+
+/Sandbox
