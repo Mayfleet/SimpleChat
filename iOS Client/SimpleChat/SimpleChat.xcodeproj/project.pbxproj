@@ -14,6 +14,7 @@
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC6872AAC39F168473CBC5 /* ChatLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* ChatLogic.swift */; };
 		73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ServerCell.swift */; };
+		73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */; };
 		73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */; };
 		809E65295E0AE684B77F845B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CF27FCD359A31F8AA5C9F /* Pods.framework */; };
 		C509AE3C1C8848960014C5DB /* Node Server in Resources */ = {isa = PBXBuildFile; fileRef = C509AE3B1C8848960014C5DB /* Node Server */; };
@@ -27,6 +28,7 @@
 		72D93E3165B62EDDFB545E48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		73BC61F952741DE71804FEB7 /* Web Client */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; name = "Web Client"; path = "../../Web Client"; sourceTree = "<group>"; };
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
+		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -104,6 +106,14 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		73BC65C93BD71D8F47BB6E3A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C515DCD71C85A25B004A7BD0 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 				C515DCEF1C85A25B004A7BD0 /* Info.plist */,
 				73BC63C81C67591F0AF40449 /* Screens */,
 				73BC62B5A0F40BB0F8989C33 /* Data */,
+				73BC65C93BD71D8F47BB6E3A /* Extensions */,
 			);
 			path = SimpleChat;
 			sourceTree = "<group>";
@@ -278,6 +289,7 @@
 				73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */,
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
 				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
+				73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

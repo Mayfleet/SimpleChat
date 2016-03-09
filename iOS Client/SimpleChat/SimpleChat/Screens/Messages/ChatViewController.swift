@@ -39,7 +39,7 @@ class ChatViewController: JSQMessagesViewController {
         super.viewWillAppear(animated)
         // TODO: logic.connect()
     }
-    
+
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         // TODO: logic.disconnect()
@@ -57,7 +57,7 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
 
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
         if logic.messages[indexPath.row].senderId() == senderId {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "AvatarOutgoing"), diameter: 30)
         } else {
@@ -65,26 +65,28 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
 
-//    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString? {
-//        let message = dataSource.messages[indexPath.row]
-//        return NSAttributedString(string: message.senderId())
-//    }
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        if indexPath.row > 0 && logic.messages[indexPath.row].date().mediumDateString == logic.messages[indexPath.row - 1].date().mediumDateString {
+            return 0
+        }
+        return 20
+    }
+
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString? {
+        return NSAttributedString(string: logic.messages[indexPath.row].date().mediumDateString)
+    }
+
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 20
+    }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = logic.messages[indexPath.row]
-        return NSAttributedString(string: message.senderId())
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return logic.messages.count
+        return NSAttributedString(string: "\(message.senderId()) - \(message.date().mediumTimeString)")
     }
 
-//    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-//        return 20
-//    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 20
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return logic.messages.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
