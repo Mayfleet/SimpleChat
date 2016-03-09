@@ -15,26 +15,14 @@ class ChatLogic: NSObject {
         }
     }
 
-    public var server: Server? {
-        didSet {
-            initializeConnection()
-        }
-    }
+    public var onStatusChange: ((status: String) -> Void)?
+
+    public var server: Server?
 
     private (set) var messages = [Message]()
 
-    override init() {
-        super.init()
-        initializeConnection()
-    }
-
     func sendText(senderId: String, text: String) {
         guard let webSocket = webSocket else {
-            return
-        }
-
-        if !webSocket.isConnected {
-            scheduleReconnection()
             return
         }
 
@@ -45,35 +33,39 @@ class ChatLogic: NSObject {
         webSocket.writeString(package)
     }
 
-    private var webSocket: WebSocket?
-    private var reconnectionTimer: NSTimer?
-
-    private func initializeConnection() {
-        reconnectionTimer?.invalidate()
-        reconnectionTimer = nil
-        webSocket?.disconnect()
-        webSocket = nil
+    func connect() {
         messages = [Message]()
         if let server = server {
             webSocket = WebSocket(url: server.backendURL, protocols: ["http"])
             webSocket?.delegate = self
-            scheduleReconnection()
-        } else {
-            print("ERROR: Invalid server.")
+            statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
+            statusTimer?.fire()
+            checkConnection()
         }
         onChange?()
     }
 
-    private func scheduleReconnection() {
-        if nil == reconnectionTimer {
-            reconnectionTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "reconnect", userInfo: nil, repeats: true)
-            reconnectionTimer?.fire()
-        }
+    func disconnect() {
+        statusTimer?.invalidate()
+        statusTimer = nil
+        webSocket?.disconnect()
+        webSocket = nil
+        messages = [Message]()
+        onChange?()
     }
 
-    @objc private func reconnect() {
-        print("connecting...")
-        webSocket?.connect()
+    private var webSocket: WebSocket?
+    private var statusTimer: NSTimer?
+
+    @objc private func checkConnection() {
+        if let webSocket = webSocket where !webSocket.isConnected {
+            onStatusChange?(status: "Disconnected")
+            print("Connection: offline. reconnecting...")
+            webSocket.connect()
+        } else {
+            onStatusChange?(status: "Connected")
+            print("Connection: online.")
+        }
     }
 
     private func processMessage(json: JSON) {
@@ -101,13 +93,11 @@ class ChatLogic: NSObject {
 extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
-        reconnectionTimer?.invalidate()
-        reconnectionTimer = nil
-        print("connected to: \(socket.origin)")
+        print("Connected to: \(socket.origin)")
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("disconnected: \(error?.localizedDescription)")
+        print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
     }
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {

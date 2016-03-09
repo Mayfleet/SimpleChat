@@ -33,16 +33,26 @@ class ChatViewController: JSQMessagesViewController {
                 self.collectionView?.reloadData()
             })
         }
+        logic.onStatusChange = {
+            status in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let server = self.server {
+                    self.title = "\(server.name) (\(status))"
+                } else {
+                    self.title = ""
+                }
+            })
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: logic.connect()
+        logic.connect()
     }
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        // TODO: logic.disconnect()
+        logic.disconnect()
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
@@ -104,5 +114,6 @@ class ChatViewController: JSQMessagesViewController {
 
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         logic.sendText(senderId, text: text)
+        finishSendingMessageAnimated(true)
     }
 }
