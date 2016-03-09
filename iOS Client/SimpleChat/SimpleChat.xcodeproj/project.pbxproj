@@ -11,6 +11,7 @@
 		73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */; };
 		73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */; };
 		73BC63FFCC098A9A7459D856 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* Server.swift */; };
+		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC6872AAC39F168473CBC5 /* ChatLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* ChatLogic.swift */; };
 		73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ServerCell.swift */; };
 		73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */; };
@@ -28,6 +29,7 @@
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListViewController.swift; sourceTree = "<group>"; };
 		73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListLogic.swift; sourceTree = "<group>"; };
 		73BC6CA84191648242329081 /* ChatLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogic.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				73BC65D1ECBB9F2977A7FEC7 /* Server.swift */,
 				73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */,
+				73BC66EE1FD46CD02DB8A7D7 /* Message.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				73BC63FFCC098A9A7459D856 /* Server.swift in Sources */,
 				73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */,
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
+				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

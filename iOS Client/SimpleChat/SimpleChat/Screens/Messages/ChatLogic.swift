@@ -6,7 +6,6 @@
 import Foundation
 import Starscream
 import SwiftyJSON
-import JSQMessagesViewController
 
 class ChatLogic: NSObject {
 
@@ -22,7 +21,7 @@ class ChatLogic: NSObject {
         }
     }
 
-    private (set) var messages = [JSQMessageData]()
+    private (set) var messages = [Message]()
 
     override init() {
         super.init()
@@ -54,7 +53,7 @@ class ChatLogic: NSObject {
         reconnectionTimer = nil
         webSocket?.disconnect()
         webSocket = nil
-        messages = [JSQMessageData]()
+        messages = [Message]()
         if let server = server {
             webSocket = WebSocket(url: server.backendURL, protocols: ["http"])
             webSocket?.delegate = self
@@ -78,10 +77,10 @@ class ChatLogic: NSObject {
     }
 
     private func processMessage(json: JSON) {
-        if let messageSenderId = json["senderId"].string,
-        messageSenderDisplayName = json["senderId"].string,
+        if let messageSender = json["senderId"].string,
         messageText = json["text"].string {
-            let message = JSQMessage(senderId: messageSenderId, displayName: messageSenderDisplayName, text: messageText)
+            // TODO: Parse date
+            let message = Message(sender: messageSender, text: messageText, date: NSDate())
             messages.append(message)
         } else {
             print("ERROR: Unable to parse message")
@@ -90,7 +89,7 @@ class ChatLogic: NSObject {
 
     private func processHistory(json: JSON) {
         if let messages = json["messages"].array {
-            self.messages = [JSQMessageData]()
+            self.messages = []
             for message in messages {
                 processMessage(message)
             }
