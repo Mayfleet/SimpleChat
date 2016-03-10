@@ -14,10 +14,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     setWindowTitle(tr("%1 v%2").arg(APPLICATION_TITLE).arg(VERSION_SHORT));
 
-    m_ui->addressEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
-    m_ui->addressEdit->installEventFilter(this);
+    m_ui->backedUrlEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
+    m_ui->backedUrlEdit->installEventFilter(this);
 
-    connect(m_ui->addressEdit, SIGNAL(editingFinished()), SLOT(updateAddressEdit()));
+    connect(m_ui->backedUrlEdit, SIGNAL(editingFinished()), SLOT(updateBackedUrlEdit()));
+
+    m_backedUrlEditCompleter = new QCompleter(this);
+    m_backedUrlCompleterModel = new QStringListModel(this);
+    m_backedUrlEditCompleter->setModel(m_backedUrlCompleterModel);
+    m_backedUrlEditCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    m_ui->backedUrlEdit->setCompleter(m_backedUrlEditCompleter);
 
     m_ui->messageEdit->viewport()->setAutoFillBackground(false);
     m_ui->messageEdit->setTabChangesFocus(true);
@@ -35,6 +41,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     QSettings settings;
     settings.beginGroup("MainWindow");
+
+    QStringList knownBackendUrls = settings.value("knownBackendUrls").toStringList();
+    m_backedUrlCompleterModel->setStringList(knownBackendUrls);
 
     QUrl backendUrl = settings.value("backendUrl", defaultBackendUrl).toUrl();
     m_simpleChatClient->open(backendUrl);
@@ -61,7 +70,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         QKeyEvent* keyEvent = reinterpret_cast<QKeyEvent*>(event);
         int key = keyEvent->key();
 
-        if ((watched == m_ui->addressEdit) && (key == Qt::Key_Escape))
+        if ((watched == m_ui->backedUrlEdit) && (key == Qt::Key_Escape))
         {
             QMetaObject::invokeMethod(m_ui->messageEdit, "setFocus", Qt::QueuedConnection);
             return true;
@@ -73,9 +82,30 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             return true;
         }
     }
-    else if ((eventType == QEvent::FocusIn) && (watched == m_ui->addressEdit))
+    else if (watched == m_ui->backedUrlEdit)
     {
-        QMetaObject::invokeMethod(m_ui->addressEdit, "selectAll", Qt::QueuedConnection);
+        switch (eventType)
+        {
+        case QEvent::FocusIn:
+            m_ui->backedUrlEdit->setProperty("mouseButtonPressTime", QDateTime::currentMSecsSinceEpoch());
+            break;
+        case QEvent::MouseMove:
+            m_ui->backedUrlEdit->setProperty("mouseButtonPressTime", 0);
+            break;
+        case QEvent::MouseButtonRelease:
+        {
+            qint64 mouseButtonPressTime = m_ui->backedUrlEdit->property("mouseButtonPressTime").toLongLong();
+
+            if (QDateTime::currentMSecsSinceEpoch() - mouseButtonPressTime < 300)
+            {
+                QMetaObject::invokeMethod(m_ui->backedUrlEdit, "selectAll", Qt::QueuedConnection);
+            }
+
+            break;
+        }
+        default:
+            break;
+        }
     }
 
     return false;
@@ -101,6 +131,9 @@ void MainWindow::closeEvent(QCloseEvent* event)
     QSettings settings;
     settings.beginGroup("MainWindow");
 
+    QStringList knownBackendUrls = m_backedUrlCompleterModel->stringList();
+    settings.setValue("knownBackendUrls", knownBackendUrls);
+
     QUrl backendUrl = m_simpleChatClient->backedUrl();
     settings.setValue("backendUrl", backendUrl);
 
@@ -123,15 +156,25 @@ void MainWindow::adjustDocumentMargins()
 
 void MainWindow::handleBackendUrlChange()
 {
-    updateAddressEdit();
+    updateBackedUrlEdit();
+
+    QString backendUrl = m_simpleChatClient->backedUrl().toString();
+    QStringList knownBackendUrls = m_backedUrlCompleterModel->stringList();
+
+    if (!knownBackendUrls.contains(backendUrl))
+    {
+        knownBackendUrls.prepend(backendUrl);
+        m_backedUrlCompleterModel->setStringList(knownBackendUrls);
+    }
+
     m_ui->messagesBrowser->clear();
     m_ui->messageEdit->setFocus();
 }
 
-void MainWindow::updateAddressEdit()
+void MainWindow::updateBackedUrlEdit()
 {
     QUrl backendUrl = m_simpleChatClient->backedUrl();
-    m_ui->addressEdit->setText(backendUrl.toString());
+    m_ui->backedUrlEdit->setText(backendUrl.toString());
 }
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
@@ -163,9 +206,9 @@ void MainWindow::sendMessage()
     m_ui->messageEdit->clear();
 }
 
-void MainWindow::on_addressEdit_returnPressed()
+void MainWindow::on_backedUrlEdit_returnPressed()
 {
-    QUrl backendUrl = QUrl::fromUserInput(m_ui->addressEdit->text());
+    QUrl backendUrl = QUrl::fromUserInput(m_ui->backedUrlEdit->text());
     m_simpleChatClient->open(backendUrl);
 }
 

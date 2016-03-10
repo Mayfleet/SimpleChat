@@ -1,7 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCompleter>
 #include <QMainWindow>
+#include <QStringListModel>
 
 #include "SimpleChatClient.h"
 
@@ -28,15 +30,18 @@ protected:
 private slots:
     void adjustDocumentMargins();
     void handleBackendUrlChange();
-    void updateAddressEdit();
+    void updateBackedUrlEdit();
 
     void appendMessage(const QString& senderId, const QString& text, const QString& type);
     void sendMessage();
 
-    void on_addressEdit_returnPressed();
+    void on_backedUrlEdit_returnPressed();
 
 private:
     Ui::MainWindow* m_ui;
+    QCompleter* m_backedUrlEditCompleter;
+    QStringListModel* m_backedUrlCompleterModel;
+
     SimpleChatClient* m_simpleChatClient;
 };
 
