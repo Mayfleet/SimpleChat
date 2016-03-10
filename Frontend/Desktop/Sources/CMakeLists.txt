@@ -100,8 +100,9 @@ IF(QT_ROOT_DIR)
 ENDIF()
 
 FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(Qt5WebSockets REQUIRED)
 
-SET(QT_LIBRARIES Qt5::Widgets)
+SET(QT_LIBRARIES Qt5::Widgets Qt5::WebSockets)
 
 # Find some Qt paths
 
@@ -120,6 +121,7 @@ SET(
     SIMPLECHAT_SRCS
     Main.cpp
     MainWindow.cpp
+    SimpleChatClient.cpp
 )
 
 SET(

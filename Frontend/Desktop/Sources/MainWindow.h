@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "SimpleChatClient.h"
+
 namespace Ui
 {
     class MainWindow;
@@ -16,8 +18,17 @@ public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
 
+public:
+    bool eventFilter(QObject* watched, QEvent* event);
+
+private slots:
+    void adjustDocumentMargins();
+    void appendMessage(const QString& senderId, const QString& text, const QString& type);
+    void sendMessage();
+
 private:
     Ui::MainWindow* m_ui;
+    SimpleChatClient* m_simpleChatClient;
 };
 
 #endif // MAINWINDOW_H
