@@ -102,6 +102,10 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>messageEdit</tabstop>
+  <tabstop>messagesBrowser</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

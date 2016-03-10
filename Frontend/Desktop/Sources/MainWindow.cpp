@@ -67,6 +67,7 @@ void MainWindow::showEvent(QShowEvent* event)
     }
 
     QMainWindow::showEvent(event);
+    m_ui->messageEdit->setFocus();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
