@@ -6,6 +6,8 @@
 static const QUrl backendUrl("ws://localhost:3000");
 //static const QUrl backendUrl("ws://mf-simple-chat.herokuapp.com");
 
+static QColor getTextColor(const QString& text);
+
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
@@ -90,8 +92,10 @@ void MainWindow::adjustDocumentMargins()
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
 {
-    static const QString rowTemplate("<p><b>%1</b>:<br/>%2</p>");
-    QString row = rowTemplate.arg(senderId).arg(text);
+    static const QString rowTemplate("<p><b style=\"color:%3;\">%1</b>:<br/>%2</p>");
+
+    QColor senderColor = getTextColor(senderId);
+    QString row = rowTemplate.arg(senderId).arg(text).arg(senderColor.name());
     m_ui->messagesBrowser->append(row);
 }
 
@@ -105,4 +109,13 @@ void MainWindow::sendMessage()
     }
 
     m_ui->messageEdit->clear();
+}
+
+// Utilities
+
+QColor getTextColor(const QString& text)
+{
+    QByteArray hash = QCryptographicHash::hash(text.toUtf8(), QCryptographicHash::Sha1);
+    quint16 trimmedHash = *(const quint16*)hash.data();
+    return QColor::fromHsv(qBound(0, trimmedHash % 37 * 10, 359), 190, 150);
 }
