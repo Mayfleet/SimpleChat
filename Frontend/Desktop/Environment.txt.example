@@ -1,0 +1,4 @@
+# Copy this file without .example suffix and edit following environment-dependent variables 
+# according your local preferences. Values in this file provided as an example only.
+
+SET(QT_ROOT_DIR "/Users/andrewmarkin/Qt/Qt5.5.1/5.5/clang_64")
