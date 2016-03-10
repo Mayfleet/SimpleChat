@@ -93,11 +93,16 @@ void MainWindow::adjustDocumentMargins()
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
 {
-    static const QString rowTemplate("<p><b style=\"color:%3;\">%1</b>:<br/>%2</p>");
+    static const QString messageHtmlTemplate("<p><b style=\"color:%3;\">%1</b>:<br/>%2</p>");
 
-    QColor senderColor = getTextColor(senderId);
-    QString row = rowTemplate.arg(senderId).arg(text).arg(senderColor.name());
-    m_ui->messagesBrowser->append(row);
+    QString filteredText = text;
+    filteredText.replace("<", "&lt;");
+    filteredText.replace(">", "&gt;");
+    filteredText.replace(QRegExp("((?:https?|ftp)://\\S+)"), "<a href=\"\\1\">\\1</a>");
+
+    QString senderColor = getTextColor(senderId).name();
+    QString messageHtml = messageHtmlTemplate.arg(senderId).arg(filteredText).arg(senderColor);
+    m_ui->messagesBrowser->append(messageHtml);
 }
 
 void MainWindow::sendMessage()
