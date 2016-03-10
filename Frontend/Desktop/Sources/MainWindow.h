@@ -21,6 +21,10 @@ public:
 public:
     bool eventFilter(QObject* watched, QEvent* event);
 
+protected:
+    void showEvent(QShowEvent* event);
+    void closeEvent(QCloseEvent* event);
+
 private slots:
     void adjustDocumentMargins();
     void appendMessage(const QString& senderId, const QString& text, const QString& type);

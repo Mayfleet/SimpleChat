@@ -1,6 +1,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include <QSettings>
+
 static const QUrl backendUrl("ws://localhost:3000");
 //static const QUrl backendUrl("ws://mf-simple-chat.herokuapp.com");
 
@@ -49,6 +51,29 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
     }
 
     return false;
+}
+
+void MainWindow::showEvent(QShowEvent* event)
+{
+    QSettings settings;
+    settings.beginGroup("MainWindow");
+
+    if (settings.contains("position") && settings.contains("size"))
+    {
+        move(settings.value("position").toPoint());
+        resize(settings.value("size").toSize());
+    }
+
+    QMainWindow::showEvent(event);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    QSettings settings;
+    settings.beginGroup("MainWindow");
+    settings.setValue("position", pos());
+    settings.setValue("size", size());
+    event->accept();
 }
 
 void MainWindow::adjustDocumentMargins()
