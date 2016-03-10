@@ -35,7 +35,13 @@ void SimpleChatClient::open(const QUrl& backedUrl)
 
     if (backedUrl.isValid())
     {
-        m_backedUrl.setScheme("ws");
+        QString scheme = m_backedUrl.scheme();
+
+        if ((scheme != "ws") && (scheme != "wss"))
+        {
+            m_backedUrl.setScheme("ws");
+        }
+
         m_webSocket->open(m_backedUrl);
     }
 

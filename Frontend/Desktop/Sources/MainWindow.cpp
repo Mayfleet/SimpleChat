@@ -4,7 +4,7 @@
 #include <QScrollBar>
 #include <QSettings>
 
-static const QUrl defaultBackendUrl("ws://mf-simple-chat.herokuapp.com");
+static const QUrl defaultBackendUrl("wss://mf-simple-chat.herokuapp.com");
 
 static QColor getTextColor(const QString& text);
 
