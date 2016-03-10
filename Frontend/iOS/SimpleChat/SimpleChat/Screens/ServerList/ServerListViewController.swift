@@ -57,6 +57,11 @@ class ServerListViewController: UITableViewController {
         messagesViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
             messagesViewController.server = logic.servers[selectedIndexPath.row]
+
+        } else if let logInViewController = segue.destinationViewController as? LogInViewController {
+            logInViewController.onClose = {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
     }
 

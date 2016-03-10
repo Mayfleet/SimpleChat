@@ -13,9 +13,11 @@
 		73BC63FFCC098A9A7459D856 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* Server.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC6872AAC39F168473CBC5 /* ChatLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* ChatLogic.swift */; };
+		73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */; };
 		73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ServerCell.swift */; };
 		73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */; };
 		73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */; };
+		73BC6FA3E9DB83958E08CDFE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */; };
 		809E65295E0AE684B77F845B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CF27FCD359A31F8AA5C9F /* Pods.framework */; };
 		C515DCE41C85A25B004A7BD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C515DCE31C85A25B004A7BD0 /* AppDelegate.swift */; };
 		C515DCE91C85A25B004A7BD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C515DCE71C85A25B004A7BD0 /* Main.storyboard */; };
@@ -28,12 +30,14 @@
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
 		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
+		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListViewController.swift; sourceTree = "<group>"; };
 		73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerListLogic.swift; sourceTree = "<group>"; };
 		73BC6CA84191648242329081 /* ChatLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogic.swift; sourceTree = "<group>"; };
 		73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		797CF27FCD359A31F8AA5C9F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE3C81E4E95E87DA4A1C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C515DCE01C85A25B004A7BD0 /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,13 +98,31 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
+		73BC6334FC23FBB6CFA54A32 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
 		73BC63C81C67591F0AF40449 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				73BC6305DF99F4D62D1723F7 /* Messages */,
 				73BC601F76A87D923DCBDA03 /* ServerList */,
+				73BC6334FC23FBB6CFA54A32 /* LogIn */,
+				73BC6587A880286A59A53015 /* SignUp */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		73BC6587A880286A59A53015 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		73BC65C93BD71D8F47BB6E3A /* Extensions */ = {
@@ -284,6 +306,8 @@
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
 				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
 				73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */,
+				73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */,
+				73BC6FA3E9DB83958E08CDFE /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
