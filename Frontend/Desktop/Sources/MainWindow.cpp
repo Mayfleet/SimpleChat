@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 {
     m_ui->setupUi(this);
 
+    setWindowTitle(tr("%1 v%2").arg(APPLICATION_TITLE).arg(VERSION_SHORT));
+
     m_ui->addressEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
     m_ui->addressEdit->installEventFilter(this);
 
