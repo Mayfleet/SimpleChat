@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include <QScrollBar>
 #include <QSettings>
 
 static const QUrl backendUrl("ws://localhost:3000");
@@ -103,6 +104,9 @@ void MainWindow::appendMessage(const QString& senderId, const QString& text, con
     QString senderColor = getTextColor(senderId).name();
     QString messageHtml = messageHtmlTemplate.arg(senderId).arg(filteredText).arg(senderColor);
     m_ui->messagesBrowser->append(messageHtml);
+
+    QScrollBar* messagesBrowserVerticalScrollBar = m_ui->messagesBrowser->verticalScrollBar();
+    messagesBrowserVerticalScrollBar->setValue(messagesBrowserVerticalScrollBar->maximum());
 }
 
 void MainWindow::sendMessage()
