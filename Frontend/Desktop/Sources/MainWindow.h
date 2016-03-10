@@ -27,8 +27,13 @@ protected:
 
 private slots:
     void adjustDocumentMargins();
+    void handleBackendUrlChange();
+    void updateAddressEdit();
+
     void appendMessage(const QString& senderId, const QString& text, const QString& type);
     void sendMessage();
+
+    void on_addressEdit_returnPressed();
 
 private:
     Ui::MainWindow* m_ui;

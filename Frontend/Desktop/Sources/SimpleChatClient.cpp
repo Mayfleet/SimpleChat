@@ -23,9 +23,23 @@ void SimpleChatClient::setSenderId(const QString& value)
     m_senderId = value;
 }
 
-void SimpleChatClient::open(const QUrl& url)
+QUrl SimpleChatClient::backedUrl() const
 {
-    m_webSocket->open(url);
+    return m_backedUrl;
+}
+
+void SimpleChatClient::open(const QUrl& backedUrl)
+{
+    m_backedUrl = backedUrl;
+    m_webSocket->close();
+
+    if (backedUrl.isValid())
+    {
+        m_backedUrl.setScheme("ws");
+        m_webSocket->open(m_backedUrl);
+    }
+
+    emit backendUrlChanged();
 }
 
 void SimpleChatClient::sendMessage(const QString& text)

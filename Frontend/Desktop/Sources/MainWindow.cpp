@@ -4,8 +4,7 @@
 #include <QScrollBar>
 #include <QSettings>
 
-static const QUrl backendUrl("ws://localhost:3000");
-//static const QUrl backendUrl("ws://mf-simple-chat.herokuapp.com");
+static const QUrl defaultBackendUrl("ws://mf-simple-chat.herokuapp.com");
 
 static QColor getTextColor(const QString& text);
 
@@ -13,11 +12,18 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 {
     m_ui->setupUi(this);
 
+    m_ui->addressEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
+    m_ui->addressEdit->installEventFilter(this);
+
+    connect(m_ui->addressEdit, SIGNAL(editingFinished()), SLOT(updateAddressEdit()));
+
     m_ui->messageEdit->viewport()->setAutoFillBackground(false);
     m_ui->messageEdit->setTabChangesFocus(true);
     m_ui->messageEdit->installEventFilter(this);
 
     m_simpleChatClient = new SimpleChatClient(this);
+
+    connect(m_simpleChatClient, SIGNAL(backendUrlChanged()), SLOT(handleBackendUrlChange()));
 
     connect(m_simpleChatClient, SIGNAL(historyMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
@@ -25,6 +31,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
     connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
 
+    QSettings settings;
+    settings.beginGroup("MainWindow");
+
+    QUrl backendUrl = settings.value("backendUrl", defaultBackendUrl).toUrl();
     m_simpleChatClient->open(backendUrl);
 
     QMetaObject::invokeMethod(this, "adjustDocumentMargins", Qt::QueuedConnection);
@@ -42,15 +52,28 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         return true;
     }
 
-    if ((event->type() == QEvent::KeyPress) && (watched == m_ui->messageEdit))
+    QEvent::Type eventType = event->type();
+
+    if (eventType == QEvent::KeyPress)
     {
         QKeyEvent* keyEvent = reinterpret_cast<QKeyEvent*>(event);
+        int key = keyEvent->key();
 
-        if (keyEvent->key() == Qt::Key_Return)
+        if ((watched == m_ui->addressEdit) && (key == Qt::Key_Escape))
+        {
+            QMetaObject::invokeMethod(m_ui->messageEdit, "setFocus", Qt::QueuedConnection);
+            return true;
+        }
+
+        if ((watched == m_ui->messageEdit) && (key == Qt::Key_Return))
         {
             QMetaObject::invokeMethod(this, "sendMessage", Qt::QueuedConnection);
             return true;
         }
+    }
+    else if ((eventType == QEvent::FocusIn) && (watched == m_ui->addressEdit))
+    {
+        QMetaObject::invokeMethod(m_ui->addressEdit, "selectAll", Qt::QueuedConnection);
     }
 
     return false;
@@ -75,6 +98,10 @@ void MainWindow::closeEvent(QCloseEvent* event)
 {
     QSettings settings;
     settings.beginGroup("MainWindow");
+
+    QUrl backendUrl = m_simpleChatClient->backedUrl();
+    settings.setValue("backendUrl", backendUrl);
+
     settings.setValue("position", pos());
     settings.setValue("size", size());
     event->accept();
@@ -90,6 +117,19 @@ void MainWindow::adjustDocumentMargins()
 
     QTextDocument* messagesBrowserDocument = m_ui->messagesBrowser->document();
     messagesBrowserDocument->setDocumentMargin(anchorPoint.x());
+}
+
+void MainWindow::handleBackendUrlChange()
+{
+    updateAddressEdit();
+    m_ui->messagesBrowser->clear();
+    m_ui->messageEdit->setFocus();
+}
+
+void MainWindow::updateAddressEdit()
+{
+    QUrl backendUrl = m_simpleChatClient->backedUrl();
+    m_ui->addressEdit->setText(backendUrl.toString());
 }
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
@@ -119,6 +159,12 @@ void MainWindow::sendMessage()
     }
 
     m_ui->messageEdit->clear();
+}
+
+void MainWindow::on_addressEdit_returnPressed()
+{
+    QUrl backendUrl = QUrl::fromUserInput(m_ui->addressEdit->text());
+    m_simpleChatClient->open(backendUrl);
 }
 
 // Utilities

@@ -6,15 +6,40 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Simple Chat</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#bottomFrame
+   <string notr="true">#topFrame
+{
+	border: none;
+	border-bottom: 1px solid #DDDDDD;
+	background-color: #F5F5F5;
+}
+
+#addressFrame
+{
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
+	background-color: #FFFFFF;
+}
+
+#addressLabel
+{
+	color: #26964B;
+}
+
+#addressEdit
+{
+	border: none;
+	background: transparent;
+}
+
+#bottomFrame
 {
 	border: none;
 	border-top: 1px solid #DDDDDD;
@@ -30,7 +55,7 @@
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="centralWidgetLayout">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -46,6 +71,62 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
+    <item>
+     <widget class="QFrame" name="topFrame">
+      <layout class="QVBoxLayout" name="topFrameLayout">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <property name="leftMargin">
+        <number>9</number>
+       </property>
+       <property name="topMargin">
+        <number>9</number>
+       </property>
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
+       <property name="bottomMargin">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="addressFrame">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <property name="leftMargin">
+           <number>9</number>
+          </property>
+          <property name="topMargin">
+           <number>3</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
+          <property name="bottomMargin">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="addressLabel">
+            <property name="text">
+             <string>Server:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="addressEdit">
+            <property name="placeholderText">
+             <string>Undefined</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item>
      <widget class="QTextBrowser" name="messagesBrowser">
       <property name="frameShape">
@@ -70,13 +151,25 @@
         <height>100</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="bottomFrameLayout">
        <property name="spacing">
+        <number>9</number>
+       </property>
+       <property name="leftMargin">
+        <number>9</number>
+       </property>
+       <property name="topMargin">
+        <number>9</number>
+       </property>
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
+       <property name="bottomMargin">
         <number>9</number>
        </property>
        <item>
         <widget class="QFrame" name="messageFrame">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="messageFrameLayout">
           <property name="spacing">
            <number>0</number>
           </property>
