@@ -78,4 +78,11 @@ class LogInViewController: UIViewController {
             }
         }
     }
+
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if traitCollection.horizontalSizeClass == .Compact {
+            return [.Portrait]
+        }
+        return [.All]
+    }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */; };
 		73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */; };
+		73BC614FB5B57C380E709A87 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64EEA4B5501E7087F609 /* RoundButton.swift */; };
 		73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */; };
 		73BC63FFCC098A9A7459D856 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* Server.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
@@ -30,6 +31,7 @@
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
 		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
+		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -133,6 +135,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		73BC6B4C96F0ACCC57A63017 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73BC64EEA4B5501E7087F609 /* RoundButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C515DCD71C85A25B004A7BD0 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +172,7 @@
 				73BC63C81C67591F0AF40449 /* Screens */,
 				73BC62B5A0F40BB0F8989C33 /* Data */,
 				73BC65C93BD71D8F47BB6E3A /* Extensions */,
+				73BC6B4C96F0ACCC57A63017 /* Views */,
 			);
 			path = SimpleChat;
 			sourceTree = "<group>";
@@ -308,6 +319,7 @@
 				73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */,
 				73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */,
 				73BC6FA3E9DB83958E08CDFE /* SignUpViewController.swift in Sources */,
+				73BC614FB5B57C380E709A87 /* RoundButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
