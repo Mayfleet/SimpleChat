@@ -48,6 +48,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)), SLOT(handleNewMessage()));
 
+    m_notificationSound = new QSound(":/Resources/Notification.wav", this);
+    m_notificationTimer = new QTimer(this);
+    m_notificationTimer->setSingleShot(true);
+    m_notificationTimer->setInterval(100);
+    connect(m_notificationTimer, SIGNAL(timeout()), m_notificationSound, SLOT(play()));
     m_missedMessagesCount = 0;
 
     qApp->installEventFilter(this);
@@ -221,6 +226,7 @@ void MainWindow::updateIconLabel()
 
 void MainWindow::incrementMissedMessagesCount()
 {
+    m_notificationTimer->start();
     m_missedMessagesCount++;
     updateIconLabel();
 }

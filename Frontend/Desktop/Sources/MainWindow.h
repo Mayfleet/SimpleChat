@@ -3,7 +3,9 @@
 
 #include <QCompleter>
 #include <QMainWindow>
+#include <QSound>
 #include <QStringListModel>
+#include <QTimer>
 
 #include "SimpleChatClient.h"
 
@@ -48,6 +50,8 @@ private:
     QCompleter* m_backedUrlEditCompleter;
     QStringListModel* m_backedUrlCompleterModel;
     SimpleChatClient* m_simpleChatClient;
+    QSound* m_notificationSound;
+    QTimer* m_notificationTimer;
     int m_missedMessagesCount;
 };
 

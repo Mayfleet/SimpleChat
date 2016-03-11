@@ -41,6 +41,14 @@ INSTALL(
     FILES_MATCHING PATTERN "*windows.dll"
 )
 
+# Audio plugins
+
+INSTALL(
+    DIRECTORY "${QT_PLUGINS_DIR}/audio"
+    DESTINATION "${SIMPLECHAT_QT_PLUGINS_DEST_DIR}"
+    FILES_MATCHING PATTERN "*windows.dll"
+)
+
 # Install bundle fixup code
 
 INSTALL(
