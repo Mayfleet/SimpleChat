@@ -36,6 +36,7 @@ private slots:
     void incrementMissedMessagesCount();
     void resetMissedMessagesCount();
 
+    void handleSocketStateChange(QAbstractSocket::SocketState state);
     void appendMessage(const QString& senderId, const QString& text, const QString& type);
     void handleNewMessage();
     void sendMessage();

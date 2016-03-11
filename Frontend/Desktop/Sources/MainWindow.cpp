@@ -37,6 +37,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     connect(m_simpleChatClient, SIGNAL(backendUrlChanged()), SLOT(handleBackendUrlChange()));
 
+    connect(m_simpleChatClient, SIGNAL(socketStateChanged(QAbstractSocket::SocketState)),
+            SLOT(handleSocketStateChange(QAbstractSocket::SocketState)));
+
     connect(m_simpleChatClient, SIGNAL(historyMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
 
@@ -226,6 +229,34 @@ void MainWindow::resetMissedMessagesCount()
 {
     m_missedMessagesCount = 0;
     updateIconLabel();
+}
+
+void MainWindow::handleSocketStateChange(QAbstractSocket::SocketState state)
+{
+    static QMap<QAbstractSocket::SocketState, QString> stateCaptionsMap;
+
+    if (stateCaptionsMap.isEmpty())
+    {
+        stateCaptionsMap.insert(QAbstractSocket::UnconnectedState, "Unconnected");
+        stateCaptionsMap.insert(QAbstractSocket::HostLookupState, "Host Lookup...");
+        stateCaptionsMap.insert(QAbstractSocket::ConnectingState, "Connecting...");
+        stateCaptionsMap.insert(QAbstractSocket::ConnectedState, "Connected");
+        stateCaptionsMap.insert(QAbstractSocket::BoundState, "Bound");
+        stateCaptionsMap.insert(QAbstractSocket::ListeningState, "Listening");
+        stateCaptionsMap.insert(QAbstractSocket::ClosingState, "Closing");
+
+        QFontMetrics stateLabelFontMetrics(m_ui->stateLabel->font());
+        int maximumCaptionWidth = 0;
+
+        foreach (QString stateCaption, stateCaptionsMap.values())
+        {
+            maximumCaptionWidth = qMax(maximumCaptionWidth, stateLabelFontMetrics.width(stateCaption));
+        }
+
+        m_ui->stateLabel->setMinimumWidth(maximumCaptionWidth);
+    }
+
+    m_ui->stateLabel->setText(stateCaptionsMap.value(state));
 }
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)

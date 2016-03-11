@@ -8,6 +8,10 @@
 SimpleChatClient::SimpleChatClient(QObject* parent) : QObject(parent)
 {
     m_webSocket = new QWebSocket("SimpleChatDesktopClient", QWebSocketProtocol::VersionLatest, this);
+
+    connect(m_webSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)),
+            SIGNAL(socketStateChanged(QAbstractSocket::SocketState)));
+
     connect(m_webSocket, SIGNAL(textMessageReceived(QString)), SLOT(handleTextMessage(QString)));
 
     m_senderId = QString("Desktop Client #%1").arg(qrand() % 1000);

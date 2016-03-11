@@ -28,12 +28,18 @@
 #backedUrlLabel
 {
 	color: #26964B;
+	font-weight: bold;
 }
 
 #backedUrlEdit
 {
 	border: none;
 	background: transparent;
+}
+
+#stateLabel
+{
+	color: #268396;
 }
 
 #bottomFrame
@@ -99,7 +105,7 @@
            <number>3</number>
           </property>
           <property name="rightMargin">
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin">
            <number>3</number>
@@ -117,6 +123,9 @@
              <string>Undefined</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stateLabel"/>
           </item>
          </layout>
         </widget>

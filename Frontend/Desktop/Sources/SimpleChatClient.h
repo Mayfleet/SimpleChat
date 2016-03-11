@@ -22,6 +22,7 @@ public slots:
 
 signals:
     void backendUrlChanged();
+    void socketStateChanged(QAbstractSocket::SocketState state);
     void historyMessageReceived(const QString& senderId, const QString& text, const QString& type);
     void simpleMessageReceived(const QString& senderId, const QString& text, const QString& type);
 
