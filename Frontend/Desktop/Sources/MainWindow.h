@@ -31,8 +31,13 @@ private slots:
     void adjustDocumentMargins();
     void handleBackendUrlChange();
     void updateBackedUrlEdit();
+    void updateIconLabel();
+
+    void incrementMissedMessagesCount();
+    void resetMissedMessagesCount();
 
     void appendMessage(const QString& senderId, const QString& text, const QString& type);
+    void handleNewMessage();
     void sendMessage();
 
     void on_backedUrlEdit_returnPressed();
@@ -41,8 +46,8 @@ private:
     Ui::MainWindow* m_ui;
     QCompleter* m_backedUrlEditCompleter;
     QStringListModel* m_backedUrlCompleterModel;
-
     SimpleChatClient* m_simpleChatClient;
+    int m_missedMessagesCount;
 };
 
 #endif // MAINWINDOW_H

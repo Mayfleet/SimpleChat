@@ -4,6 +4,10 @@
 #include <QScrollBar>
 #include <QSettings>
 
+#ifdef Q_OS_MAC
+#include <QtMac>
+#endif
+
 static const QUrl defaultBackendUrl("wss://mf-simple-chat.herokuapp.com");
 
 static QColor getTextColor(const QString& text);
@@ -38,6 +42,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
+
+    connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)), SLOT(handleNewMessage()));
+
+    m_missedMessagesCount = 0;
 
     qApp->installEventFilter(this);
 
@@ -109,9 +117,14 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             break;
         }
     }
-    else if ((eventType == QEvent::ApplicationActivate) && (watched == QCoreApplication::instance()) && !isVisible())
+    else if ((eventType == QEvent::ApplicationActivate) && (watched == QCoreApplication::instance()))
     {
-        QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
+        if (!isVisible())
+        {
+            QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
+        }
+
+        QMetaObject::invokeMethod(this, "resetMissedMessagesCount", Qt::QueuedConnection);
     }
 
     return false;
@@ -183,6 +196,38 @@ void MainWindow::updateBackedUrlEdit()
     m_ui->backedUrlEdit->setText(backendUrl.toString());
 }
 
+void MainWindow::updateIconLabel()
+{
+    QString iconLabelText;
+
+    if (m_missedMessagesCount > 20)
+    {
+        iconLabelText = "20+";
+    }
+    else if (m_missedMessagesCount > 0)
+    {
+        iconLabelText = QString::number(m_missedMessagesCount);
+    }
+
+#ifdef Q_OS_MAC
+        QtMac::setBadgeLabelText(iconLabelText);
+#endif
+
+    // TODO: Implement similar indication on Windows and Linux
+}
+
+void MainWindow::incrementMissedMessagesCount()
+{
+    m_missedMessagesCount++;
+    updateIconLabel();
+}
+
+void MainWindow::resetMissedMessagesCount()
+{
+    m_missedMessagesCount = 0;
+    updateIconLabel();
+}
+
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
 {
     static const QString messageHtmlTemplate("<p><b style=\"color:%3;\">%1</b>:<br/>%2</p>");
@@ -198,6 +243,14 @@ void MainWindow::appendMessage(const QString& senderId, const QString& text, con
 
     QScrollBar* messagesBrowserVerticalScrollBar = m_ui->messagesBrowser->verticalScrollBar();
     messagesBrowserVerticalScrollBar->setValue(messagesBrowserVerticalScrollBar->maximum());
+}
+
+void MainWindow::handleNewMessage()
+{
+    if (!isActiveWindow())
+    {
+        incrementMissedMessagesCount();
+    }
 }
 
 void MainWindow::sendMessage()
