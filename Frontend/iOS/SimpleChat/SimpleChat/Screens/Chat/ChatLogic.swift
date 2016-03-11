@@ -87,6 +87,28 @@ class ChatLogic: NSObject {
     }
 }
 
+extension ChatLogic {
+
+    private func sendRequest(request: Request) {
+        guard let webSocket = webSocket else {
+            return
+        }
+
+        let dictionary = [
+                "cid": request.cid,
+                "type": request.type,
+                "payload": request.payload
+        ]
+
+        guard let serialized = JSON(dictionary).rawString() else {
+            return
+        }
+
+        print("> " + serialized)
+        webSocket.writeString(serialized)
+    }
+}
+
 extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
