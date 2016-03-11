@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
     connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
 
+    qApp->installEventFilter(this);
+
     QSettings settings;
     settings.beginGroup("MainWindow");
 
@@ -106,6 +108,10 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         default:
             break;
         }
+    }
+    else if ((eventType == QEvent::ApplicationActivate) && (watched == QCoreApplication::instance()) && !isVisible())
+    {
+        QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
     }
 
     return false;
