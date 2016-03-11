@@ -91,13 +91,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		73BC6305DF99F4D62D1723F7 /* Messages */ = {
+		73BC6305DF99F4D62D1723F7 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				73BC6CA84191648242329081 /* ChatLogic.swift */,
 				73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */,
 			);
-			path = Messages;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		73BC6334FC23FBB6CFA54A32 /* LogIn */ = {
@@ -111,7 +111,7 @@
 		73BC63C81C67591F0AF40449 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				73BC6305DF99F4D62D1723F7 /* Messages */,
+				73BC6305DF99F4D62D1723F7 /* Chat */,
 				73BC601F76A87D923DCBDA03 /* ServerList */,
 				73BC6334FC23FBB6CFA54A32 /* LogIn */,
 				73BC6587A880286A59A53015 /* SignUp */,

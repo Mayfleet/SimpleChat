@@ -20,6 +20,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="K1b-PI-e6D"/>
+                    <connections>
+                        <segue destination="F6K-dr-QLM" kind="presentation" identifier="ShowAuthentication" id="2XT-Vx-HYx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -152,7 +155,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="557" y="2254"/>
+            <point key="canvasLocation" x="1301" y="2266"/>
         </scene>
         <!--Servers-->
         <scene sceneID="ibu-0I-geM">
@@ -189,7 +192,6 @@
                                 <connections>
                                     <outlet property="serverBackendURLLabel" destination="0LU-DU-bWi" id="GBA-zl-RQr"/>
                                     <outlet property="serverNameLabel" destination="3Ll-GL-Bxx" id="5rO-Xk-Egs"/>
-                                    <segue destination="F6K-dr-QLM" kind="presentation" id="kBC-uy-jeh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -199,11 +201,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Servers" id="qa6-g9-gq6">
-                        <barButtonItem key="leftBarButtonItem" title="Log In" id="vgH-vh-fJi">
-                            <connections>
-                                <segue destination="F6K-dr-QLM" kind="presentation" id="2yL-I7-iKf"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HUJ-q8-ffO">
                             <connections>
                                 <action selector="addServerButtonAction:" destination="nHv-hX-U8T" id="ZAE-1y-hsG"/>
@@ -382,7 +379,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="557" y="1478"/>
+            <point key="canvasLocation" x="1301" y="1490"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdc-Ji-C8j">
@@ -404,7 +401,4 @@
     <resources>
         <image name="Close" width="18" height="18"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="kBC-uy-jeh"/>
-    </inferredMetricsTieBreakers>
 </document>
