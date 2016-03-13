@@ -96,7 +96,7 @@
         <widget class="QFrame" name="backedUrlFrame">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="spacing">
-           <number>3</number>
+           <number>6</number>
           </property>
           <property name="leftMargin">
            <number>9</number>
