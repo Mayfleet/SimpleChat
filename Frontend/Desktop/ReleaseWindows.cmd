@@ -1,4 +1,4 @@
-call "%ProgramFiles(x86)%\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
+call "%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
 
 rmdir /S /Q Release
 mkdir Release\Build

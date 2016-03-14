@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCompleter>
 #include <QMainWindow>
+#include <QSound>
+#include <QStringListModel>
+#include <QTimer>
 
 #include "SimpleChatClient.h"
 
@@ -28,16 +32,27 @@ protected:
 private slots:
     void adjustDocumentMargins();
     void handleBackendUrlChange();
-    void updateAddressEdit();
+    void updateBackedUrlEdit();
+    void updateIconLabel();
 
+    void incrementMissedMessagesCount();
+    void resetMissedMessagesCount();
+
+    void handleSocketStateChange(QAbstractSocket::SocketState state);
     void appendMessage(const QString& senderId, const QString& text, const QString& type);
+    void handleNewMessage();
     void sendMessage();
 
-    void on_addressEdit_returnPressed();
+    void on_backedUrlEdit_returnPressed();
 
 private:
     Ui::MainWindow* m_ui;
+    QCompleter* m_backedUrlEditCompleter;
+    QStringListModel* m_backedUrlCompleterModel;
     SimpleChatClient* m_simpleChatClient;
+    QSound* m_notificationSound;
+    QTimer* m_notificationTimer;
+    int m_missedMessagesCount;
 };
 
 #endif // MAINWINDOW_H

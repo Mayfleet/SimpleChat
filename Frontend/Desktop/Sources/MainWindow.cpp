@@ -4,7 +4,11 @@
 #include <QScrollBar>
 #include <QSettings>
 
-static const QUrl defaultBackendUrl("ws://mf-simple-chat.herokuapp.com");
+#ifdef Q_OS_MAC
+#include <QtMac>
+#endif
+
+static const QUrl defaultBackendUrl("wss://mf-simple-chat.herokuapp.com");
 
 static QColor getTextColor(const QString& text);
 
@@ -14,10 +18,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     setWindowTitle(tr("%1 v%2").arg(APPLICATION_TITLE).arg(VERSION_SHORT));
 
-    m_ui->addressEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
-    m_ui->addressEdit->installEventFilter(this);
+    m_ui->backedUrlEdit->setAttribute(Qt::WA_MacShowFocusRect, false);
+    m_ui->backedUrlEdit->installEventFilter(this);
 
-    connect(m_ui->addressEdit, SIGNAL(editingFinished()), SLOT(updateAddressEdit()));
+    connect(m_ui->backedUrlEdit, SIGNAL(editingFinished()), SLOT(updateBackedUrlEdit()));
+
+    m_backedUrlEditCompleter = new QCompleter(this);
+    m_backedUrlCompleterModel = new QStringListModel(this);
+    m_backedUrlEditCompleter->setModel(m_backedUrlCompleterModel);
+    m_backedUrlEditCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    m_ui->backedUrlEdit->setCompleter(m_backedUrlEditCompleter);
 
     m_ui->messageEdit->viewport()->setAutoFillBackground(false);
     m_ui->messageEdit->setTabChangesFocus(true);
@@ -27,14 +37,31 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent),  m_ui(new Ui::Mai
 
     connect(m_simpleChatClient, SIGNAL(backendUrlChanged()), SLOT(handleBackendUrlChange()));
 
+    connect(m_simpleChatClient, SIGNAL(socketStateChanged(QAbstractSocket::SocketState)),
+            SLOT(handleSocketStateChange(QAbstractSocket::SocketState)));
+
     connect(m_simpleChatClient, SIGNAL(historyMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
 
     connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)),
             SLOT(appendMessage(QString,QString,QString)));
 
+    connect(m_simpleChatClient, SIGNAL(simpleMessageReceived(QString,QString,QString)), SLOT(handleNewMessage()));
+
+    m_notificationSound = new QSound(":/Resources/Notification.wav", this);
+    m_notificationTimer = new QTimer(this);
+    m_notificationTimer->setSingleShot(true);
+    m_notificationTimer->setInterval(100);
+    connect(m_notificationTimer, SIGNAL(timeout()), m_notificationSound, SLOT(play()));
+    m_missedMessagesCount = 0;
+
+    qApp->installEventFilter(this);
+
     QSettings settings;
     settings.beginGroup("MainWindow");
+
+    QStringList knownBackendUrls = settings.value("knownBackendUrls").toStringList();
+    m_backedUrlCompleterModel->setStringList(knownBackendUrls);
 
     QUrl backendUrl = settings.value("backendUrl", defaultBackendUrl).toUrl();
     m_simpleChatClient->open(backendUrl);
@@ -61,7 +88,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
         QKeyEvent* keyEvent = reinterpret_cast<QKeyEvent*>(event);
         int key = keyEvent->key();
 
-        if ((watched == m_ui->addressEdit) && (key == Qt::Key_Escape))
+        if ((watched == m_ui->backedUrlEdit) && (key == Qt::Key_Escape))
         {
             QMetaObject::invokeMethod(m_ui->messageEdit, "setFocus", Qt::QueuedConnection);
             return true;
@@ -73,9 +100,39 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
             return true;
         }
     }
-    else if ((eventType == QEvent::FocusIn) && (watched == m_ui->addressEdit))
+    else if (watched == m_ui->backedUrlEdit)
     {
-        QMetaObject::invokeMethod(m_ui->addressEdit, "selectAll", Qt::QueuedConnection);
+        switch (eventType)
+        {
+        case QEvent::FocusIn:
+            m_ui->backedUrlEdit->setProperty("mouseButtonPressTime", QDateTime::currentMSecsSinceEpoch());
+            break;
+        case QEvent::MouseMove:
+            m_ui->backedUrlEdit->setProperty("mouseButtonPressTime", 0);
+            break;
+        case QEvent::MouseButtonRelease:
+        {
+            qint64 mouseButtonPressTime = m_ui->backedUrlEdit->property("mouseButtonPressTime").toLongLong();
+
+            if (QDateTime::currentMSecsSinceEpoch() - mouseButtonPressTime < 300)
+            {
+                QMetaObject::invokeMethod(m_ui->backedUrlEdit, "selectAll", Qt::QueuedConnection);
+            }
+
+            break;
+        }
+        default:
+            break;
+        }
+    }
+    else if ((eventType == QEvent::ApplicationActivate) && (watched == QCoreApplication::instance()))
+    {
+        if (!isVisible())
+        {
+            QMetaObject::invokeMethod(this, "show", Qt::QueuedConnection);
+        }
+
+        QMetaObject::invokeMethod(this, "resetMissedMessagesCount", Qt::QueuedConnection);
     }
 
     return false;
@@ -101,6 +158,9 @@ void MainWindow::closeEvent(QCloseEvent* event)
     QSettings settings;
     settings.beginGroup("MainWindow");
 
+    QStringList knownBackendUrls = m_backedUrlCompleterModel->stringList();
+    settings.setValue("knownBackendUrls", knownBackendUrls);
+
     QUrl backendUrl = m_simpleChatClient->backedUrl();
     settings.setValue("backendUrl", backendUrl);
 
@@ -123,15 +183,86 @@ void MainWindow::adjustDocumentMargins()
 
 void MainWindow::handleBackendUrlChange()
 {
-    updateAddressEdit();
+    updateBackedUrlEdit();
+
+    QString backendUrl = m_simpleChatClient->backedUrl().toString();
+    QStringList knownBackendUrls = m_backedUrlCompleterModel->stringList();
+
+    if (!knownBackendUrls.contains(backendUrl))
+    {
+        knownBackendUrls.prepend(backendUrl);
+        m_backedUrlCompleterModel->setStringList(knownBackendUrls);
+    }
+
     m_ui->messagesBrowser->clear();
     m_ui->messageEdit->setFocus();
 }
 
-void MainWindow::updateAddressEdit()
+void MainWindow::updateBackedUrlEdit()
 {
     QUrl backendUrl = m_simpleChatClient->backedUrl();
-    m_ui->addressEdit->setText(backendUrl.toString());
+    m_ui->backedUrlEdit->setText(backendUrl.toString());
+}
+
+void MainWindow::updateIconLabel()
+{
+    QString iconLabelText;
+
+    if (m_missedMessagesCount > 20)
+    {
+        iconLabelText = "20+";
+    }
+    else if (m_missedMessagesCount > 0)
+    {
+        iconLabelText = QString::number(m_missedMessagesCount);
+    }
+
+#ifdef Q_OS_MAC
+        QtMac::setBadgeLabelText(iconLabelText);
+#endif
+
+    // TODO: Implement similar indication on Windows and Linux
+}
+
+void MainWindow::incrementMissedMessagesCount()
+{
+    m_notificationTimer->start();
+    m_missedMessagesCount++;
+    updateIconLabel();
+}
+
+void MainWindow::resetMissedMessagesCount()
+{
+    m_missedMessagesCount = 0;
+    updateIconLabel();
+}
+
+void MainWindow::handleSocketStateChange(QAbstractSocket::SocketState state)
+{
+    static QMap<QAbstractSocket::SocketState, QString> stateCaptionsMap;
+
+    if (stateCaptionsMap.isEmpty())
+    {
+        stateCaptionsMap.insert(QAbstractSocket::UnconnectedState, "Unconnected");
+        stateCaptionsMap.insert(QAbstractSocket::HostLookupState, "Host Lookup...");
+        stateCaptionsMap.insert(QAbstractSocket::ConnectingState, "Connecting...");
+        stateCaptionsMap.insert(QAbstractSocket::ConnectedState, "Connected");
+        stateCaptionsMap.insert(QAbstractSocket::BoundState, "Bound");
+        stateCaptionsMap.insert(QAbstractSocket::ListeningState, "Listening");
+        stateCaptionsMap.insert(QAbstractSocket::ClosingState, "Closing");
+
+        QFontMetrics stateLabelFontMetrics(m_ui->stateLabel->font());
+        int maximumCaptionWidth = 0;
+
+        foreach (QString stateCaption, stateCaptionsMap.values())
+        {
+            maximumCaptionWidth = qMax(maximumCaptionWidth, stateLabelFontMetrics.width(stateCaption));
+        }
+
+        m_ui->stateLabel->setMinimumWidth(maximumCaptionWidth);
+    }
+
+    m_ui->stateLabel->setText(stateCaptionsMap.value(state));
 }
 
 void MainWindow::appendMessage(const QString& senderId, const QString& text, const QString& type)
@@ -151,6 +282,14 @@ void MainWindow::appendMessage(const QString& senderId, const QString& text, con
     messagesBrowserVerticalScrollBar->setValue(messagesBrowserVerticalScrollBar->maximum());
 }
 
+void MainWindow::handleNewMessage()
+{
+    if (!isActiveWindow())
+    {
+        incrementMissedMessagesCount();
+    }
+}
+
 void MainWindow::sendMessage()
 {
     QString message = m_ui->messageEdit->toPlainText().trimmed();
@@ -163,9 +302,9 @@ void MainWindow::sendMessage()
     m_ui->messageEdit->clear();
 }
 
-void MainWindow::on_addressEdit_returnPressed()
+void MainWindow::on_backedUrlEdit_returnPressed()
 {
-    QUrl backendUrl = QUrl::fromUserInput(m_ui->addressEdit->text());
+    QUrl backendUrl = QUrl::fromUserInput(m_ui->backedUrlEdit->text());
     m_simpleChatClient->open(backendUrl);
 }
 

@@ -8,6 +8,10 @@
 SimpleChatClient::SimpleChatClient(QObject* parent) : QObject(parent)
 {
     m_webSocket = new QWebSocket("SimpleChatDesktopClient", QWebSocketProtocol::VersionLatest, this);
+
+    connect(m_webSocket, SIGNAL(stateChanged(QAbstractSocket::SocketState)),
+            SIGNAL(socketStateChanged(QAbstractSocket::SocketState)));
+
     connect(m_webSocket, SIGNAL(textMessageReceived(QString)), SLOT(handleTextMessage(QString)));
 
     m_senderId = QString("Desktop Client #%1").arg(qrand() % 1000);
@@ -35,7 +39,13 @@ void SimpleChatClient::open(const QUrl& backedUrl)
 
     if (backedUrl.isValid())
     {
-        m_backedUrl.setScheme("ws");
+        QString scheme = m_backedUrl.scheme();
+
+        if ((scheme != "ws") && (scheme != "wss"))
+        {
+            m_backedUrl.setScheme("ws");
+        }
+
         m_webSocket->open(m_backedUrl);
     }
 

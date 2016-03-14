@@ -18,22 +18,28 @@
 	background-color: #F5F5F5;
 }
 
-#addressFrame
+#backedUrlFrame
 {
 	border: 1px solid #CCCCCC;
 	border-radius: 3px;
 	background-color: #FFFFFF;
 }
 
-#addressLabel
+#backedUrlLabel
 {
 	color: #26964B;
+	font-weight: bold;
 }
 
-#addressEdit
+#backedUrlEdit
 {
 	border: none;
 	background: transparent;
+}
+
+#stateLabel
+{
+	color: #268396;
 }
 
 #bottomFrame
@@ -87,10 +93,10 @@
         <number>9</number>
        </property>
        <item>
-        <widget class="QFrame" name="addressFrame">
+        <widget class="QFrame" name="backedUrlFrame">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <property name="spacing">
-           <number>3</number>
+           <number>6</number>
           </property>
           <property name="leftMargin">
            <number>9</number>
@@ -99,24 +105,27 @@
            <number>3</number>
           </property>
           <property name="rightMargin">
-           <number>9</number>
+           <number>3</number>
           </property>
           <property name="bottomMargin">
            <number>3</number>
           </property>
           <item>
-           <widget class="QLabel" name="addressLabel">
+           <widget class="QLabel" name="backedUrlLabel">
             <property name="text">
              <string>Server:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="addressEdit">
+           <widget class="QLineEdit" name="backedUrlEdit">
             <property name="placeholderText">
              <string>Undefined</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stateLabel"/>
           </item>
          </layout>
         </widget>
