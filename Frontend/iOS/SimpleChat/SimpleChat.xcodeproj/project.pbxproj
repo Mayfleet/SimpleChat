@@ -18,7 +18,7 @@
 		73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */; };
 		73BC638D693A16593CCFD725 /* SetPointerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */; };
 		73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */; };
-		73BC63FFCC098A9A7459D856 /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */; };
+		73BC63FFCC098A9A7459D856 /* ChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */; };
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC64DA0C4B991021C06431 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC69E77ACA5D1918E100B6 /* Request.swift */; };
@@ -29,7 +29,7 @@
 		73BC68798F83377392091D58 /* SigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6230CF29F376C8DE8677 /* SigninFailureResponse.swift */; };
 		73BC69A5B36EB1D162C2DD3D /* QuickSigninSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6D0CC5E82EF43198D788 /* QuickSigninSuccessResponse.swift */; };
 		73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */; };
-		73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ServerCell.swift */; };
+		73BC6A79C8F328551EE4803E /* ChatConfigurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ChatConfigurationCell.swift */; };
 		73BC6B351E1884F6165828A3 /* SignoutSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC60A06D71BF92EEE87B7F /* SignoutSuccessResponse.swift */; };
 		73BC6B5A55AD63223246C433 /* SigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68486161F99BD9D9CCCD /* SigninRequest.swift */; };
 		73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */; };
@@ -54,13 +54,13 @@
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
 		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
 		73BC63AD2741D17BA7DE4A92 /* SignoutRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutRequest.swift; sourceTree = "<group>"; };
-		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
+		73BC63E79C9695929C45E267 /* ChatConfigurationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfigurationCell.swift; sourceTree = "<group>"; };
 		73BC64AB7AB4E923E80F0C80 /* SignoutFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutFailureResponse.swift; sourceTree = "<group>"; };
 		73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalGradientView.swift; sourceTree = "<group>"; };
 		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninRequest.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
+		73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfiguration.swift; sourceTree = "<group>"; };
 		73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerFailureResponse.swift; sourceTree = "<group>"; };
 		73BC66BFF65EEAFCBE714D3D /* SigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			children = (
 				73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */,
 				73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */,
-				73BC63E79C9695929C45E267 /* ServerCell.swift */,
+				73BC63E79C9695929C45E267 /* ChatConfigurationCell.swift */,
 			);
 			path = ServerList;
 			sourceTree = "<group>";
@@ -142,7 +142,7 @@
 		73BC62B5A0F40BB0F8989C33 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */,
+				73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */,
 				73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */,
 				73BC66EE1FD46CD02DB8A7D7 /* Message.swift */,
 				73BC68C668C018383420A2A1 /* Requests */,
@@ -388,8 +388,8 @@
 				73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */,
 				73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */,
 				73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */,
-				73BC63FFCC098A9A7459D856 /* ServerConfiguration.swift in Sources */,
-				73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */,
+				73BC63FFCC098A9A7459D856 /* ChatConfiguration.swift in Sources */,
+				73BC6A79C8F328551EE4803E /* ChatConfigurationCell.swift in Sources */,
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
 				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
 				73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */,

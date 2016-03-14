@@ -5,9 +5,9 @@
 
 import UIKit
 
-class ServerCell: UITableViewCell {
+class ChatConfigurationCell: UITableViewCell {
 
-    static let defaultReuseIdentifier = "ServerCell"
+    static let defaultReuseIdentifier = "ChatConfigurationCell"
 
     @IBOutlet weak var serverNameLabel: UILabel?
     @IBOutlet weak var serverBackendURLLabel: UILabel?
@@ -15,19 +15,19 @@ class ServerCell: UITableViewCell {
     @IBOutlet weak var editorLeadingConstraint: NSLayoutConstraint?
 
     @IBAction func deleteButtonAction(sender: AnyObject) {
-        delegate?.serverCellDidDelete(self)
+        delegate?.chatConfigurationCellDidDelete(self)
     }
     
     @IBAction func autoconnectButtonAction(sender: AnyObject) {
-        delegate?.serverCellDidToggleAutoconnect(self)
+        delegate?.chatConfigurationCellDidToggleAutoconnect(self)
     }
     
-    weak var delegate: ServerCellDelegate?
+    weak var delegate: ChatConfigurationCellDelegate?
     
-    var server: ServerConfiguration? {
+    var chatConfiguration: ChatConfiguration? {
         didSet {
-            serverNameLabel?.text = server?.name
-            serverBackendURLLabel?.text = server?.backendURL.absoluteString
+            serverNameLabel?.text = chatConfiguration?.name
+            serverBackendURLLabel?.text = chatConfiguration?.backendURL.absoluteString
         }
     }
 
@@ -55,9 +55,9 @@ class ServerCell: UITableViewCell {
     }
 }
 
-protocol ServerCellDelegate: class {
+protocol ChatConfigurationCellDelegate: class {
     
-    func serverCellDidDelete(serverCell: ServerCell)
+    func chatConfigurationCellDidDelete(cell: ChatConfigurationCell)
     
-    func serverCellDidToggleAutoconnect(serverCell: ServerCell)
+    func chatConfigurationCellDidToggleAutoconnect(cell: ChatConfigurationCell)
 }

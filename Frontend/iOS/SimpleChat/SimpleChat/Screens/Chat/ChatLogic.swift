@@ -14,11 +14,11 @@ class ChatLogic: NSObject {
         case Offline
     }
 
-    let configuration: ServerConfiguration
+    let configuration: ChatConfiguration
     private (set) var status = Status.Offline
     private (set) var messages = [Message]()
 
-    init(configuration: ServerConfiguration) {
+    init(configuration: ChatConfiguration) {
         self.configuration = configuration
     }
 

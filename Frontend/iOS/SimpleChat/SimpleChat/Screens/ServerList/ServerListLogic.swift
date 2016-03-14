@@ -16,7 +16,7 @@ class ServerListLogic: NSObject {
         backendURLString = backendURLString,
         backendURL = NSURL(string: backendURLString) {
 
-            servers.append(ServerConfiguration(name: name, backendURL: backendURL))
+            configurations.append(ChatConfiguration(name: name, backendURL: backendURL))
             save()
             return true
         } else {
@@ -24,42 +24,54 @@ class ServerListLogic: NSObject {
         }
     }
 
-    func removeServerAtIndex(index: Int) -> Bool {
-        servers.removeAtIndex(index)
+    func removeConfigurationAtIndex(index: Int) -> Bool {
+        configurations.removeAtIndex(index)
         save()
         return true
     }
 
-    private (set) var servers = [ServerConfiguration]()
+    func removeConfiguration(configuration: ChatConfiguration) -> Bool {
+        if let index = configurations.indexOf(configuration) {
+            configurations.removeAtIndex(index)
+            save()
+            return true
 
-    private func load() {
+        } else {
+            return false
+        }
+    }
+
+    private (set) var configurations = [ChatConfiguration]()
+
+    func load() {
         if let
         jsonString = StorageDispatcher.defaultDispatcher.readString("servers"),
         jsonArray = JSON.parse(jsonString).array {
-            var serversTemp = [ServerConfiguration]()
+            var serversTemp = [ChatConfiguration]()
             for json in jsonArray {
                 if let
                 name = json["name"].string,
                 backendURLString = json["backendURLString"].string,
-                backendURL = NSURL(string: backendURLString) {
-                    serversTemp.append(ServerConfiguration(name: name, backendURL: backendURL))
+                backendURL = NSURL(string: backendURLString),
+                autoconnect = json["autoconnect"].bool {
+                    serversTemp.append(ChatConfiguration(name: name, backendURL: backendURL, autoconnect: autoconnect))
                 }
             }
-            servers = serversTemp
+            configurations = serversTemp
 
         } else {
-            servers = [
-                    ServerConfiguration(name: "Local", backendURL: NSURL(string: "ws://localhost:3000/")!),
-                    ServerConfiguration(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!)
+            configurations = [
+                    ChatConfiguration(name: "Local", backendURL: NSURL(string: "ws://localhost:3000/")!),
+                    ChatConfiguration(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!)
             ]
             save()
         }
     }
 
-    private func save() {
-        var packed = [[String: String]]()
-        for server in servers {
-            packed.append(["name": server.name, "backendURLString": server.backendURL.absoluteString])
+    func save() {
+        var packed = [[String: AnyObject]]()
+        for configuration in configurations {
+            packed.append(["name": configuration.name, "backendURLString": configuration.backendURL.absoluteString, "autoconnect": configuration.autoconnect])
         }
         if let jsonString = JSON(packed).rawString() {
             StorageDispatcher.defaultDispatcher.writeString(jsonString, fileName: "servers")

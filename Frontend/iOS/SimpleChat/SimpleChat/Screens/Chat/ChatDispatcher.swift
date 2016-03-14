@@ -9,7 +9,7 @@ class ChatDispatcher {
 
     static let defaultDispatcher = ChatDispatcher()
 
-    func chatWithConfiguration(configuration: ServerConfiguration) -> ChatLogic {
+    func chatWithConfiguration(configuration: ChatConfiguration) -> ChatLogic {
         if let chat = activeChats[configuration] {
             return chat
         }
@@ -18,14 +18,14 @@ class ChatDispatcher {
         return chat
     }
 
-    private var activeChats = [ServerConfiguration: ChatLogic]()
+    private var activeChats = [ChatConfiguration: ChatLogic]()
 
-    func connectChatWithConfiguration(configuration: ServerConfiguration) {
+    func connectChatWithConfiguration(configuration: ChatConfiguration) {
         let chat = chatWithConfiguration(configuration)
         chat.connect()
     }
 
-    func disconnectChatWithConfiguration(configuration: ServerConfiguration) {
+    func disconnectChatWithConfiguration(configuration: ChatConfiguration) {
         let chat = chatWithConfiguration(configuration)
         chat.disconnect()
     }
