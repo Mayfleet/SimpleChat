@@ -61,6 +61,10 @@ Carthage/Build
 # For more information about the recommended setup visit:
 # https://github.com/fastlane/fastlane/blob/master/docs/Gitignore.md
 
+# AppCode directories
+
+/.idea
+
 # Utility directories
 
 /Sandbox
