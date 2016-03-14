@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */; };
 		73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68092ABB2C56051F1B78 /* ServerListViewController.swift */; };
+		73BC60CA5259E2CBB96E8A72 /* HorizontalGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */; };
 		73BC60E7732A4B7F6AE77324 /* SignoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63AD2741D17BA7DE4A92 /* SignoutRequest.swift */; };
 		73BC614FB5B57C380E709A87 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64EEA4B5501E7087F609 /* RoundButton.swift */; };
 		73BC618DC3E2E771923403F3 /* SignoutFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64AB7AB4E923E80F0C80 /* SignoutFailureResponse.swift */; };
@@ -55,6 +56,7 @@
 		73BC63AD2741D17BA7DE4A92 /* SignoutRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutRequest.swift; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		73BC64AB7AB4E923E80F0C80 /* SignoutFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutFailureResponse.swift; sourceTree = "<group>"; };
+		73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalGradientView.swift; sourceTree = "<group>"; };
 		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninRequest.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				73BC64EEA4B5501E7087F609 /* RoundButton.swift */,
 				73BC67C49441DE892C7F34FB /* RoundedLabel.swift */,
+				73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */,
 				73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */,
 				73BC6DEC21F7FBEA5A83B027 /* RoundedLabel.swift in Sources */,
+				73BC60CA5259E2CBB96E8A72 /* HorizontalGradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

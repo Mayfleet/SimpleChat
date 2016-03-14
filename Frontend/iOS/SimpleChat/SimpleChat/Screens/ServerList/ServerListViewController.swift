@@ -51,6 +51,13 @@ class ServerListViewController: UITableViewController {
         super.viewDidLoad()
         logic.onChange = dataChanged
 
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
+//        if let toggleEditButton = toggleEditButton {
+//            editButtonItem()
+//        }
+        
         // TODO: Find better place to subscribe
         subscribe()
     }
@@ -74,6 +81,7 @@ class ServerListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ServerCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ServerCell
         cell.server = logic.servers[indexPath.row]
+        cell.delegate = self
         return cell
     }
 
@@ -92,6 +100,14 @@ class ServerListViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
     private func subscribe() {
         let center = NSNotificationCenter.defaultCenter()
         center.addObserverForName(ChatLogic.statusChangedNotification, object: nil, queue: nil, usingBlock: chatStatusChangedNotification)
@@ -120,5 +136,16 @@ class ServerListViewController: UITableViewController {
                 }
             }
         }
+    }
+}
+
+extension ServerListViewController: ServerCellDelegate {
+
+    func serverCellDidDelete(serverCell: ServerCell) {
+        print("Delete")
+    }
+
+    func serverCellDidToggleAutoconnect(serverCell: ServerCell) {
+        print("Toggle Autoconnect")
     }
 }
