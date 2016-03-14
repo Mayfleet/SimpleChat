@@ -13,16 +13,43 @@ class ChatViewController: JSQMessagesViewController {
 
     // MARK: - ChatViewController
 
-    var server: ServerConfiguration? {
-        set {
-            logic.server = newValue
-        }
-        get {
-            return logic.server
+    var chatLogic: ChatLogic? {
+        didSet {
+            let center = NSNotificationCenter.defaultCenter()
+            if let chatLogic = chatLogic {
+                center.addObserverForName(ChatLogic.statusChangedNotification, object: chatLogic, queue: nil, usingBlock: {
+                    _ in
+
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let chatLogic = self.chatLogic {
+                            switch chatLogic.status {
+                            case ChatLogic.Status.Online:
+                                self.title = NSLocalizedString("Online", comment: "Online Chat Status")
+                                break
+                            case ChatLogic.Status.Offline:
+                                self.title = NSLocalizedString("Offline", comment: "Offline Chat Status")
+                                break
+                            }
+                        } else {
+                            self.title = ""
+                        }
+                    })
+                })
+
+                center.addObserverForName(ChatLogic.messagesChangedNotification, object: chatLogic, queue: nil, usingBlock: {
+                    _ in
+
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.collectionView?.reloadData()
+                    })
+                })
+
+            } else {
+                center.removeObserver(self, name: ChatLogic.statusChangedNotification, object: nil)
+                center.removeObserver(self, name: ChatLogic.messagesChangedNotification, object: nil)
+            }
         }
     }
-
-    private let logic = ChatLogic()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,35 +57,25 @@ class ChatViewController: JSQMessagesViewController {
         senderDisplayName = senderId
         inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         inputToolbar?.contentView?.leftContentPadding = 0
-        logic.onChange = {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.collectionView?.reloadData()
-            })
-        }
-        logic.onStatusChange = {
-            status in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let server = self.server {
-                    self.title = "\(server.name) (\(status))"
-                } else {
-                    self.title = ""
-                }
-            })
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        logic.connect()
+        // TODO: Remove
+        chatLogic?.connect()
     }
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        logic.disconnect()
+        // TODO: Remove
+        chatLogic?.disconnect()
     }
 
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        return logic.messages[indexPath.row]
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData? {
+        guard let chatLogic = chatLogic else {
+            return nil
+        }
+        return chatLogic.messages[indexPath.row]
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource? {
@@ -66,7 +83,11 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
-        if logic.messages[indexPath.row].senderId() == senderId {
+        guard let chatLogic = chatLogic else {
+            return nil
+        }
+
+        if chatLogic.messages[indexPath.row].senderId() == senderId {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "AvatarOutgoing"), diameter: 30)
         } else {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "AvatarIncoming"), diameter: 30)
@@ -74,44 +95,65 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        if indexPath.row > 0 && logic.messages[indexPath.row].date().mediumDateString == logic.messages[indexPath.row - 1].date().mediumDateString {
+        guard let chatLogic = chatLogic else {
+            return 0
+        }
+
+        if indexPath.row > 0 && chatLogic.messages[indexPath.row].date().mediumDateString == chatLogic.messages[indexPath.row - 1].date().mediumDateString {
             return 0
         }
         return 20
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString? {
-        return NSAttributedString(string: logic.messages[indexPath.row].date().mediumDateString)
+        guard let chatLogic = chatLogic else {
+            return nil
+        }
+
+        return NSAttributedString(string: chatLogic.messages[indexPath.row].date().mediumDateString)
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return 20
     }
 
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = logic.messages[indexPath.row]
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString? {
+        guard let chatLogic = chatLogic else {
+            return nil
+        }
+
+        let message = chatLogic.messages[indexPath.row]
         return NSAttributedString(string: "\(message.senderId()) - \(message.date().mediumTimeString)")
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return logic.messages.count
+        guard let chatLogic = chatLogic else {
+            return 0
+        }
+
+        return chatLogic.messages.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
 
-        let message = logic.messages[indexPath.item]
-        if message.senderId() == senderId {
-            cell.textView?.textColor = UIColor(red: 0.16, green: 0.5, blue: 0.73, alpha: 1)
-        } else {
-            cell.textView?.textColor = UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1)
+        if let chatLogic = chatLogic {
+            let message = chatLogic.messages[indexPath.item]
+            if message.senderId() == senderId {
+                cell.textView?.textColor = UIColor(red: 0.16, green: 0.5, blue: 0.73, alpha: 1)
+            } else {
+                cell.textView?.textColor = UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1)
+            }
         }
 
         return cell
     }
 
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        logic.sendText(senderId, text: text)
+        guard let chatLogic = chatLogic else {
+            return
+        }
+        chatLogic.sendText(senderId, text: text)
         finishSendingMessageAnimated(true)
     }
 }

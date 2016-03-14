@@ -11,11 +11,23 @@ class ServerCell: UITableViewCell {
 
     @IBOutlet weak var serverNameLabel: UILabel?
     @IBOutlet weak var serverBackendURLLabel: UILabel?
+    @IBOutlet weak var serverNotificationsLabel: UILabel?
 
     var server: ServerConfiguration? {
         didSet {
             serverNameLabel?.text = server?.name
             serverBackendURLLabel?.text = server?.backendURL.absoluteString
+        }
+    }
+
+    var notificationsCount = 0 {
+        didSet {
+            if notificationsCount > 0 {
+                serverNotificationsLabel?.hidden = false
+                serverNotificationsLabel?.text = "\(notificationsCount)"
+            } else {
+                serverNotificationsLabel?.hidden = true
+            }
         }
     }
 }

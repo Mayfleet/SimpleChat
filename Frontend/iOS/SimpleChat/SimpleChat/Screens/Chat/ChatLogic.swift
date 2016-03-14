@@ -9,17 +9,18 @@ import SwiftyJSON
 
 class ChatLogic: NSObject {
 
-    var onChange: (Void -> Void)? {
-        didSet {
-            onChange?()
-        }
+    enum Status {
+        case Online
+        case Offline
     }
 
-    var onStatusChange: ((status:String) -> Void)?
-
-    var server: ServerConfiguration?
-
+    let configuration: ServerConfiguration
+    private (set) var status = Status.Offline
     private (set) var messages = [Message]()
+
+    init(configuration: ServerConfiguration) {
+        self.configuration = configuration
+    }
 
     func sendText(senderId: String, text: String) {
         guard let webSocket = webSocket else {
@@ -35,14 +36,12 @@ class ChatLogic: NSObject {
 
     func connect() {
         messages = [Message]()
-        if let server = server {
-            webSocket = WebSocket(url: server.backendURL, protocols: ["http"])
-            webSocket?.delegate = self
-            statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
-            statusTimer?.fire()
-            checkConnection()
-        }
-        onChange?()
+        webSocket = WebSocket(url: configuration.backendURL, protocols: ["http"])
+        webSocket?.delegate = self
+        statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
+        statusTimer?.fire()
+        checkConnection()
+        messagesChanged()
     }
 
     func disconnect() {
@@ -51,7 +50,8 @@ class ChatLogic: NSObject {
         webSocket?.disconnect()
         webSocket = nil
         messages = [Message]()
-        onChange?()
+//        onChange?()
+        messagesChanged()
     }
 
     private var webSocket: WebSocket?
@@ -59,11 +59,13 @@ class ChatLogic: NSObject {
 
     @objc private func checkConnection() {
         if let webSocket = webSocket where !webSocket.isConnected {
-            onStatusChange?(status: "Offline")
+//            onStatusChange?(status: "Offline")
+            statusChanged(Status.Offline)
             print("Connection: offline. reconnecting...")
             webSocket.connect()
         } else {
-            onStatusChange?(status: "Online")
+//            onStatusChange?(status: "Online")
+            statusChanged(Status.Online)
             print("Connection: online.")
         }
     }
@@ -84,6 +86,21 @@ class ChatLogic: NSObject {
             }
             print("messages: \(messages)")
         }
+    }
+
+    // Notifications
+
+    static let statusChangedNotification = "ChatLogicStatusChangedNotification"
+    static let messagesChangedNotification = "ChatLogicMessagesChangedNotification"
+
+    private func statusChanged(status: Status) {
+        self.status = status
+        NSNotificationCenter.defaultCenter().postNotificationName(ChatLogic.statusChangedNotification, object: self)
+    }
+
+
+    private func messagesChanged() {
+        NSNotificationCenter.defaultCenter().postNotificationName(ChatLogic.messagesChangedNotification, object: self)
     }
 }
 
@@ -113,12 +130,14 @@ extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         print("Connected to: \(socket.origin)")
-        onStatusChange?(status: "Online")
+//        onStatusChange?(status: "Online")
+        statusChanged(Status.Online)
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
-        onStatusChange?(status: "Offline")
+//        onStatusChange?(status: "Offline")
+        statusChanged(Status.Offline)
     }
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
@@ -127,11 +146,13 @@ extension ChatLogic: WebSocketDelegate {
         switch json["type"] {
         case "history":
             processHistory(json)
-            onChange?()
+//            onChange?()
+            messagesChanged()
             break
         case "message":
             processMessage(json)
-            onChange?()
+//            onChange?()
+            messagesChanged()
             break
         default:
             print("< unknown message: \(json)")

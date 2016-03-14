@@ -50,18 +50,16 @@ class ServerListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logic.onChange = dataChanged
+
+        // TODO: Find better place to subscribe
+        subscribe()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let
-        messagesViewController = segue.destinationViewController as? ChatViewController,
+        chatViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            messagesViewController.server = logic.servers[selectedIndexPath.row]
-
-        } else if let logInViewController = segue.destinationViewController as? LogInViewController {
-            logInViewController.onClose = {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            chatViewController.chatLogic = ChatDispatcher.defaultDispatcher.chatWithConfiguration(logic.servers[selectedIndexPath.row])
         }
     }
 
@@ -87,7 +85,39 @@ class ServerListViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: Find better solution for segue names
-        performSegueWithIdentifier("ShowMessages", sender: self)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        performSegueWithIdentifier("ShowMessages", sender: self)
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        ChatDispatcher.defaultDispatcher.connectChatWithConfiguration(logic.servers[indexPath.row])
+    }
+
+    private func subscribe() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserverForName(ChatLogic.statusChangedNotification, object: nil, queue: nil, usingBlock: chatStatusChangedNotification)
+        center.addObserverForName(ChatLogic.messagesChangedNotification, object: nil, queue: nil, usingBlock: chatMessagesChangedNotification)
+    }
+
+    private func unsubscribe() {
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: ChatLogic.statusChangedNotification, object: nil)
+        center.removeObserver(self, name: ChatLogic.messagesChangedNotification, object: nil)
+    }
+
+    // Chat Notifications
+
+    private func chatStatusChangedNotification(notification: NSNotification) {
+
+    }
+
+    private func chatMessagesChangedNotification(notification: NSNotification) {
+        if let chat = notification.object as? ChatLogic {
+            for case let cell as ServerCell in tableView.visibleCells {
+                if cell.server == chat.configuration {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        cell.notificationsCount = chat.messages.count
+                    })
+                }
+            }
+        }
     }
 }

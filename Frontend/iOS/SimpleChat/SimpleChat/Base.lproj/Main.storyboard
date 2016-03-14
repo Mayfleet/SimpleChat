@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Chat View Controller-->
@@ -166,32 +167,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerCell" textLabel="3Ll-GL-Bxx" detailTextLabel="0LU-DU-bWi" style="IBUITableViewCellStyleSubtitle" id="VPC-er-Dsz" customClass="ServerCell" customModule="SimpleChat" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServerCell" id="VPC-er-Dsz" customClass="ServerCell" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VPC-er-Dsz" id="wtP-UF-cQY">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ll-GL-Bxx">
-                                            <rect key="frame" x="15" y="5" width="106" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDc-qS-Tki">
+                                            <rect key="frame" x="8" y="8" width="526" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="[Server Backend URL]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0LU-DU-bWi">
-                                            <rect key="frame" x="15" y="25" width="116" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Server Backend URL]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWX-UJ-ehd">
+                                            <rect key="frame" x="8" y="22" width="526" height="13"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[9999]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-N5-ocF">
+                                            <rect key="frame" x="542" y="8" width="50" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="FZg-sk-LJb"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="top" secondItem="TDc-qS-Tki" secondAttribute="bottom" id="4AE-Jp-DGn"/>
+                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="leading" secondItem="TDc-qS-Tki" secondAttribute="trailing" constant="8" id="9YP-7o-Cse"/>
+                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="topMargin" id="Kd5-rq-8ad"/>
+                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="width" secondItem="TDc-qS-Tki" secondAttribute="width" id="OGK-RG-aWo"/>
+                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="bottom" secondItem="wtP-UF-cQY" secondAttribute="bottomMargin" id="PLC-h1-dkR"/>
+                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leadingMargin" id="YPe-xT-oLU"/>
+                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="height" secondItem="oWX-UJ-ehd" secondAttribute="height" id="bMy-pP-xEj"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="e2v-N5-ocF" secondAttribute="bottom" id="bUS-pH-y4e"/>
+                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="trailing" secondItem="wtP-UF-cQY" secondAttribute="trailingMargin" id="jJU-tK-es1"/>
+                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leadingMargin" id="wYP-4R-9bQ"/>
+                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="topMargin" id="ybA-hw-seO"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="serverBackendURLLabel" destination="0LU-DU-bWi" id="GBA-zl-RQr"/>
-                                    <outlet property="serverNameLabel" destination="3Ll-GL-Bxx" id="5rO-Xk-Egs"/>
+                                    <outlet property="serverBackendURLLabel" destination="oWX-UJ-ehd" id="8uZ-RQ-Ehl"/>
+                                    <outlet property="serverNameLabel" destination="TDc-qS-Tki" id="f89-Hr-UOf"/>
+                                    <outlet property="serverNotificationsLabel" destination="e2v-N5-ocF" id="PRx-tp-tcG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -16,6 +16,7 @@
 		73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */; };
 		73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */; };
 		73BC638D693A16593CCFD725 /* SetPointerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */; };
+		73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */; };
 		73BC63FFCC098A9A7459D856 /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */; };
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		72D93E3165B62EDDFB545E48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		73BC60A06D71BF92EEE87B7F /* SignoutSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutSuccessResponse.swift; sourceTree = "<group>"; };
+		73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDispatcher.swift; sourceTree = "<group>"; };
 		73BC6230CF29F376C8DE8677 /* SigninFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninFailureResponse.swift; sourceTree = "<group>"; };
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
 		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				73BC6CA84191648242329081 /* ChatLogic.swift */,
 				73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */,
+				73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				73BC618DC3E2E771923403F3 /* SignoutFailureResponse.swift in Sources */,
 				73BC6D405CCA21E9ED3128B8 /* SetPointerSuccessResponse.swift in Sources */,
 				73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */,
+				73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

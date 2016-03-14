@@ -15,3 +15,14 @@ struct ServerConfiguration {
         self.backendURL = backendURL
     }
 }
+
+extension ServerConfiguration: Hashable {
+
+    var hashValue: Int {
+        return name.hashValue ^ backendURL.hashValue
+    }
+}
+
+func ==(lhs: ServerConfiguration, rhs: ServerConfiguration) -> Bool {
+    return lhs.name == rhs.name && lhs.backendURL == rhs.backendURL
+}
