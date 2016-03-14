@@ -17,7 +17,7 @@ class ChatLogic: NSObject {
 
     var onStatusChange: ((status:String) -> Void)?
 
-    var server: Server?
+    var server: ServerConfiguration?
 
     private (set) var messages = [Message]()
 
@@ -84,6 +84,28 @@ class ChatLogic: NSObject {
             }
             print("messages: \(messages)")
         }
+    }
+}
+
+extension ChatLogic {
+
+    private func sendRequest(request: Request) {
+        guard let webSocket = webSocket else {
+            return
+        }
+
+        let dictionary = [
+                "cid": request.cid,
+                "type": request.type,
+                "payload": request.payload
+        ]
+
+        guard let serialized = JSON(dictionary).rawString() else {
+            return
+        }
+
+        print("> " + serialized)
+        webSocket.writeString(serialized)
     }
 }
 

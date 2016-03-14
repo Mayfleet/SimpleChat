@@ -13,7 +13,7 @@ class ChatViewController: JSQMessagesViewController {
 
     // MARK: - ChatViewController
 
-    var server: Server? {
+    var server: ServerConfiguration? {
         set {
             logic.server = newValue
         }
@@ -61,12 +61,8 @@ class ChatViewController: JSQMessagesViewController {
         return logic.messages[indexPath.row]
     }
 
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
-        if logic.messages[indexPath.row].senderId() == senderId {
-            return JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.5))
-        } else {
-            return JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.blueColor().colorWithAlphaComponent(0.5))
-        }
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource? {
+        return nil
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
@@ -106,9 +102,9 @@ class ChatViewController: JSQMessagesViewController {
 
         let message = logic.messages[indexPath.item]
         if message.senderId() == senderId {
-            cell.textView?.textColor = UIColor.blackColor()
+            cell.textView?.textColor = UIColor(red: 0.16, green: 0.5, blue: 0.73, alpha: 1)
         } else {
-            cell.textView?.textColor = UIColor.whiteColor()
+            cell.textView?.textColor = UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1)
         }
 
         return cell

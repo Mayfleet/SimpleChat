@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Server {
+struct ServerConfiguration {
 
     let name: String
     let backendURL: NSURL

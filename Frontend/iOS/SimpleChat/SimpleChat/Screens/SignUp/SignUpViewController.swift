@@ -11,8 +11,7 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var userNameTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
-//    @IBOutlet weak var containerView: UIView?
-    @IBOutlet weak var contentScrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView?
     @IBOutlet weak var containerToBottomLayoutConstraint: NSLayoutConstraint?
 
     @IBAction func closeButtonAction(sender: AnyObject) {
@@ -42,18 +41,6 @@ class SignUpViewController: UIViewController {
             return
         }
 
-        print("viewHeight:\(viewHeight)")
-        print("frameEnd:\(frameEnd)")
-
-//        if frameEnd.origin.y < viewHeight { // Keyboard visible
-//            let inset = UIEdgeInsets(top: 0, left: 0, bottom: frameEnd.size.height, right: 0)
-//            contentScrollView?.contentInset = inset
-//            contentScrollView?.scrollIndicatorInsets = inset
-//
-//        } else { // Keyboard hidden
-//            contentScrollView?.contentInset = UIEdgeInsetsZero
-//            contentScrollView?.scrollIndicatorInsets = UIEdgeInsetsZero
-//        }
         view.layoutIfNeeded()
         UIView.animateWithDuration(animationDuration) {
             () -> Void in
@@ -78,6 +65,13 @@ class SignUpViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         unsubscribe()
+    }
+
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if traitCollection.horizontalSizeClass == .Compact {
+            return [.Portrait]
+        }
+        return [.All]
     }
 }
 
