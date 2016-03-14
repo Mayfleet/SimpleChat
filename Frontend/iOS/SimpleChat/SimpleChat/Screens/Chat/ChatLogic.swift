@@ -17,7 +17,7 @@ class ChatLogic: NSObject {
 
     var onStatusChange: ((status:String) -> Void)?
 
-    var server: Server?
+    var server: ServerConfiguration?
 
     private (set) var messages = [Message]()
 

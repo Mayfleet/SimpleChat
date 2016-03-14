@@ -13,7 +13,7 @@ class ChatViewController: JSQMessagesViewController {
 
     // MARK: - ChatViewController
 
-    var server: Server? {
+    var server: ServerConfiguration? {
         set {
             logic.server = newValue
         }

@@ -16,7 +16,7 @@ class ServerListLogic: NSObject {
         backendURLString = backendURLString,
         backendURL = NSURL(string: backendURLString) {
 
-            servers.append(Server(name: name, backendURL: backendURL))
+            servers.append(ServerConfiguration(name: name, backendURL: backendURL))
             save()
             return true
         } else {
@@ -30,27 +30,27 @@ class ServerListLogic: NSObject {
         return true
     }
 
-    private (set) var servers = [Server]()
+    private (set) var servers = [ServerConfiguration]()
 
     private func load() {
         if let
         jsonString = StorageDispatcher.defaultDispatcher.readString("servers"),
         jsonArray = JSON.parse(jsonString).array {
-            var serversTemp = [Server]()
+            var serversTemp = [ServerConfiguration]()
             for json in jsonArray {
                 if let
                 name = json["name"].string,
                 backendURLString = json["backendURLString"].string,
                 backendURL = NSURL(string: backendURLString) {
-                    serversTemp.append(Server(name: name, backendURL: backendURL))
+                    serversTemp.append(ServerConfiguration(name: name, backendURL: backendURL))
                 }
             }
             servers = serversTemp
 
         } else {
             servers = [
-                    Server(name: "Local", backendURL: NSURL(string: "ws://localhost:3000/")!),
-                    Server(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!)
+                    ServerConfiguration(name: "Local", backendURL: NSURL(string: "ws://localhost:3000/")!),
+                    ServerConfiguration(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!)
             ]
             save()
         }

@@ -12,7 +12,7 @@ class ServerCell: UITableViewCell {
     @IBOutlet weak var serverNameLabel: UILabel?
     @IBOutlet weak var serverBackendURLLabel: UILabel?
 
-    var server: Server? {
+    var server: ServerConfiguration? {
         didSet {
             serverNameLabel?.text = server?.name
             serverBackendURLLabel?.text = server?.backendURL.absoluteString

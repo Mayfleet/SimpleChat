@@ -16,7 +16,7 @@
 		73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6B601FD9C5CA9A669A2A /* ServerListLogic.swift */; };
 		73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */; };
 		73BC638D693A16593CCFD725 /* SetPointerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */; };
-		73BC63FFCC098A9A7459D856 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* Server.swift */; };
+		73BC63FFCC098A9A7459D856 /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */; };
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC64DA0C4B991021C06431 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC69E77ACA5D1918E100B6 /* Request.swift */; };
@@ -55,7 +55,7 @@
 		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninRequest.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		73BC65D1ECBB9F2977A7FEC7 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
 		73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerFailureResponse.swift; sourceTree = "<group>"; };
 		73BC66BFF65EEAFCBE714D3D /* SigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		73BC62B5A0F40BB0F8989C33 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				73BC65D1ECBB9F2977A7FEC7 /* Server.swift */,
+				73BC65D1ECBB9F2977A7FEC7 /* ServerConfiguration.swift */,
 				73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */,
 				73BC66EE1FD46CD02DB8A7D7 /* Message.swift */,
 				73BC68C668C018383420A2A1 /* Requests */,
@@ -379,7 +379,7 @@
 				73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */,
 				73BC60A39F37BAF60F0D1DCB /* ServerListViewController.swift in Sources */,
 				73BC62538AE9A62EAE8724D6 /* ServerListLogic.swift in Sources */,
-				73BC63FFCC098A9A7459D856 /* Server.swift in Sources */,
+				73BC63FFCC098A9A7459D856 /* ServerConfiguration.swift in Sources */,
 				73BC6A79C8F328551EE4803E /* ServerCell.swift in Sources */,
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
 				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
