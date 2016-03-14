@@ -89,6 +89,7 @@ class ServerListViewController: UITableViewController {
 //        tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         ChatDispatcher.defaultDispatcher.connectChatWithConfiguration(logic.servers[indexPath.row])
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     private func subscribe() {
