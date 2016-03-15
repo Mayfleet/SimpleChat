@@ -35,6 +35,10 @@ class ChatLogic: NSObject {
     }
 
     func connect() {
+        if let webSocket = webSocket where webSocket.isConnected {
+            return
+        }
+
         messages = [Message]()
         webSocket = WebSocket(url: configuration.backendURL, protocols: ["http"])
         webSocket?.delegate = self
@@ -50,7 +54,6 @@ class ChatLogic: NSObject {
         webSocket?.disconnect()
         webSocket = nil
         messages = [Message]()
-//        onChange?()
         messagesChanged()
     }
 
@@ -59,12 +62,10 @@ class ChatLogic: NSObject {
 
     @objc private func checkConnection() {
         if let webSocket = webSocket where !webSocket.isConnected {
-//            onStatusChange?(status: "Offline")
             statusChanged(Status.Offline)
             print("Connection: offline. reconnecting...")
             webSocket.connect()
         } else {
-//            onStatusChange?(status: "Online")
             statusChanged(Status.Online)
             print("Connection: online.")
         }
@@ -130,13 +131,11 @@ extension ChatLogic: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         print("Connected to: \(socket.origin)")
-//        onStatusChange?(status: "Online")
         statusChanged(Status.Online)
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
-//        onStatusChange?(status: "Offline")
         statusChanged(Status.Offline)
     }
 
@@ -146,12 +145,10 @@ extension ChatLogic: WebSocketDelegate {
         switch json["type"] {
         case "history":
             processHistory(json)
-//            onChange?()
             messagesChanged()
             break
         case "message":
             processMessage(json)
-//            onChange?()
             messagesChanged()
             break
         default:

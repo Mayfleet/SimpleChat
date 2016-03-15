@@ -67,8 +67,9 @@ class ChatViewController: JSQMessagesViewController {
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        // TODO: Remove
-        chatLogic?.disconnect()
+        if let chatLogic = chatLogic where !chatLogic.configuration.autoconnect {
+            chatLogic.disconnect()
+        }
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData? {
@@ -126,11 +127,17 @@ class ChatViewController: JSQMessagesViewController {
         return NSAttributedString(string: "\(message.senderId()) - \(message.date().mediumTimeString)")
     }
 
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return nil == chatLogic ? 0 : 1
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let chatLogic = chatLogic else {
             return 0
         }
 
+        print("numberOfItemsInSection: \(chatLogic.messages.count)")
+        
         return chatLogic.messages.count
     }
 

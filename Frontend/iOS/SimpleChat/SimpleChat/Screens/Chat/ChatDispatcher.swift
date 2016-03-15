@@ -18,8 +18,6 @@ class ChatDispatcher {
         return chat
     }
 
-    private var activeChats = [ChatConfiguration: ChatLogic]()
-
     func connectChatWithConfiguration(configuration: ChatConfiguration) {
         let chat = chatWithConfiguration(configuration)
         chat.connect()
@@ -29,4 +27,8 @@ class ChatDispatcher {
         let chat = chatWithConfiguration(configuration)
         chat.disconnect()
     }
+
+    private var activeChats = [ChatConfiguration: ChatLogic]()
 }
+
+
