@@ -18,7 +18,6 @@
 		73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */; };
 		73BC638D693A16593CCFD725 /* SetPointerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */; };
 		73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */; };
-		73BC63FFCC098A9A7459D856 /* ChatConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */; };
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC64DA0C4B991021C06431 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC69E77ACA5D1918E100B6 /* Request.swift */; };
@@ -31,6 +30,7 @@
 		73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */; };
 		73BC6A79C8F328551EE4803E /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63E79C9695929C45E267 /* ChatCell.swift */; };
 		73BC6B351E1884F6165828A3 /* SignoutSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC60A06D71BF92EEE87B7F /* SignoutSuccessResponse.swift */; };
+		73BC6B3987E326AE84207818 /* AddChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6FDDE5C39D05DA2F5F06 /* AddChatCell.swift */; };
 		73BC6B5A55AD63223246C433 /* SigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68486161F99BD9D9CCCD /* SigninRequest.swift */; };
 		73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */; };
 		73BC6D405CCA21E9ED3128B8 /* SetPointerSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6EC8AA2321CAAE730A30 /* SetPointerSuccessResponse.swift */; };
@@ -61,7 +61,6 @@
 		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninRequest.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfiguration.swift; sourceTree = "<group>"; };
 		73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerFailureResponse.swift; sourceTree = "<group>"; };
 		73BC66BFF65EEAFCBE714D3D /* SigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerRequest.swift; sourceTree = "<group>"; };
 		73BC6EC8AA2321CAAE730A30 /* SetPointerSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC6F5AF30FCD16D16D5C18 /* SignupSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSuccessResponse.swift; sourceTree = "<group>"; };
+		73BC6FDDE5C39D05DA2F5F06 /* AddChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddChatCell.swift; sourceTree = "<group>"; };
 		73BC6FFFB9062AE03B92AD58 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		797CF27FCD359A31F8AA5C9F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE3C81E4E95E87DA4A1C8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +116,7 @@
 			children = (
 				73BC68092ABB2C56051F1B78 /* ChatListViewController.swift */,
 				73BC63E79C9695929C45E267 /* ChatCell.swift */,
+				73BC6FDDE5C39D05DA2F5F06 /* AddChatCell.swift */,
 			);
 			path = ChatList;
 			sourceTree = "<group>";
@@ -141,7 +142,6 @@
 		73BC62B5A0F40BB0F8989C33 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				73BC65D1ECBB9F2977A7FEC7 /* ChatConfiguration.swift */,
 				73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */,
 				73BC66EE1FD46CD02DB8A7D7 /* Message.swift */,
 				73BC68C668C018383420A2A1 /* Requests */,
@@ -387,7 +387,6 @@
 				73BC6872AAC39F168473CBC5 /* Chat.swift in Sources */,
 				73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */,
 				73BC60A39F37BAF60F0D1DCB /* ChatListViewController.swift in Sources */,
-				73BC63FFCC098A9A7459D856 /* ChatConfiguration.swift in Sources */,
 				73BC6A79C8F328551EE4803E /* ChatCell.swift in Sources */,
 				73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */,
 				73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */,
@@ -416,6 +415,7 @@
 				73BC6DEC21F7FBEA5A83B027 /* RoundedLabel.swift in Sources */,
 				73BC60CA5259E2CBB96E8A72 /* HorizontalGradientView.swift in Sources */,
 				73BC607B994E7A109C4A0929 /* App.swift in Sources */,
+				73BC6B3987E326AE84207818 /* AddChatCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

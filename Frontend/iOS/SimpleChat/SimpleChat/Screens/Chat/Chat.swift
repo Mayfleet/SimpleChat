@@ -14,19 +14,24 @@ class Chat: NSObject {
         case Offline
     }
 
-    let configuration: ChatConfiguration
+    var name: String
+    var backendURL: NSURL
+    var autoconnect: Bool
+
     private (set) var status = Status.Offline
     private (set) var messages = [Message]()
 
-    init(configuration: ChatConfiguration) {
-        self.configuration = configuration
+    init(name: String, backendURL: NSURL, autoconnect: Bool = false) {
+        self.name = name
+        self.backendURL = backendURL
+        self.autoconnect = autoconnect
     }
 
-    convenience init?(configuration: ChatConfiguration?) {
-        guard let configuration = configuration else {
+    convenience init?(name: String?, backendURLString: String?, autoconnect: Bool = false) {
+        guard let name = name, backendURLString = backendURLString, backendURL = NSURL(string: backendURLString) else {
             return nil
         }
-        self.init(configuration: configuration)
+        self.init(name: name, backendURL: backendURL, autoconnect: autoconnect)
     }
 
     func sendText(senderId: String, text: String) {
@@ -47,7 +52,7 @@ class Chat: NSObject {
         }
 
         messages = [Message]()
-        webSocket = WebSocket(url: configuration.backendURL, protocols: ["http"])
+        webSocket = WebSocket(url: backendURL, protocols: ["http"])
         webSocket?.delegate = self
         statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
         statusTimer?.fire()
@@ -96,8 +101,8 @@ class Chat: NSObject {
 
     // Notifications
 
-    static let statusChangedNotification = "ChatLogicStatusChangedNotification"
-    static let messagesChangedNotification = "ChatLogicMessagesChangedNotification"
+    static let statusChangedNotification = "ChatStatusChangedNotification"
+    static let messagesChangedNotification = "ChatMessagesChangedNotification"
 
     private func statusChanged(status: Status) {
         self.status = status

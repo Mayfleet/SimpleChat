@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ServerListViewController: UITableViewController {
+class ChatListViewController: UITableViewController {
 
     // MARK: - ServerListViewController @IB
 
@@ -29,7 +29,7 @@ class ServerListViewController: UITableViewController {
             let name = alert.textFields?[0].text
             let backendURLString = alert.textFields?[1].text
 
-            if App.chatDispatcher.addChat(Chat(configuration: ChatConfiguration(name: name, backendURLString: backendURLString))) {
+            if App.chatDispatcher.addChat(Chat(name: name, backendURLString: backendURLString)) {
                 let newIndexPath = NSIndexPath(forRow: App.chatDispatcher.chats.count - 1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             }
@@ -46,17 +46,11 @@ class ServerListViewController: UITableViewController {
         })
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // TODO: Find better place to subscribe
-        subscribe()
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let
         chatViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            chatViewController.chatLogic = App.chatDispatcher.chats[selectedIndexPath.row]
+            chatViewController.chat = App.chatDispatcher.chats[selectedIndexPath.row]
         }
     }
 
@@ -75,7 +69,7 @@ class ServerListViewController: UITableViewController {
             cell.delegate = self
             return cell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier("AddChatCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCellWithIdentifier(AddChatCell.defaultReuseIdentifier, forIndexPath: indexPath)
         }
     }
 
@@ -108,39 +102,11 @@ class ServerListViewController: UITableViewController {
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
-
-    private func subscribe() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserverForName(Chat.statusChangedNotification, object: nil, queue: nil, usingBlock: chatStatusChangedNotification)
-        center.addObserverForName(Chat.messagesChangedNotification, object: nil, queue: nil, usingBlock: chatMessagesChangedNotification)
-    }
-
-    private func unsubscribe() {
-        let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
-        center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
-    }
-
-    // Chat Notifications
-
-    private func chatStatusChangedNotification(notification: NSNotification) {
-        // TODO: Display status in cell
-    }
-
-    private func chatMessagesChangedNotification(notification: NSNotification) {
-        if let chat = notification.object as? Chat {
-            for case let cell as ChatCell in tableView.visibleCells where cell.chat == chat {
-                dispatch_async(dispatch_get_main_queue(), {
-                    cell.notificationsCount = chat.messages.count
-                })
-            }
-        }
-    }
 }
 
-extension ServerListViewController: ChatConfigurationCellDelegate {
+extension ChatListViewController: ChatCellDelegate {
 
-    func chatConfigurationCellDidDelete(cell: ChatCell) {
+    func chatCellDidDelete(cell: ChatCell) {
         if let chat = cell.chat {
             if App.chatDispatcher.removeChat(chat) {
                 tableView?.reloadData()
@@ -148,9 +114,14 @@ extension ServerListViewController: ChatConfigurationCellDelegate {
         }
     }
 
-    func chatConfigurationCellDidToggleAutoconnect(cell: ChatCell) {
+    func chatCellDidEdit(cell: ChatCell) {
+        // TODO: Implement
+        print("edit: \(cell.chat)")
+    }
+
+    func chatCellDidToggleAutoconnect(cell: ChatCell) {
         if let chat = cell.chat {
-            chat.configuration.autoconnect = !chat.configuration.autoconnect
+            chat.autoconnect = !chat.autoconnect
             if App.chatDispatcher.updateChat(chat) {
                 tableView?.reloadData()
             }

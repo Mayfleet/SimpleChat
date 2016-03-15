@@ -48,9 +48,9 @@ class ChatDispatcher {
 
     private func save() {
         let packed = chats.map {
-            return ["name": $0.configuration.name,
-                    "backendURLString": $0.configuration.backendURL.absoluteString,
-                    "autoconnect": $0.configuration.autoconnect]
+            return ["name": $0.name,
+                    "backendURLString": $0.backendURL.absoluteString,
+                    "autoconnect": $0.autoconnect]
         }
 
         if let jsonString = JSON(packed).rawString() {
@@ -69,25 +69,25 @@ class ChatDispatcher {
                 backendURLString = $0["backendURLString"].string,
                 backendURL = NSURL(string: backendURLString),
                 autoconnect = $0["autoconnect"].bool {
-                    return Chat(configuration: ChatConfiguration(name: name, backendURL: backendURL, autoconnect: autoconnect))
+                    return Chat(name: name, backendURL: backendURL, autoconnect: autoconnect)
                 } else {
                     return nil
                 }
             }
         } else {
             chats = [
-                    ChatConfiguration(name: "Local:3000", backendURLString: "ws://localhost:3000/", autoconnect: true),
-                    ChatConfiguration(name: "Local:3030", backendURLString: "ws://localhost:3030/"),
-                    ChatConfiguration(name: "Local:3033", backendURLString: "ws://localhost:3033/"),
-                    ChatConfiguration(name: "Local:3333", backendURLString: "ws://localhost:3333/"),
-                    ChatConfiguration(name: "Heroku", backendURLString: "ws://mf-simple-chat.herokuapp.com:80/", autoconnect: true)
+                    Chat(name: "Local:3000", backendURLString: "ws://localhost:3000/", autoconnect: true),
+                    Chat(name: "Local:3030", backendURLString: "ws://localhost:3030/"),
+                    Chat(name: "Local:3033", backendURLString: "ws://localhost:3033/"),
+                    Chat(name: "Local:3333", backendURLString: "ws://localhost:3333/"),
+                    Chat(name: "Heroku", backendURLString: "ws://mf-simple-chat.herokuapp.com:80/", autoconnect: true)
             ].flatMap {
-                return Chat(configuration: $0)
+                return $0
             }
             save()
         }
 
-        for chat in chats where chat.configuration.autoconnect {
+        for chat in chats where chat.autoconnect {
             chat.connect()
         }
     }

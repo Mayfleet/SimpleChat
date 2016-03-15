@@ -159,10 +159,10 @@
             </objects>
             <point key="canvasLocation" x="1301" y="2266"/>
         </scene>
-        <!--Servers-->
+        <!--Chats-->
         <scene sceneID="ibu-0I-geM">
             <objects>
-                <tableViewController id="nHv-hX-U8T" customClass="ServerListViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nHv-hX-U8T" customClass="ChatListViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Grx-s5-BvH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -314,7 +314,7 @@
                                     <outlet property="serverNotificationsLabel" destination="e2v-N5-ocF" id="PRx-tp-tcG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddChatCell" textLabel="COX-f7-KSy" style="IBUITableViewCellStyleDefault" id="vhc-3D-zLe">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddChatCell" textLabel="COX-f7-KSy" style="IBUITableViewCellStyleDefault" id="vhc-3D-zLe" customClass="AddChatCell" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vhc-3D-zLe" id="Jym-fg-927">
@@ -339,7 +339,7 @@
                             <outlet property="delegate" destination="nHv-hX-U8T" id="sYe-Ls-HGV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Servers" id="qa6-g9-gq6"/>
+                    <navigationItem key="navigationItem" title="Chats" id="qa6-g9-gq6"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="ShowMessages" id="PYD-dg-XIf"/>
                     </connections>
