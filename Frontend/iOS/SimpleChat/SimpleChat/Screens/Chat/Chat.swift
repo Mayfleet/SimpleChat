@@ -70,11 +70,9 @@ class Chat: NSObject {
     @objc private func checkConnection() {
         if let webSocket = webSocket where !webSocket.isConnected {
             statusChanged(Status.Offline)
-            print("Connection: offline. reconnecting...")
             webSocket.connect()
         } else {
             statusChanged(Status.Online)
-            print("Connection: online.")
         }
     }
 
@@ -137,12 +135,10 @@ extension Chat {
 extension Chat: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
-        print("Connected to: \(socket.origin)")
         statusChanged(Status.Online)
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
         statusChanged(Status.Offline)
     }
 

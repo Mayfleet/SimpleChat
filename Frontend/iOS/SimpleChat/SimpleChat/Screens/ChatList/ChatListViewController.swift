@@ -48,8 +48,6 @@ class ServerListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem()
-
         // TODO: Find better place to subscribe
         subscribe()
     }
@@ -63,31 +61,43 @@ class ServerListViewController: UITableViewController {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return App.chatDispatcher.chats.count
+        return section == 0 ? App.chatDispatcher.chats.count : 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ChatCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ChatCell
-        cell.chat = App.chatDispatcher.chats[indexPath.row]
-        cell.delegate = self
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(ChatCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ChatCell
+            cell.chat = App.chatDispatcher.chats[indexPath.row]
+            cell.delegate = self
+            return cell
+        } else {
+            return tableView.dequeueReusableCellWithIdentifier("AddChatCell", forIndexPath: indexPath)
+        }
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: Find better solution for segue names
-        performSegueWithIdentifier("ShowMessages", sender: self)
+        if indexPath.section == 0 {
+            performSegueWithIdentifier("ShowMessages", sender: self)
+        } else {
+            addServerButtonAction(self)
+        }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) where !editing && !cell.editing {
+        if indexPath.section == 1 {
             return indexPath
         } else {
-            return nil
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) where /*!editing && */ !cell.editing {
+                return indexPath
+            } else {
+                return nil
+            }
         }
     }
 
@@ -114,17 +124,15 @@ class ServerListViewController: UITableViewController {
     // Chat Notifications
 
     private func chatStatusChangedNotification(notification: NSNotification) {
-
+        // TODO: Display status in cell
     }
 
     private func chatMessagesChangedNotification(notification: NSNotification) {
         if let chat = notification.object as? Chat {
-            for case let cell as ChatCell in tableView.visibleCells {
-                if cell.chat == chat {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        cell.notificationsCount = chat.messages.count
-                    })
-                }
+            for case let cell as ChatCell in tableView.visibleCells where cell.chat == chat {
+                dispatch_async(dispatch_get_main_queue(), {
+                    cell.notificationsCount = chat.messages.count
+                })
             }
         }
     }

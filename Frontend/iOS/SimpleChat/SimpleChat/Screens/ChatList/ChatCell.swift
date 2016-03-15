@@ -10,17 +10,22 @@ class ChatCell: UITableViewCell {
     static let defaultReuseIdentifier = "ChatCell"
 
     @IBOutlet weak var serverNameLabel: UILabel?
+    @IBOutlet weak var serverNameEditingLabel: UILabel?
     @IBOutlet weak var serverBackendURLLabel: UILabel?
     @IBOutlet weak var serverNotificationsLabel: UILabel?
     @IBOutlet weak var editorLeadingConstraint: NSLayoutConstraint?
     @IBOutlet weak var autoconnectButton: UIButton?
 
-    @IBAction func deleteButtonAction(sender: AnyObject) {
-        delegate?.chatConfigurationCellDidDelete(self)
-    }
-
     @IBAction func autoconnectButtonAction(sender: AnyObject) {
         delegate?.chatConfigurationCellDidToggleAutoconnect(self)
+    }
+
+    @IBAction func editButtonAction(sender: AnyObject) {
+//        delegate?.chatConfigurationCellDidDelete(self)
+    }
+
+    @IBAction func deleteButtonAction(sender: AnyObject) {
+        delegate?.chatConfigurationCellDidDelete(self)
     }
 
     @objc func swipeLeftAction(sender: AnyObject) {
@@ -40,16 +45,19 @@ class ChatCell: UITableViewCell {
     var chat: Chat? {
         didSet {
             serverNameLabel?.text = chat?.configuration.name
+            serverNameEditingLabel?.text = chat?.configuration.name
             serverBackendURLLabel?.text = chat?.configuration.backendURL.absoluteString
 
             var autoconnectTitle = NSLocalizedString("Autoconnect: Off", comment: "Autoconnect Button Title: Off")
-            var autoconnectColor = UIColor.orangeColor()
+            var autoconnectTextColor = UIColor(hue: 0.07, saturation: 1, brightness: 0.83, alpha: 1)
             if let configuration = chat?.configuration where configuration.autoconnect {
                 autoconnectTitle = NSLocalizedString("Autoconnect: On", comment: "Autoconnect Button Title: On")
-                autoconnectColor = UIColor.greenColor()
+                autoconnectTextColor = UIColor(hue: 0.47, saturation: 0.82, brightness: 0.63, alpha: 1)
             }
+            var autoconnectBackgroundColor = autoconnectTextColor.colorWithAlphaComponent(0.25)
             autoconnectButton?.setTitle(autoconnectTitle, forState: .Normal)
-            autoconnectButton?.backgroundColor = autoconnectColor
+            autoconnectButton?.setTitleColor(autoconnectTextColor, forState: .Normal)
+            autoconnectButton?.backgroundColor = autoconnectBackgroundColor
         }
     }
 
