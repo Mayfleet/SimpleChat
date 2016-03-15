@@ -26,10 +26,11 @@ class ServerListViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Add", style: .Default, handler: {
             _ in
 
-            let serverName = alert.textFields?[0].text
-            let serverBackendURLString = alert.textFields?[1].text
-            if self.logic.addConfigurationWithName(serverName, backendURLString: serverBackendURLString) {
-                let newIndexPath = NSIndexPath(forRow: self.logic.configurations.count - 1, inSection: 0)
+            let name = alert.textFields?[0].text
+            let backendURLString = alert.textFields?[1].text
+
+            if ChatDispatcher.defaultDispatcher.addChat(ChatLogic(configuration: ChatConfiguration(name: name, backendURLString: backendURLString))) {
+                let newIndexPath = NSIndexPath(forRow: ChatDispatcher.defaultDispatcher.chats.count - 1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             }
         }))
@@ -39,8 +40,6 @@ class ServerListViewController: UITableViewController {
 
     // MARK: - ServerListViewController
 
-    private let logic = ServerListLogic()
-
     private func dataChanged() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView?.reloadData()
@@ -49,8 +48,6 @@ class ServerListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        logic.onChange = dataChanged
-
         navigationItem.leftBarButtonItem = editButtonItem()
 
         // TODO: Find better place to subscribe
@@ -61,7 +58,7 @@ class ServerListViewController: UITableViewController {
         if let
         chatViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            chatViewController.chatLogic = ChatDispatcher.defaultDispatcher.chatWithConfiguration(logic.configurations[selectedIndexPath.row])
+            chatViewController.chatLogic = ChatDispatcher.defaultDispatcher.chats[selectedIndexPath.row]
         }
     }
 
@@ -70,29 +67,28 @@ class ServerListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logic.configurations.count
+        return ChatDispatcher.defaultDispatcher.chats.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(ChatConfigurationCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ChatConfigurationCell
-        cell.chatConfiguration = logic.configurations[indexPath.row]
+        cell.chat = ChatDispatcher.defaultDispatcher.chats[indexPath.row]
         cell.delegate = self
         return cell
     }
-
-//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == .Delete {
-//            logic.removeServerAtIndex(indexPath.row)
-//        }
-//    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: Find better solution for segue names
         performSegueWithIdentifier("ShowMessages", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
-//        ChatDispatcher.defaultDispatcher.connectChatWithConfiguration(logic.configurations[indexPath.row])
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) where !editing && !cell.editing {
+            return indexPath
+        } else {
+            return nil
+        }
     }
 
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -124,7 +120,7 @@ class ServerListViewController: UITableViewController {
     private func chatMessagesChangedNotification(notification: NSNotification) {
         if let chat = notification.object as? ChatLogic {
             for case let cell as ChatConfigurationCell in tableView.visibleCells {
-                if cell.chatConfiguration == chat.configuration {
+                if cell.chat == chat {
                     dispatch_async(dispatch_get_main_queue(), {
                         cell.notificationsCount = chat.messages.count
                     })
@@ -137,8 +133,8 @@ class ServerListViewController: UITableViewController {
 extension ServerListViewController: ChatConfigurationCellDelegate {
 
     func chatConfigurationCellDidDelete(cell: ChatConfigurationCell) {
-        if let configuration = cell.chatConfiguration {
-            if logic.removeConfiguration(configuration) {
+        if let chat = cell.chat {
+            if ChatDispatcher.defaultDispatcher.removeChat(chat) {
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
                 })

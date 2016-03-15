@@ -70,9 +70,9 @@ class ServerListLogic: NSObject {
             save()
         }
 
-        for configuration in configurations where configuration.autoconnect {
-            ChatDispatcher.defaultDispatcher.chatWithConfiguration(configuration).connect()
-        }
+//        for configuration in configurations where configuration.autoconnect {
+//            ChatDispatcher.defaultDispatcher.chatWithConfiguration(configuration).connect()
+//        }
     }
 
     func save() {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct ChatConfiguration {
+class ChatConfiguration {
 
     var name: String
     var backendURL: NSURL
@@ -16,6 +16,27 @@ struct ChatConfiguration {
         self.backendURL = backendURL
         self.autoconnect = autoconnect
     }
+
+    convenience init?(name: String?, backendURL: NSURL?, autoconnect: Bool = false) {
+        guard let name = name, backendURL = backendURL else {
+            return nil
+        }
+        self.init(name: name, backendURL: backendURL, autoconnect: autoconnect)
+    }
+
+    convenience init?(name: String?, backendURLString: String?, autoconnect: Bool = false) {
+        guard let name = name, backendURLString = backendURLString, backendURL = NSURL(string: backendURLString) else {
+            return nil
+        }
+        self.init(name: name, backendURL: backendURL, autoconnect: autoconnect)
+    }
+
+//    convenience init?(name: String?, backendURLString: String?, autoconnect: Bool?) {
+//        guard let name = name, backendURLString = backendURLString, backendURL = NSURL(string: backendURLString) else {
+//            return nil
+//        }
+//        self.init(name: name, backendURL: backendURL, autoconnect: false)
+//    }
 }
 
 extension ChatConfiguration: Hashable {

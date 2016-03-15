@@ -22,6 +22,13 @@ class ChatLogic: NSObject {
         self.configuration = configuration
     }
 
+    convenience init?(configuration: ChatConfiguration?) {
+        guard let configuration = configuration else {
+            return nil
+        }
+        self.init(configuration: configuration)
+    }
+
     func sendText(senderId: String, text: String) {
         guard let webSocket = webSocket else {
             return

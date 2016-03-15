@@ -37,14 +37,14 @@ class ChatConfigurationCell: UITableViewCell {
 
     weak var delegate: ChatConfigurationCellDelegate?
 
-    var chatConfiguration: ChatConfiguration? {
+    var chat: ChatLogic? {
         didSet {
-            serverNameLabel?.text = chatConfiguration?.name
-            serverBackendURLLabel?.text = chatConfiguration?.backendURL.absoluteString
+            serverNameLabel?.text = chat?.configuration.name
+            serverBackendURLLabel?.text = chat?.configuration.backendURL.absoluteString
 
             var autoconnectTitle = NSLocalizedString("Autoconnect: Off", comment: "Autoconnect Button Title: Off")
             var autoconnectColor = UIColor.orangeColor()
-            if let chatConfiguration = chatConfiguration where chatConfiguration.autoconnect {
+            if let configuration = chat?.configuration where configuration.autoconnect {
                 autoconnectTitle = NSLocalizedString("Autoconnect: On", comment: "Autoconnect Button Title: On")
                 autoconnectColor = UIColor.greenColor()
             }
@@ -52,6 +52,22 @@ class ChatConfigurationCell: UITableViewCell {
             autoconnectButton?.backgroundColor = autoconnectColor
         }
     }
+
+//    var chatConfiguration: ChatConfiguration? {
+//        didSet {
+//            serverNameLabel?.text = chatConfiguration?.name
+//            serverBackendURLLabel?.text = chatConfiguration?.backendURL.absoluteString
+//
+//            var autoconnectTitle = NSLocalizedString("Autoconnect: Off", comment: "Autoconnect Button Title: Off")
+//            var autoconnectColor = UIColor.orangeColor()
+//            if let chatConfiguration = chatConfiguration where chatConfiguration.autoconnect {
+//                autoconnectTitle = NSLocalizedString("Autoconnect: On", comment: "Autoconnect Button Title: On")
+//                autoconnectColor = UIColor.greenColor()
+//            }
+//            autoconnectButton?.setTitle(autoconnectTitle, forState: .Normal)
+//            autoconnectButton?.backgroundColor = autoconnectColor
+//        }
+//    }
 
     var notificationsCount = 0 {
         didSet {
