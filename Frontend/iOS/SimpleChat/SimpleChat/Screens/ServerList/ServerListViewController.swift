@@ -28,7 +28,7 @@ class ServerListViewController: UITableViewController {
 
             let serverName = alert.textFields?[0].text
             let serverBackendURLString = alert.textFields?[1].text
-            if self.logic.addServerWithName(serverName, backendURLString: serverBackendURLString) {
+            if self.logic.addConfigurationWithName(serverName, backendURLString: serverBackendURLString) {
                 let newIndexPath = NSIndexPath(forRow: self.logic.configurations.count - 1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             }
@@ -51,12 +51,7 @@ class ServerListViewController: UITableViewController {
         super.viewDidLoad()
         logic.onChange = dataChanged
 
-
         navigationItem.leftBarButtonItem = editButtonItem()
-
-//        if let toggleEditButton = toggleEditButton {
-//            editButtonItem()
-//        }
 
         // TODO: Find better place to subscribe
         subscribe()
@@ -93,11 +88,11 @@ class ServerListViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: Find better solution for segue names
-//        performSegueWithIdentifier("ShowMessages", sender: self)
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
-        ChatDispatcher.defaultDispatcher.connectChatWithConfiguration(logic.configurations[indexPath.row])
+        performSegueWithIdentifier("ShowMessages", sender: self)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+//        ChatDispatcher.defaultDispatcher.connectChatWithConfiguration(logic.configurations[indexPath.row])
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

@@ -10,7 +10,7 @@ class ServerListLogic: NSObject {
 
     var onChange: (Void -> Void)?
 
-    func addServerWithName(name: String?, backendURLString: String?) -> Bool {
+    func addConfigurationWithName(name: String?, backendURLString: String?) -> Bool {
         if let
         name = name,
         backendURLString = backendURLString,
@@ -61,10 +61,17 @@ class ServerListLogic: NSObject {
 
         } else {
             configurations = [
-                    ChatConfiguration(name: "Local", backendURL: NSURL(string: "ws://localhost:3000/")!),
-                    ChatConfiguration(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!)
+                    ChatConfiguration(name: "Local:3000", backendURL: NSURL(string: "ws://localhost:3000/")!, autoconnect: true),
+                    ChatConfiguration(name: "Local:3030", backendURL: NSURL(string: "ws://localhost:3030/")!),
+                    ChatConfiguration(name: "Local:3033", backendURL: NSURL(string: "ws://localhost:3033/")!),
+                    ChatConfiguration(name: "Local:3333", backendURL: NSURL(string: "ws://localhost:3333/")!),
+                    ChatConfiguration(name: "Heroku", backendURL: NSURL(string: "ws://mf-simple-chat.herokuapp.com:80/")!, autoconnect: true)
             ]
             save()
+        }
+
+        for configuration in configurations where configuration.autoconnect {
+            ChatDispatcher.defaultDispatcher.chatWithConfiguration(configuration).connect()
         }
     }
 
