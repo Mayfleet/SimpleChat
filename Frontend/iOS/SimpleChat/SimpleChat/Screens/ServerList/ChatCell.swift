@@ -5,9 +5,9 @@
 
 import UIKit
 
-class ChatConfigurationCell: UITableViewCell {
+class ChatCell: UITableViewCell {
 
-    static let defaultReuseIdentifier = "ChatConfigurationCell"
+    static let defaultReuseIdentifier = "ChatCell"
 
     @IBOutlet weak var serverNameLabel: UILabel?
     @IBOutlet weak var serverBackendURLLabel: UILabel?
@@ -37,7 +37,7 @@ class ChatConfigurationCell: UITableViewCell {
 
     weak var delegate: ChatConfigurationCellDelegate?
 
-    var chat: ChatLogic? {
+    var chat: Chat? {
         didSet {
             serverNameLabel?.text = chat?.configuration.name
             serverBackendURLLabel?.text = chat?.configuration.backendURL.absoluteString
@@ -52,22 +52,6 @@ class ChatConfigurationCell: UITableViewCell {
             autoconnectButton?.backgroundColor = autoconnectColor
         }
     }
-
-//    var chatConfiguration: ChatConfiguration? {
-//        didSet {
-//            serverNameLabel?.text = chatConfiguration?.name
-//            serverBackendURLLabel?.text = chatConfiguration?.backendURL.absoluteString
-//
-//            var autoconnectTitle = NSLocalizedString("Autoconnect: Off", comment: "Autoconnect Button Title: Off")
-//            var autoconnectColor = UIColor.orangeColor()
-//            if let chatConfiguration = chatConfiguration where chatConfiguration.autoconnect {
-//                autoconnectTitle = NSLocalizedString("Autoconnect: On", comment: "Autoconnect Button Title: On")
-//                autoconnectColor = UIColor.greenColor()
-//            }
-//            autoconnectButton?.setTitle(autoconnectTitle, forState: .Normal)
-//            autoconnectButton?.backgroundColor = autoconnectColor
-//        }
-//    }
 
     var notificationsCount = 0 {
         didSet {
@@ -120,7 +104,7 @@ class ChatConfigurationCell: UITableViewCell {
 
 protocol ChatConfigurationCellDelegate: class {
 
-    func chatConfigurationCellDidDelete(cell: ChatConfigurationCell)
+    func chatConfigurationCellDidDelete(cell: ChatCell)
 
-    func chatConfigurationCellDidToggleAutoconnect(cell: ChatConfigurationCell)
+    func chatConfigurationCellDidToggleAutoconnect(cell: ChatCell)
 }

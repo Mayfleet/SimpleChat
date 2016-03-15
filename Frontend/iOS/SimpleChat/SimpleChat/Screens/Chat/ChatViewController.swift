@@ -13,20 +13,20 @@ class ChatViewController: JSQMessagesViewController {
 
     // MARK: - ChatViewController
 
-    var chatLogic: ChatLogic? {
+    var chatLogic: Chat? {
         didSet {
             let center = NSNotificationCenter.defaultCenter()
             if let chatLogic = chatLogic {
-                center.addObserverForName(ChatLogic.statusChangedNotification, object: chatLogic, queue: nil, usingBlock: {
+                center.addObserverForName(Chat.statusChangedNotification, object: chatLogic, queue: nil, usingBlock: {
                     _ in
 
                     dispatch_async(dispatch_get_main_queue(), {
                         if let chatLogic = self.chatLogic {
                             switch chatLogic.status {
-                            case ChatLogic.Status.Online:
+                            case Chat.Status.Online:
                                 self.title = NSLocalizedString("Online", comment: "Online Chat Status")
                                 break
-                            case ChatLogic.Status.Offline:
+                            case Chat.Status.Offline:
                                 self.title = NSLocalizedString("Offline", comment: "Offline Chat Status")
                                 break
                             }
@@ -36,7 +36,7 @@ class ChatViewController: JSQMessagesViewController {
                     })
                 })
 
-                center.addObserverForName(ChatLogic.messagesChangedNotification, object: chatLogic, queue: nil, usingBlock: {
+                center.addObserverForName(Chat.messagesChangedNotification, object: chatLogic, queue: nil, usingBlock: {
                     _ in
 
                     dispatch_async(dispatch_get_main_queue(), {
@@ -45,8 +45,8 @@ class ChatViewController: JSQMessagesViewController {
                 })
 
             } else {
-                center.removeObserver(self, name: ChatLogic.statusChangedNotification, object: nil)
-                center.removeObserver(self, name: ChatLogic.messagesChangedNotification, object: nil)
+                center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
+                center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
             }
         }
     }

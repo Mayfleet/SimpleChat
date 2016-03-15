@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        print("Chats: \(ChatDispatcher.defaultDispatcher.chats.count)")
+        print("Chats: \(App.chatDispatcher.chats.count)")
 
         return true
     }

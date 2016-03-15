@@ -7,7 +7,7 @@ import Foundation
 import Starscream
 import SwiftyJSON
 
-class ChatLogic: NSObject {
+class Chat: NSObject {
 
     enum Status {
         case Online
@@ -103,16 +103,16 @@ class ChatLogic: NSObject {
 
     private func statusChanged(status: Status) {
         self.status = status
-        NSNotificationCenter.defaultCenter().postNotificationName(ChatLogic.statusChangedNotification, object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName(Chat.statusChangedNotification, object: self)
     }
 
 
     private func messagesChanged() {
-        NSNotificationCenter.defaultCenter().postNotificationName(ChatLogic.messagesChangedNotification, object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName(Chat.messagesChangedNotification, object: self)
     }
 }
 
-extension ChatLogic {
+extension Chat {
 
     private func sendRequest(request: Request) {
         guard let webSocket = webSocket else {
@@ -134,7 +134,7 @@ extension ChatLogic {
     }
 }
 
-extension ChatLogic: WebSocketDelegate {
+extension Chat: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         print("Connected to: \(socket.origin)")

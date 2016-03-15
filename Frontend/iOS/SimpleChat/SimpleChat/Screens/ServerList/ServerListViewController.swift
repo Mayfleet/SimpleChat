@@ -29,8 +29,8 @@ class ServerListViewController: UITableViewController {
             let name = alert.textFields?[0].text
             let backendURLString = alert.textFields?[1].text
 
-            if ChatDispatcher.defaultDispatcher.addChat(ChatLogic(configuration: ChatConfiguration(name: name, backendURLString: backendURLString))) {
-                let newIndexPath = NSIndexPath(forRow: ChatDispatcher.defaultDispatcher.chats.count - 1, inSection: 0)
+            if App.chatDispatcher.addChat(Chat(configuration: ChatConfiguration(name: name, backendURLString: backendURLString))) {
+                let newIndexPath = NSIndexPath(forRow: App.chatDispatcher.chats.count - 1, inSection: 0)
                 self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             }
         }))
@@ -58,7 +58,7 @@ class ServerListViewController: UITableViewController {
         if let
         chatViewController = segue.destinationViewController as? ChatViewController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            chatViewController.chatLogic = ChatDispatcher.defaultDispatcher.chats[selectedIndexPath.row]
+            chatViewController.chatLogic = App.chatDispatcher.chats[selectedIndexPath.row]
         }
     }
 
@@ -67,12 +67,12 @@ class ServerListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChatDispatcher.defaultDispatcher.chats.count
+        return App.chatDispatcher.chats.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ChatConfigurationCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ChatConfigurationCell
-        cell.chat = ChatDispatcher.defaultDispatcher.chats[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(ChatCell.defaultReuseIdentifier, forIndexPath: indexPath) as! ChatCell
+        cell.chat = App.chatDispatcher.chats[indexPath.row]
         cell.delegate = self
         return cell
     }
@@ -101,14 +101,14 @@ class ServerListViewController: UITableViewController {
 
     private func subscribe() {
         let center = NSNotificationCenter.defaultCenter()
-        center.addObserverForName(ChatLogic.statusChangedNotification, object: nil, queue: nil, usingBlock: chatStatusChangedNotification)
-        center.addObserverForName(ChatLogic.messagesChangedNotification, object: nil, queue: nil, usingBlock: chatMessagesChangedNotification)
+        center.addObserverForName(Chat.statusChangedNotification, object: nil, queue: nil, usingBlock: chatStatusChangedNotification)
+        center.addObserverForName(Chat.messagesChangedNotification, object: nil, queue: nil, usingBlock: chatMessagesChangedNotification)
     }
 
     private func unsubscribe() {
         let center = NSNotificationCenter.defaultCenter()
-        center.removeObserver(self, name: ChatLogic.statusChangedNotification, object: nil)
-        center.removeObserver(self, name: ChatLogic.messagesChangedNotification, object: nil)
+        center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
+        center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
     }
 
     // Chat Notifications
@@ -118,8 +118,8 @@ class ServerListViewController: UITableViewController {
     }
 
     private func chatMessagesChangedNotification(notification: NSNotification) {
-        if let chat = notification.object as? ChatLogic {
-            for case let cell as ChatConfigurationCell in tableView.visibleCells {
+        if let chat = notification.object as? Chat {
+            for case let cell as ChatCell in tableView.visibleCells {
                 if cell.chat == chat {
                     dispatch_async(dispatch_get_main_queue(), {
                         cell.notificationsCount = chat.messages.count
@@ -132,17 +132,20 @@ class ServerListViewController: UITableViewController {
 
 extension ServerListViewController: ChatConfigurationCellDelegate {
 
-    func chatConfigurationCellDidDelete(cell: ChatConfigurationCell) {
+    func chatConfigurationCellDidDelete(cell: ChatCell) {
         if let chat = cell.chat {
-            if ChatDispatcher.defaultDispatcher.removeChat(chat) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
+            if App.chatDispatcher.removeChat(chat) {
+                tableView?.reloadData()
             }
         }
     }
 
-    func chatConfigurationCellDidToggleAutoconnect(cell: ChatConfigurationCell) {
-        print("Toggle Autoconnect")
+    func chatConfigurationCellDidToggleAutoconnect(cell: ChatCell) {
+        if let chat = cell.chat {
+            chat.configuration.autoconnect = !chat.configuration.autoconnect
+            if App.chatDispatcher.updateChat(chat) {
+                tableView?.reloadData()
+            }
+        }
     }
 }

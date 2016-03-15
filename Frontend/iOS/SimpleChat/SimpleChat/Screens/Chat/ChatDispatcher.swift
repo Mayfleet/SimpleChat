@@ -8,11 +8,9 @@ import SwiftyJSON
 
 class ChatDispatcher {
 
-    static let defaultDispatcher = ChatDispatcher()
+    private (set) var chats = [Chat]()
 
-    private (set) var chats = [ChatLogic]()
-
-    func addChat(chat: ChatLogic?) -> Bool {
+    func addChat(chat: Chat?) -> Bool {
         if let chat = chat {
             chats.append(chat)
             save()
@@ -22,9 +20,19 @@ class ChatDispatcher {
         }
     }
 
-    func removeChat(chat: ChatLogic) -> Bool {
+    func removeChat(chat: Chat) -> Bool {
         if let index = chats.indexOf(chat) {
             chats.removeAtIndex(index)
+            save()
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func updateChat(chat: Chat) -> Bool {
+        if let index = chats.indexOf(chat) {
+            chats[index] = chat
             save()
             return true
         } else {
@@ -61,7 +69,7 @@ class ChatDispatcher {
                 backendURLString = $0["backendURLString"].string,
                 backendURL = NSURL(string: backendURLString),
                 autoconnect = $0["autoconnect"].bool {
-                    return ChatLogic(configuration: ChatConfiguration(name: name, backendURL: backendURL, autoconnect: autoconnect))
+                    return Chat(configuration: ChatConfiguration(name: name, backendURL: backendURL, autoconnect: autoconnect))
                 } else {
                     return nil
                 }
@@ -74,7 +82,7 @@ class ChatDispatcher {
                     ChatConfiguration(name: "Local:3333", backendURLString: "ws://localhost:3333/"),
                     ChatConfiguration(name: "Heroku", backendURLString: "ws://mf-simple-chat.herokuapp.com:80/", autoconnect: true)
             ].flatMap {
-                return ChatLogic(configuration: $0)
+                return Chat(configuration: $0)
             }
             save()
         }
