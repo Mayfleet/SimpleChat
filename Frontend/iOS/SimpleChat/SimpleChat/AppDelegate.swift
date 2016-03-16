@@ -14,6 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+        print("Chats: \(App.chatDispatcher.chats.count)")
+
+        UIView.appearance().tintColor = UIColor.flatBlackColor()
+
         return true
     }
 }

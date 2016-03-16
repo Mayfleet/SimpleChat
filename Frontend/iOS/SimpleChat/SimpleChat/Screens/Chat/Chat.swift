@@ -7,19 +7,32 @@ import Foundation
 import Starscream
 import SwiftyJSON
 
-class ChatLogic: NSObject {
+class Chat: NSObject {
 
-    var onChange: (Void -> Void)? {
-        didSet {
-            onChange?()
-        }
+    enum Status {
+        case Online
+        case Offline
     }
 
-    var onStatusChange: ((status:String) -> Void)?
+    var name: String
+    var backendURL: NSURL
+    var autoconnect: Bool
 
-    var server: ServerConfiguration?
-
+    private (set) var status = Status.Offline
     private (set) var messages = [Message]()
+
+    init(name: String, backendURL: NSURL, autoconnect: Bool = false) {
+        self.name = name
+        self.backendURL = backendURL
+        self.autoconnect = autoconnect
+    }
+
+    convenience init?(name: String?, backendURLString: String?, autoconnect: Bool = false) {
+        guard let name = name, backendURLString = backendURLString, backendURL = NSURL(string: backendURLString) else {
+            return nil
+        }
+        self.init(name: name, backendURL: backendURL, autoconnect: autoconnect)
+    }
 
     func sendText(senderId: String, text: String) {
         guard let webSocket = webSocket else {
@@ -34,15 +47,17 @@ class ChatLogic: NSObject {
     }
 
     func connect() {
-        messages = [Message]()
-        if let server = server {
-            webSocket = WebSocket(url: server.backendURL, protocols: ["http"])
-            webSocket?.delegate = self
-            statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
-            statusTimer?.fire()
-            checkConnection()
+        if let webSocket = webSocket where webSocket.isConnected {
+            return
         }
-        onChange?()
+
+        messages = [Message]()
+        webSocket = WebSocket(url: backendURL, protocols: ["http"])
+        webSocket?.delegate = self
+        statusTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkConnection", userInfo: nil, repeats: true)
+        statusTimer?.fire()
+        checkConnection()
+        messagesChanged()
     }
 
     func disconnect() {
@@ -51,7 +66,7 @@ class ChatLogic: NSObject {
         webSocket?.disconnect()
         webSocket = nil
         messages = [Message]()
-        onChange?()
+        messagesChanged()
     }
 
     private var webSocket: WebSocket?
@@ -59,12 +74,10 @@ class ChatLogic: NSObject {
 
     @objc private func checkConnection() {
         if let webSocket = webSocket where !webSocket.isConnected {
-            onStatusChange?(status: "Offline")
-            print("Connection: offline. reconnecting...")
+            statusChanged(Status.Offline)
             webSocket.connect()
         } else {
-            onStatusChange?(status: "Online")
-            print("Connection: online.")
+            statusChanged(Status.Online)
         }
     }
 
@@ -85,9 +98,24 @@ class ChatLogic: NSObject {
             print("messages: \(messages)")
         }
     }
+
+    // Notifications
+
+    static let statusChangedNotification = "ChatStatusChangedNotification"
+    static let messagesChangedNotification = "ChatMessagesChangedNotification"
+
+    private func statusChanged(status: Status) {
+        self.status = status
+        NSNotificationCenter.defaultCenter().postNotificationName(Chat.statusChangedNotification, object: self)
+    }
+
+
+    private func messagesChanged() {
+        NSNotificationCenter.defaultCenter().postNotificationName(Chat.messagesChangedNotification, object: self)
+    }
 }
 
-extension ChatLogic {
+extension Chat {
 
     private func sendRequest(request: Request) {
         guard let webSocket = webSocket else {
@@ -109,16 +137,14 @@ extension ChatLogic {
     }
 }
 
-extension ChatLogic: WebSocketDelegate {
+extension Chat: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
-        print("Connected to: \(socket.origin)")
-        onStatusChange?(status: "Online")
+        statusChanged(Status.Online)
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        print("Disconnected from: \(socket.origin). Error: \(error?.localizedDescription)")
-        onStatusChange?(status: "Offline")
+        statusChanged(Status.Offline)
     }
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
@@ -127,11 +153,11 @@ extension ChatLogic: WebSocketDelegate {
         switch json["type"] {
         case "history":
             processHistory(json)
-            onChange?()
+            messagesChanged()
             break
         case "message":
             processMessage(json)
-            onChange?()
+            messagesChanged()
             break
         default:
             print("< unknown message: \(json)")
