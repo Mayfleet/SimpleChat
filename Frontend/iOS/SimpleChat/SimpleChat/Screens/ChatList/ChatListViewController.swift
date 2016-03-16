@@ -43,7 +43,6 @@ class ChatListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.prompt = NSLocalizedString("Simple Chat", comment: "")
         view.backgroundColor = UIColor.flatPurpleColorDark()
     }
 

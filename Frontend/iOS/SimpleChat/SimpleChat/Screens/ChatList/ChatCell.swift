@@ -20,11 +20,12 @@ class ChatCell: UITableViewCell {
     static let defaultReuseIdentifier = "ChatCell"
 
     @IBOutlet weak var serverNameLabel: UILabel?
-    @IBOutlet weak var serverNameEditingLabel: UILabel?
-    @IBOutlet weak var serverBackendURLLabel: UILabel?
     @IBOutlet weak var serverNotificationsLabel: UILabel?
-    @IBOutlet weak var editorLeadingConstraint: NSLayoutConstraint?
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint?
+    @IBOutlet weak var editorContainer: UIView?
     @IBOutlet weak var autoconnectButton: UIButton?
+    @IBOutlet weak var editButton: UIButton?
+    @IBOutlet weak var deleteButton: UIButton?
 
     @IBAction func autoconnectButtonAction(sender: AnyObject) {
         delegate?.chatCellDidToggleAutoconnect(self)
@@ -55,18 +56,15 @@ class ChatCell: UITableViewCell {
     var chat: Chat? {
         didSet {
             serverNameLabel?.text = chat?.name
-            serverNameEditingLabel?.text = chat?.name
-            serverBackendURLLabel?.text = chat?.backendURL.absoluteString
 
             var autoconnectTitle = NSLocalizedString("Autoconnect: Off", comment: "Autoconnect Button Title: Off")
-            var autoconnectTextColor = UIColor(hue: 0.07, saturation: 1, brightness: 0.83, alpha: 1)
+            var autoconnectBackgroundColor = UIColor.flatYellowColorDark()
+
             if let chat = chat where chat.autoconnect {
                 autoconnectTitle = NSLocalizedString("Autoconnect: On", comment: "Autoconnect Button Title: On")
-                autoconnectTextColor = UIColor(hue: 0.47, saturation: 0.82, brightness: 0.63, alpha: 1)
+                autoconnectBackgroundColor = UIColor.flatGreenColorDark()
             }
-            var autoconnectBackgroundColor = autoconnectTextColor.colorWithAlphaComponent(0.25)
             autoconnectButton?.setTitle(autoconnectTitle, forState: .Normal)
-            autoconnectButton?.setTitleColor(autoconnectTextColor, forState: .Normal)
             autoconnectButton?.backgroundColor = autoconnectBackgroundColor
 
             subscribe()
@@ -75,10 +73,13 @@ class ChatCell: UITableViewCell {
 
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        if let editorToLeftConstraint = editorLeadingConstraint {
+
+        if let
+        leadingConstraint = leadingConstraint,
+        editorContainer = editorContainer {
+
             layoutIfNeeded()
-            let width = frame.size.width
-            editorToLeftConstraint.constant = editing ? 0 : width
+            leadingConstraint.constant = editing ? -editorContainer.frame.size.width : 4
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [.CurveEaseInOut], animations: {
                 () -> Void in
                 self.layoutIfNeeded()
@@ -113,14 +114,15 @@ class ChatCell: UITableViewCell {
 
         switch chat.status {
         case Chat.Status.Online:
-            serverNotificationsLabel?.textColor = UIColor(red: 0.15, green: 0.69, blue: 0.37, alpha: 1)
-            serverNotificationsLabel?.backgroundColor = UIColor(red: 0.15, green: 0.69, blue: 0.37, alpha: 0.25)
+            serverNotificationsLabel?.backgroundColor = UIColor.flatGreenColorDark()
             break
         case Chat.Status.Offline:
-            serverNotificationsLabel?.textColor = UIColor(red: 0.75, green: 0.22, blue: 0.17, alpha: 1)
-            serverNotificationsLabel?.backgroundColor = UIColor(red: 0.75, green: 0.22, blue: 0.17, alpha: 0.25)
+            serverNotificationsLabel?.backgroundColor = UIColor.flatRedColorDark()
             break
         }
+
+        editButton?.backgroundColor = UIColor.flatSkyBlueColorDark()
+        deleteButton?.backgroundColor = UIColor.flatRedColorDark()
     }
 
     private func commonInit() {
