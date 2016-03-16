@@ -8,4 +8,11 @@ import Foundation
 struct App {
 
     static let chatDispatcher = ChatDispatcher()
+
+    struct SegueIdentifiers {
+
+        static let showChat = "ShowMessages"
+
+    }
+
 }

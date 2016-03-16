@@ -74,9 +74,8 @@ class ChatListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // TODO: Find better solution for segue names
         if indexPath.section == 0 {
-            performSegueWithIdentifier("ShowMessages", sender: self)
+            performSegueWithIdentifier(App.SegueIdentifiers.showChat, sender: self)
         } else {
             addServerButtonAction(self)
         }
