@@ -8,15 +8,15 @@ import UIKit
 class NavigationController: UINavigationController {
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .Default
+        return .LightContent
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationBar.barStyle = .Default
-        navigationBar.barTintColor = UIColor.flatWhiteColor()
         hidesNavigationBarHairline = true
-        view.backgroundColor = UIColor.flatGrayColor()
+        navigationBar.barStyle = .Black
+        navigationBar.barTintColor = UIColor.flatPurpleColor()
+        navigationBar.tintColor = UIColor.flatWhiteColor()
+        view.backgroundColor = UIColor.flatPurpleColorDark()
     }
 }

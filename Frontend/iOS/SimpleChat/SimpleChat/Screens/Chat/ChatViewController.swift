@@ -53,7 +53,6 @@ class ChatViewController: JSQMessagesViewController {
             dispatch_async(dispatch_get_main_queue(), {
                 self.title = self.chat?.name
             })
-
         }
     }
 
@@ -63,7 +62,8 @@ class ChatViewController: JSQMessagesViewController {
         senderDisplayName = senderId
         inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         inputToolbar?.contentView?.leftContentPadding = 0
-        collectionView?.backgroundColor = UIColor.flatGrayColor()
+        view.backgroundColor = UIColor.flatPurpleColorDark()
+        collectionView?.backgroundColor = UIColor.clearColor()
     }
 
     override func viewWillAppear(animated: Bool) {
