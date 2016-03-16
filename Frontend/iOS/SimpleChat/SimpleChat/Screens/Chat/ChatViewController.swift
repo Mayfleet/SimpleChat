@@ -17,6 +17,7 @@ class ChatViewController: JSQMessagesViewController {
         didSet {
             let center = NSNotificationCenter.defaultCenter()
             if let chat = chat {
+
                 center.addObserverForName(Chat.statusChangedNotification, object: chat, queue: nil, usingBlock: {
                     _ in
 
@@ -24,10 +25,10 @@ class ChatViewController: JSQMessagesViewController {
                         if let chat = self.chat {
                             switch chat.status {
                             case Chat.Status.Online:
-                                self.title = NSLocalizedString("Online", comment: "Online Chat Status")
+                                self.navigationItem.prompt = NSLocalizedString("Online", comment: "Online Chat Status")
                                 break
                             case Chat.Status.Offline:
-                                self.title = NSLocalizedString("Offline", comment: "Offline Chat Status")
+                                self.navigationItem.prompt = NSLocalizedString("Offline", comment: "Offline Chat Status")
                                 break
                             }
                         } else {
@@ -48,6 +49,11 @@ class ChatViewController: JSQMessagesViewController {
                 center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
                 center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
             }
+
+            dispatch_async(dispatch_get_main_queue(), {
+                self.title = self.chat?.name
+            })
+
         }
     }
 
@@ -57,6 +63,7 @@ class ChatViewController: JSQMessagesViewController {
         senderDisplayName = senderId
         inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         inputToolbar?.contentView?.leftContentPadding = 0
+        collectionView?.backgroundColor = UIColor.flatGrayColor()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -79,7 +86,15 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource? {
-        return nil
+        guard let chat = chat else {
+            return nil
+        }
+
+        if chat.messages[indexPath.row].senderId() == senderId {
+            return bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.whiteColor())
+        } else {
+            return bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.whiteColor())
+        }
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource? {
@@ -110,7 +125,8 @@ class ChatViewController: JSQMessagesViewController {
             return nil
         }
 
-        return NSAttributedString(string: chat.messages[indexPath.row].date().mediumDateString)
+        let string = chat.messages[indexPath.row].date().mediumDateString
+        return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.flatWhiteColor()])
     }
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
@@ -123,20 +139,19 @@ class ChatViewController: JSQMessagesViewController {
         }
 
         let message = chat.messages[indexPath.row]
-        return NSAttributedString(string: "\(message.senderId()) - \(message.date().mediumTimeString)")
+        let string = "\(message.senderId()) - \(message.date().mediumTimeString)"
+        return NSAttributedString(string: string, attributes: [NSForegroundColorAttributeName: UIColor.flatWhiteColor()])
     }
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return nil == chat ? 0 : 1
     }
-    
+
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let chat = chat else {
             return 0
         }
 
-        print("numberOfItemsInSection: \(chat.messages.count)")
-        
         return chat.messages.count
     }
 
@@ -146,9 +161,9 @@ class ChatViewController: JSQMessagesViewController {
         if let chat = chat {
             let message = chat.messages[indexPath.item]
             if message.senderId() == senderId {
-                cell.textView?.textColor = UIColor(red: 0.16, green: 0.5, blue: 0.73, alpha: 1)
+                cell.textView?.textColor = UIColor.flatBlueColorDark()
             } else {
-                cell.textView?.textColor = UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1)
+                cell.textView?.textColor = UIColor.flatGreenColorDark()
             }
         }
 
@@ -162,4 +177,6 @@ class ChatViewController: JSQMessagesViewController {
         chat.sendText(senderId, text: text)
         finishSendingMessageAnimated(true)
     }
+
+    private let bubbleFactory = JSQMessagesBubbleImageFactory()
 }

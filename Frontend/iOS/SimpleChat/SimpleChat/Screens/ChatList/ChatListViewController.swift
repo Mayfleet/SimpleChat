@@ -4,10 +4,11 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class ChatListViewController: UITableViewController {
 
-    // MARK: - ServerListViewController @IB
+    // MARK: - ChatListViewController @IB
 
     @IBAction func addServerButtonAction(sender: AnyObject) {
         let alert = UIAlertController(title: "Add Server", message: nil, preferredStyle: .Alert)
@@ -38,7 +39,14 @@ class ChatListViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    // MARK: - ServerListViewController
+    // MARK: - ChatListViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.flatGrayColor()
+
+        self.navigationItem.prompt = NSLocalizedString("Simple Chat", comment: "")
+    }
 
     private func dataChanged() {
         dispatch_async(dispatch_get_main_queue(), {

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         print("Chats: \(App.chatDispatcher.chats.count)")
 
+        UIView.appearance().tintColor = UIColor.flatBlackColor()
+
         return true
     }
 }

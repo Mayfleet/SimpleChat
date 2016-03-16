@@ -12,7 +12,5 @@ struct App {
     struct SegueIdentifiers {
 
         static let showChat = "ShowMessages"
-
     }
-
 }

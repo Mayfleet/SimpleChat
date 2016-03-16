@@ -1,14 +1,14 @@
 //
-// Created by Maxim Pervushin on 11/03/16.
+// Created by Maxim Pervushin on 16/03/16.
 // Copyright (c) 2016 Maxim Pervushin. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class RoundButton: UIButton {
+@IBDesignable class RoundedButton: UIButton {
 
     override func layoutSubviews() {
-        layer.cornerRadius = min(frame.height, frame.width) / 2
+        layer.cornerRadius = 3
         super.layoutSubviews()
     }
 
@@ -21,7 +21,7 @@ import UIKit
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()

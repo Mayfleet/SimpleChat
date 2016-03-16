@@ -5,7 +5,7 @@
 
 import UIKit
 
-@IBDesignable class RoundedLabel: UILabel {
+@IBDesignable class CircleLabel: UILabel {
 
     override func layoutSubviews() {
         clipsToBounds = true

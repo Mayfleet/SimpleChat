@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -21,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="K1b-PI-e6D"/>
+                    <navigationItem key="navigationItem" prompt="" id="K1b-PI-e6D"/>
                     <connections>
                         <segue destination="F6K-dr-QLM" kind="presentation" identifier="ShowAuthentication" id="2XT-Vx-HYx"/>
                     </connections>
@@ -114,7 +113,7 @@
                                     <constraint firstItem="U7z-yI-EzO" firstAttribute="top" secondItem="Z4s-Vm-bQh" secondAttribute="bottom" constant="5" id="zsQ-jE-fkV"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVR-ct-EbF" customClass="RoundButton" customModule="SimpleChat" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVR-ct-EbF" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="8" y="28" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -166,7 +165,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Grx-s5-BvH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87058823529999996" green="0.41176470590000003" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="VPC-er-Dsz" customClass="ChatCell" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -175,36 +174,45 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDc-qS-Tki">
-                                            <rect key="frame" x="8" y="8" width="528" height="14"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Server Backend URL]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWX-UJ-ehd">
-                                            <rect key="frame" x="8" y="22" width="528" height="14"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="[9999]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-N5-ocF" customClass="RoundedLabel" customModule="SimpleChat" customModuleProvider="target">
-                                            <rect key="frame" x="544" y="8" width="48" height="28"/>
-                                            <color key="backgroundColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="0.25" colorSpace="calibratedRGB"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agh-0i-eBz" customClass="RoundedView" customModule="SimpleChat" customModuleProvider="target">
+                                            <rect key="frame" x="4" y="4" width="592" height="40"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDc-qS-Tki">
+                                                    <rect key="frame" x="8" y="0.0" width="524" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="[9999]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-N5-ocF" customClass="CircleLabel" customModule="SimpleChat" customModuleProvider="target">
+                                                    <rect key="frame" x="536" y="6" width="48" height="28"/>
+                                                    <color key="backgroundColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="0.25" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="e2v-N5-ocF" secondAttribute="height" id="mSf-UB-6fn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="e2v-N5-ocF" secondAttribute="height" id="MLE-70-Djj"/>
+                                                <constraint firstItem="e2v-N5-ocF" firstAttribute="top" secondItem="Agh-0i-eBz" secondAttribute="top" constant="6" id="H1Z-Xf-JIb"/>
+                                                <constraint firstAttribute="bottom" secondItem="e2v-N5-ocF" secondAttribute="bottom" constant="6" id="PoR-cP-vAe"/>
+                                                <constraint firstAttribute="trailing" secondItem="e2v-N5-ocF" secondAttribute="trailing" constant="8" id="Zou-5s-cbI"/>
+                                                <constraint firstItem="TDc-qS-Tki" firstAttribute="top" secondItem="Agh-0i-eBz" secondAttribute="top" id="acT-ib-SOw"/>
+                                                <constraint firstItem="TDc-qS-Tki" firstAttribute="leading" secondItem="Agh-0i-eBz" secondAttribute="leading" constant="8" id="c55-k4-pQA"/>
+                                                <constraint firstAttribute="bottom" secondItem="TDc-qS-Tki" secondAttribute="bottom" id="lOh-w3-hRG"/>
+                                                <constraint firstItem="e2v-N5-ocF" firstAttribute="leading" secondItem="TDc-qS-Tki" secondAttribute="trailing" constant="4" id="tSb-t4-GdZ"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                            <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xV-7x-kjI" userLabel="Editor View" customClass="HorizontalGradientView" customModule="SimpleChat" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="1200" height="44"/>
+                                            <rect key="frame" x="1000" y="0.0" width="1200" height="44"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKa-xa-Yyw">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUB-cA-6Tt">
-                                                            <rect key="frame" x="353" y="0.0" width="136" height="44"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUB-cA-6Tt" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
+                                                            <rect key="frame" x="349" y="0.0" width="136" height="44"/>
                                                             <color key="backgroundColor" red="0.87058823529411766" green="0.41176470588235292" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -215,8 +223,14 @@
                                                                 <action selector="autoconnectButtonAction:" destination="VPC-er-Dsz" eventType="touchUpInside" id="QaD-cv-kXy"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-36-avd">
-                                                            <rect key="frame" x="489" y="0.0" width="47" height="44"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="[Editing Chat Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L0l-Fc-Gdg">
+                                                            <rect key="frame" x="8" y="0.0" width="333" height="44"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-36-avd" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
+                                                            <rect key="frame" x="487" y="0.0" width="47" height="44"/>
                                                             <color key="backgroundColor" red="0.13333333333333333" green="0.41960784313725491" blue="0.66666666666666663" alpha="0.25" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                             <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -227,7 +241,7 @@
                                                                 <action selector="editButtonAction:" destination="VPC-er-Dsz" eventType="touchUpInside" id="WrL-2d-KGY"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0a-EI-c7s">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0a-EI-c7s" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
                                                             <rect key="frame" x="536" y="0.0" width="64" height="44"/>
                                                             <color key="backgroundColor" red="0.69019607843137254" green="0.14509803921568629" blue="0.12941176470588237" alpha="0.25" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -239,12 +253,6 @@
                                                                 <action selector="deleteButtonAction:" destination="VPC-er-Dsz" eventType="touchUpInside" id="yei-6F-EkF"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="[Editing Chat Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L0l-Fc-Gdg">
-                                                            <rect key="frame" x="8" y="0.0" width="337" height="44"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -255,13 +263,13 @@
                                                         <constraint firstItem="hUB-cA-6Tt" firstAttribute="top" secondItem="IKa-xa-Yyw" secondAttribute="top" id="O4L-hV-BLq"/>
                                                         <constraint firstAttribute="bottom" secondItem="A0a-EI-c7s" secondAttribute="bottom" id="Oip-5s-Z1b"/>
                                                         <constraint firstItem="hUB-cA-6Tt" firstAttribute="leading" secondItem="L0l-Fc-Gdg" secondAttribute="trailing" constant="8" id="Sqi-d3-6G3"/>
-                                                        <constraint firstItem="wNc-36-avd" firstAttribute="leading" secondItem="hUB-cA-6Tt" secondAttribute="trailing" id="YFr-nj-Dpj"/>
+                                                        <constraint firstItem="wNc-36-avd" firstAttribute="leading" secondItem="hUB-cA-6Tt" secondAttribute="trailing" constant="2" id="YFr-nj-Dpj"/>
                                                         <constraint firstAttribute="bottom" secondItem="hUB-cA-6Tt" secondAttribute="bottom" id="kuQ-qa-jnJ"/>
                                                         <constraint firstItem="hUB-cA-6Tt" firstAttribute="top" secondItem="IKa-xa-Yyw" secondAttribute="top" id="mxB-8G-TEn"/>
                                                         <constraint firstAttribute="bottom" secondItem="L0l-Fc-Gdg" secondAttribute="bottom" id="p9Q-fe-qGS"/>
                                                         <constraint firstAttribute="trailing" secondItem="A0a-EI-c7s" secondAttribute="trailing" id="snV-jT-qyW"/>
                                                         <constraint firstItem="L0l-Fc-Gdg" firstAttribute="top" secondItem="IKa-xa-Yyw" secondAttribute="top" id="t2m-k6-uUL"/>
-                                                        <constraint firstItem="A0a-EI-c7s" firstAttribute="leading" secondItem="wNc-36-avd" secondAttribute="trailing" id="uAY-Ge-DLX"/>
+                                                        <constraint firstItem="A0a-EI-c7s" firstAttribute="leading" secondItem="wNc-36-avd" secondAttribute="trailing" constant="2" id="uAY-Ge-DLX"/>
                                                         <constraint firstItem="A0a-EI-c7s" firstAttribute="top" secondItem="IKa-xa-Yyw" secondAttribute="top" id="whO-hR-1i3"/>
                                                     </constraints>
                                                 </view>
@@ -286,52 +294,64 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="top" secondItem="TDc-qS-Tki" secondAttribute="bottom" id="4AE-Jp-DGn"/>
-                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="leading" secondItem="TDc-qS-Tki" secondAttribute="trailing" constant="8" id="9YP-7o-Cse"/>
-                                        <constraint firstItem="2xV-7x-kjI" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leading" id="EJg-c0-H3g"/>
-                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="topMargin" id="Kd5-rq-8ad"/>
-                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="width" secondItem="TDc-qS-Tki" secondAttribute="width" id="OGK-RG-aWo"/>
-                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="bottom" secondItem="wtP-UF-cQY" secondAttribute="bottomMargin" id="PLC-h1-dkR"/>
+                                        <constraint firstAttribute="trailing" secondItem="Agh-0i-eBz" secondAttribute="trailing" constant="4" id="BPZ-hV-xvf"/>
+                                        <constraint firstItem="2xV-7x-kjI" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leading" constant="1000" id="EJg-c0-H3g"/>
+                                        <constraint firstItem="Agh-0i-eBz" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="top" constant="4" id="Ej0-ug-TXX"/>
                                         <constraint firstAttribute="bottom" secondItem="2xV-7x-kjI" secondAttribute="bottom" id="R6j-qm-PhT"/>
-                                        <constraint firstItem="oWX-UJ-ehd" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leadingMargin" id="YPe-xT-oLU"/>
-                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="height" secondItem="oWX-UJ-ehd" secondAttribute="height" id="bMy-pP-xEj"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="e2v-N5-ocF" secondAttribute="bottom" id="bUS-pH-y4e"/>
-                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="trailing" secondItem="wtP-UF-cQY" secondAttribute="trailingMargin" id="jJU-tK-es1"/>
+                                        <constraint firstItem="Agh-0i-eBz" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leading" constant="4" id="esq-jV-OV6"/>
+                                        <constraint firstAttribute="bottom" secondItem="Agh-0i-eBz" secondAttribute="bottom" id="f2N-KI-n0E"/>
                                         <constraint firstItem="2xV-7x-kjI" firstAttribute="width" secondItem="wtP-UF-cQY" secondAttribute="width" multiplier="2:1" id="lRo-6C-ww0"/>
                                         <constraint firstItem="2xV-7x-kjI" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="top" id="lvF-JD-kj3"/>
-                                        <constraint firstItem="TDc-qS-Tki" firstAttribute="leading" secondItem="wtP-UF-cQY" secondAttribute="leadingMargin" id="wYP-4R-9bQ"/>
-                                        <constraint firstItem="e2v-N5-ocF" firstAttribute="top" secondItem="wtP-UF-cQY" secondAttribute="topMargin" id="ybA-hw-seO"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="autoconnectButton" destination="hUB-cA-6Tt" id="Cis-t5-glO"/>
                                     <outlet property="editorLeadingConstraint" destination="EJg-c0-H3g" id="SpU-NT-sYn"/>
-                                    <outlet property="serverBackendURLLabel" destination="oWX-UJ-ehd" id="8uZ-RQ-Ehl"/>
                                     <outlet property="serverNameEditingLabel" destination="L0l-Fc-Gdg" id="k6S-bZ-qyT"/>
                                     <outlet property="serverNameLabel" destination="TDc-qS-Tki" id="f89-Hr-UOf"/>
                                     <outlet property="serverNotificationsLabel" destination="e2v-N5-ocF" id="PRx-tp-tcG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddChatCell" textLabel="COX-f7-KSy" style="IBUITableViewCellStyleDefault" id="vhc-3D-zLe" customClass="AddChatCell" customModule="SimpleChat" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddChatCell" id="vhc-3D-zLe" customClass="AddChatCell" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vhc-3D-zLe" id="Jym-fg-927">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="COX-f7-KSy">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                            <color key="textColor" red="0.14509803921568629" green="0.63921568627450975" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODv-05-Cl7" customClass="RoundedView" customModule="SimpleChat" customModuleProvider="target">
+                                            <rect key="frame" x="4" y="4" width="592" height="40"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHo-4z-Eea">
+                                                    <rect key="frame" x="0.0" y="0.0" width="592" height="40"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" red="0.1450980392" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="PHo-4z-Eea" secondAttribute="trailing" id="5mM-QK-wsL"/>
+                                                <constraint firstItem="PHo-4z-Eea" firstAttribute="top" secondItem="ODv-05-Cl7" secondAttribute="top" id="PkM-CO-Bed"/>
+                                                <constraint firstItem="PHo-4z-Eea" firstAttribute="leading" secondItem="ODv-05-Cl7" secondAttribute="leading" id="QCs-Ql-inf"/>
+                                                <constraint firstAttribute="bottom" secondItem="PHo-4z-Eea" secondAttribute="bottom" id="jbr-13-ruw"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="ODv-05-Cl7" secondAttribute="bottom" id="4mc-KG-buN"/>
+                                        <constraint firstItem="ODv-05-Cl7" firstAttribute="leading" secondItem="Jym-fg-927" secondAttribute="leading" constant="4" id="E7u-aV-Zmt"/>
+                                        <constraint firstItem="ODv-05-Cl7" firstAttribute="top" secondItem="Jym-fg-927" secondAttribute="top" constant="4" id="SOq-sl-IED"/>
+                                        <constraint firstAttribute="trailing" secondItem="ODv-05-Cl7" secondAttribute="trailing" constant="4" id="Tzg-ME-7dz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.14509803921568629" green="0.63921568627450975" blue="0.30196078431372547" alpha="0.25" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -466,7 +486,7 @@
                                     <constraint firstItem="zjC-h4-l2X" firstAttribute="leading" secondItem="Abe-p1-CgG" secondAttribute="leading" id="xCs-LG-IcM"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-6e-h6v" customClass="RoundButton" customModule="SimpleChat" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-6e-h6v" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="8" y="28" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -517,10 +537,12 @@
         <!--Navigation Controller-->
         <scene sceneID="zdc-Ji-C8j">
             <objects>
-                <navigationController id="qe7-O8-YVy" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ve7-V0-vec">
+                <navigationController id="qe7-O8-YVy" customClass="NavigationController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Ve7-V0-vec">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1333333333" green="0.41960784309999999" blue="0.66666666669999997" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="nHv-hX-U8T" kind="relationship" relationship="rootViewController" id="yES-bW-izx"/>

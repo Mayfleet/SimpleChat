@@ -7,22 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73BC604E372FD21B1A38DBC8 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC613E9D020FC68EBCDF43 /* NavigationController.swift */; };
 		73BC606A95F2F93C80E214A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */; };
 		73BC607B994E7A109C4A0929 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC632DDB8EE523C573088E /* App.swift */; };
 		73BC60A39F37BAF60F0D1DCB /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68092ABB2C56051F1B78 /* ChatListViewController.swift */; };
 		73BC60CA5259E2CBB96E8A72 /* HorizontalGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */; };
 		73BC60E7732A4B7F6AE77324 /* SignoutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63AD2741D17BA7DE4A92 /* SignoutRequest.swift */; };
-		73BC614FB5B57C380E709A87 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64EEA4B5501E7087F609 /* RoundButton.swift */; };
+		73BC614FB5B57C380E709A87 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64EEA4B5501E7087F609 /* CircleButton.swift */; };
 		73BC618DC3E2E771923403F3 /* SignoutFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC64AB7AB4E923E80F0C80 /* SignoutFailureResponse.swift */; };
 		73BC61FBA8B60CF8EF173FB2 /* SignupSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6F5AF30FCD16D16D5C18 /* SignupSuccessResponse.swift */; };
 		73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */; };
 		73BC638D693A16593CCFD725 /* SetPointerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */; };
+		73BC639AB86D06A46E6D879A /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63A1931E293ABE761A6F /* UIColor+Image.swift */; };
 		73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */; };
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC64DA0C4B991021C06431 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC69E77ACA5D1918E100B6 /* Request.swift */; };
 		73BC66BE6BA111C59A0B4A59 /* SignupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68824F3514372A69CD58 /* SignupRequest.swift */; };
 		73BC672ED8434EF9CA8B0BC5 /* SignupFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6908A0D8416A291CC086 /* SignupFailureResponse.swift */; };
+		73BC6769F21918A453CB3A84 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC678CF4175ACFFB838E10 /* RoundedButton.swift */; };
 		73BC678FE6FBFBF4C8AF9A73 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68E80E37A0E41F889EF6 /* Response.swift */; };
 		73BC6872AAC39F168473CBC5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6CA84191648242329081 /* Chat.swift */; };
 		73BC68798F83377392091D58 /* SigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6230CF29F376C8DE8677 /* SigninFailureResponse.swift */; };
@@ -32,9 +35,10 @@
 		73BC6B351E1884F6165828A3 /* SignoutSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC60A06D71BF92EEE87B7F /* SignoutSuccessResponse.swift */; };
 		73BC6B3987E326AE84207818 /* AddChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6FDDE5C39D05DA2F5F06 /* AddChatCell.swift */; };
 		73BC6B5A55AD63223246C433 /* SigninRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68486161F99BD9D9CCCD /* SigninRequest.swift */; };
+		73BC6B6BEEBD1BECA5B543BF /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6E9C0CCCC12694B0F42E /* RoundedView.swift */; };
 		73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */; };
 		73BC6D405CCA21E9ED3128B8 /* SetPointerSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6EC8AA2321CAAE730A30 /* SetPointerSuccessResponse.swift */; };
-		73BC6DEC21F7FBEA5A83B027 /* RoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC67C49441DE892C7F34FB /* RoundedLabel.swift */; };
+		73BC6DEC21F7FBEA5A83B027 /* CircleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC67C49441DE892C7F34FB /* CircleLabel.swift */; };
 		73BC6E084AE07AB52E0885A7 /* SigninSuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66BFF65EEAFCBE714D3D /* SigninSuccessResponse.swift */; };
 		73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */; };
 		73BC6F2ECAC5256C6EDA4662 /* StorageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */; };
@@ -50,21 +54,24 @@
 		72D93E3165B62EDDFB545E48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		73BC60A06D71BF92EEE87B7F /* SignoutSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC6107DE0E8A9183C082AB /* ChatDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDispatcher.swift; sourceTree = "<group>"; };
+		73BC613E9D020FC68EBCDF43 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		73BC6230CF29F376C8DE8677 /* SigninFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninFailureResponse.swift; sourceTree = "<group>"; };
 		73BC632DDB8EE523C573088E /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		73BC6361C9B05A205D904C05 /* StorageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDispatcher.swift; sourceTree = "<group>"; };
+		73BC63A1931E293ABE761A6F /* UIColor+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+SimpleChat.swift"; sourceTree = "<group>"; };
 		73BC63AD2741D17BA7DE4A92 /* SignoutRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutRequest.swift; sourceTree = "<group>"; };
 		73BC63E79C9695929C45E267 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		73BC64AB7AB4E923E80F0C80 /* SignoutFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutFailureResponse.swift; sourceTree = "<group>"; };
 		73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalGradientView.swift; sourceTree = "<group>"; };
-		73BC64EEA4B5501E7087F609 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		73BC64EEA4B5501E7087F609 /* CircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		73BC6514007CC9CD177A2D18 /* QuickSigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninRequest.swift; sourceTree = "<group>"; };
 		73BC65A2D2C6CD4986A95FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73BC662F9347F04E97E9689F /* SetPointerFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerFailureResponse.swift; sourceTree = "<group>"; };
 		73BC66BFF65EEAFCBE714D3D /* SigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC66EE1FD46CD02DB8A7D7 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		73BC67C49441DE892C7F34FB /* RoundedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedLabel.swift; sourceTree = "<group>"; };
+		73BC678CF4175ACFFB838E10 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		73BC67C49441DE892C7F34FB /* CircleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLabel.swift; sourceTree = "<group>"; };
 		73BC68092ABB2C56051F1B78 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		73BC68486161F99BD9D9CCCD /* SigninRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninRequest.swift; sourceTree = "<group>"; };
 		73BC68824F3514372A69CD58 /* SignupRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupRequest.swift; sourceTree = "<group>"; };
@@ -76,6 +83,7 @@
 		73BC6D0CC5E82EF43198D788 /* QuickSigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC6E2E33146CF7ABC71DF8 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		73BC6E529160C72F4DF6DFDB /* SetPointerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerRequest.swift; sourceTree = "<group>"; };
+		73BC6E9C0CCCC12694B0F42E /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		73BC6EC8AA2321CAAE730A30 /* SetPointerSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPointerSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC6F5AF30FCD16D16D5C18 /* SignupSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSuccessResponse.swift; sourceTree = "<group>"; };
 		73BC6FDDE5C39D05DA2F5F06 /* AddChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddChatCell.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 				73BC601F76A87D923DCBDA03 /* ChatList */,
 				73BC6334FC23FBB6CFA54A32 /* LogIn */,
 				73BC6587A880286A59A53015 /* SignUp */,
+				73BC6AAC5F07C44D14C5AE9A /* Root */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -191,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				73BC63A3307F7C652FA529CD /* NSDate+SimpleChat.swift */,
+				73BC63A1931E293ABE761A6F /* UIColor+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -208,12 +218,22 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		73BC6AAC5F07C44D14C5AE9A /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				73BC613E9D020FC68EBCDF43 /* NavigationController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		73BC6B4C96F0ACCC57A63017 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73BC64EEA4B5501E7087F609 /* RoundButton.swift */,
-				73BC67C49441DE892C7F34FB /* RoundedLabel.swift */,
+				73BC64EEA4B5501E7087F609 /* CircleButton.swift */,
+				73BC67C49441DE892C7F34FB /* CircleLabel.swift */,
 				73BC64C3178F8C25D2BC58E7 /* HorizontalGradientView.swift */,
+				73BC678CF4175ACFFB838E10 /* RoundedButton.swift */,
+				73BC6E9C0CCCC12694B0F42E /* RoundedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -393,7 +413,7 @@
 				73BC6E41BDB1B1F9A799CF58 /* NSDate+SimpleChat.swift in Sources */,
 				73BC6A5DF221E9954CB8F7C6 /* LogInViewController.swift in Sources */,
 				73BC6FA3E9DB83958E08CDFE /* SignUpViewController.swift in Sources */,
-				73BC614FB5B57C380E709A87 /* RoundButton.swift in Sources */,
+				73BC614FB5B57C380E709A87 /* CircleButton.swift in Sources */,
 				73BC66BE6BA111C59A0B4A59 /* SignupRequest.swift in Sources */,
 				73BC634049DA95A1797377D6 /* QuickSigninRequest.swift in Sources */,
 				73BC6B5A55AD63223246C433 /* SigninRequest.swift in Sources */,
@@ -412,10 +432,14 @@
 				73BC6D405CCA21E9ED3128B8 /* SetPointerSuccessResponse.swift in Sources */,
 				73BC6BDED5459EC791D1941C /* SetPointerFailureResponse.swift in Sources */,
 				73BC63C02F01B88149DBD5F8 /* ChatDispatcher.swift in Sources */,
-				73BC6DEC21F7FBEA5A83B027 /* RoundedLabel.swift in Sources */,
+				73BC6DEC21F7FBEA5A83B027 /* CircleLabel.swift in Sources */,
 				73BC60CA5259E2CBB96E8A72 /* HorizontalGradientView.swift in Sources */,
 				73BC607B994E7A109C4A0929 /* App.swift in Sources */,
 				73BC6B3987E326AE84207818 /* AddChatCell.swift in Sources */,
+				73BC6769F21918A453CB3A84 /* RoundedButton.swift in Sources */,
+				73BC6B6BEEBD1BECA5B543BF /* RoundedView.swift in Sources */,
+				73BC604E372FD21B1A38DBC8 /* NavigationController.swift in Sources */,
+				73BC639AB86D06A46E6D879A /* UIColor+Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
