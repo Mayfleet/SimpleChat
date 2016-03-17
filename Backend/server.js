@@ -59,12 +59,12 @@ module.exports.listen = function () {
     }
 
     function sendDebugReport(client) {
-        var debugReport = {
-            'type': 'message',
-            'senderId': 'Server',
-            'text': 'users: ' + clients.length + ', messages: ' + history.length
-        };
-        client.sendUTF(JSON.stringify(debugReport));
+        // var debugReport = {
+        //     'type': 'message',
+        //     'senderId': 'Server',
+        //     'text': 'users: ' + clients.length + ', messages: ' + history.length
+        // };
+        // client.sendUTF(JSON.stringify(debugReport));
     }
 
     function sendHistory(client) {
