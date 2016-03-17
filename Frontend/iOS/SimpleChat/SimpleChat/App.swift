@@ -3,11 +3,13 @@
 // Copyright (c) 2016 Maxim Pervushin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct App {
 
-    static let chatDispatcher = ChatDispatcher()
+    static var chatDispatcher: ChatDispatcher {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).chatDispatcher
+    }
 
     struct SegueIdentifiers {
 

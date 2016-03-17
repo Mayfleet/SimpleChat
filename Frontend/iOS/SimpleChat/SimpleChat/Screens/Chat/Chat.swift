@@ -6,6 +6,7 @@
 import Foundation
 import Starscream
 import SwiftyJSON
+import CocoaLumberjack
 
 class Chat: NSObject {
 
@@ -42,8 +43,8 @@ class Chat: NSObject {
         guard let package = JSON(["type": "message", "senderId": senderId, "text": text]).rawString() else {
             return
         }
-        print("> " + package)
         webSocket.writeString(package)
+        DDLogDebug("> " + package)
     }
 
     func connect() {
@@ -85,7 +86,7 @@ class Chat: NSObject {
         if let message = Message(dictionary: json.dictionaryObject) {
             messages.append(message)
         } else {
-            print("Unable to parse message: \(json.dictionaryObject)")
+            DDLogError("Unable to parse message: \(json.dictionaryObject)")
         }
     }
 
@@ -95,7 +96,7 @@ class Chat: NSObject {
             for message in messages {
                 processMessage(message)
             }
-            print("messages: \(messages)")
+            DDLogDebug("messages: \(messages)")
         }
     }
 
@@ -132,8 +133,8 @@ extension Chat {
             return
         }
 
-        print("> " + serialized)
         webSocket.writeString(serialized)
+        DDLogDebug("> " + serialized)
     }
 }
 
@@ -160,7 +161,7 @@ extension Chat: WebSocketDelegate {
             messagesChanged()
             break
         default:
-            print("< unknown message: \(json)")
+            DDLogError("< unknown message: \(json)")
             break
         }
     }

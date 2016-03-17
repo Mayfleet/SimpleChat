@@ -8,6 +8,6 @@ import UIKit
 extension UIColor {
 
     class var randomGrayscaleColor: UIColor {
-        return UIColor(white: CGFloat(drand48()), alpha: 0.15)
+        return UIColor(white: CGFloat(drand48()), alpha: 0.02)
     }
 }
