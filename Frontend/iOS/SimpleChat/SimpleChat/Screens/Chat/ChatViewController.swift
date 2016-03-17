@@ -56,14 +56,27 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
 
+    override class func nib() -> UINib? {
+        return nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyScrollsToMostRecentMessage = true
         senderId = "iOS App #\(arc4random_uniform(1000) + 1)"
         senderDisplayName = senderId
         inputToolbar?.contentView?.leftBarButtonItemWidth = 0
         inputToolbar?.contentView?.leftContentPadding = 0
         view.backgroundColor = UIColor.flatPurpleColorDark()
         collectionView?.backgroundColor = UIColor.clearColor()
+        if let inputToolbar = inputToolbar {
+            view.bringSubviewToFront(inputToolbar)
+            if let button = inputToolbar.contentView?.rightBarButtonItem {
+                button.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
+                button.setTitleColor(UIColor.flatWhiteColor(), forState: .Highlighted)
+                button.setTitleColor(UIColor.flatWhiteColor().colorWithAlphaComponent(0.25), forState: .Disabled)
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {

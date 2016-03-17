@@ -41,12 +41,6 @@ class ChatListViewController: UITableViewController {
 
     // MARK: - ChatListViewController
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.prompt = NSLocalizedString("Simple Chat", comment: "")
-        view.backgroundColor = UIColor.flatPurpleColorDark()
-    }
-
     private func dataChanged() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView?.reloadData()
