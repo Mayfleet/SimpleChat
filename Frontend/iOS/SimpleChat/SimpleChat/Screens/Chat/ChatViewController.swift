@@ -91,6 +91,16 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        if let logInViewController = segue.destinationViewController as? LogInViewController {
+            logInViewController.onClose = {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+    }
+    
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData? {
         guard let chat = chat else {
             return nil

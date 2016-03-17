@@ -67,6 +67,10 @@ class SignUpViewController: UIViewController {
         unsubscribe()
     }
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if traitCollection.horizontalSizeClass == .Compact {
             return [.Portrait]
