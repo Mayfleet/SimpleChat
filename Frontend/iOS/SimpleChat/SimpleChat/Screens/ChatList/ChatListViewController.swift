@@ -41,11 +41,6 @@ class ChatListViewController: UITableViewController {
 
     // MARK: - ChatListViewController
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.flatPurpleColorDark()
-    }
-
     private func dataChanged() {
         dispatch_async(dispatch_get_main_queue(), {
             self.tableView?.reloadData()

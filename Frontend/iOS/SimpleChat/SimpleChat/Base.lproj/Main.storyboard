@@ -36,7 +36,6 @@
                                 <items/>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xlq-Vo-0pm" secondAttribute="bottom" id="3f2-wb-OzP"/>
                             <constraint firstItem="HkW-oW-qiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4WA-tL-gCP"/>
@@ -196,7 +195,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Grx-s5-BvH" customClass="BackgroundTableView" customModule="SimpleChat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.87058823529999996" green="0.41176470590000003" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="VPC-er-Dsz" customClass="ChatCell" customModule="SimpleChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>

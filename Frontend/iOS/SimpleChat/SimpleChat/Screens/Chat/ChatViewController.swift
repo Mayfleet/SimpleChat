@@ -69,11 +69,13 @@ class ChatViewController: JSQMessagesViewController {
         inputToolbar?.contentView?.leftContentPadding = 0
         view.backgroundColor = UIColor.flatPurpleColorDark()
         collectionView?.backgroundColor = UIColor.clearColor()
-        view.tintColor = UIColor.flatWhiteColor()
         if let inputToolbar = inputToolbar {
-            inputToolbar.barTintColor = UIColor.flatPurpleColor()
-            inputToolbar.tintColor = UIColor.flatWhiteColor()
             view.bringSubviewToFront(inputToolbar)
+            if let button = inputToolbar.contentView?.rightBarButtonItem {
+                button.setTitleColor(UIColor.flatWhiteColor(), forState: .Normal)
+                button.setTitleColor(UIColor.flatWhiteColor(), forState: .Highlighted)
+                button.setTitleColor(UIColor.flatWhiteColor().colorWithAlphaComponent(0.25), forState: .Disabled)
+            }
         }
     }
 

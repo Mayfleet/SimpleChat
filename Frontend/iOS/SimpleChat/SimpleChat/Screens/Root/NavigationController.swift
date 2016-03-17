@@ -14,9 +14,6 @@ class NavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hidesNavigationBarHairline = true
-        navigationBar.barStyle = .Black
-        navigationBar.barTintColor = UIColor.flatPurpleColor()
-        navigationBar.tintColor = UIColor.flatWhiteColor()
         view.backgroundColor = UIColor.flatPurpleColorDark()
     }
 }
