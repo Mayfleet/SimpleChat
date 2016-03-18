@@ -29,7 +29,7 @@ clear_previous_screenshots true # remove the '#' to clear all previously generat
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"
 
-# workspace "./Project.xcworkspace"
+workspace "./SimpleChat.xcworkspace"
 
 # For more information about all available options run
 # snapshot --help
