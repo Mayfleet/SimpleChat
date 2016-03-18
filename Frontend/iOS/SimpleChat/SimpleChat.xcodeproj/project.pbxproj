@@ -51,7 +51,19 @@
 		C515DCE91C85A25B004A7BD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C515DCE71C85A25B004A7BD0 /* Main.storyboard */; };
 		C515DCEB1C85A25B004A7BD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C515DCEA1C85A25B004A7BD0 /* Assets.xcassets */; };
 		C515DCEE1C85A25B004A7BD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C515DCEC1C85A25B004A7BD0 /* LaunchScreen.storyboard */; };
+		C5427F551C9C1388009902EB /* Simple_Chat_Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5427F541C9C1388009902EB /* Simple_Chat_Screenshots.swift */; };
+		C5427F5D1C9C13CA009902EB /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5427F5C1C9C13CA009902EB /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C5427F571C9C1388009902EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C515DCD81C85A25B004A7BD0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C515DCDF1C85A25B004A7BD0;
+			remoteInfo = SimpleChat;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		72D93E3165B62EDDFB545E48 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +114,10 @@
 		C515DCEA1C85A25B004A7BD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C515DCED1C85A25B004A7BD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C515DCEF1C85A25B004A7BD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5427F521C9C1388009902EB /* Simple Chat Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Simple Chat Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5427F541C9C1388009902EB /* Simple_Chat_Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple_Chat_Screenshots.swift; sourceTree = "<group>"; };
+		C5427F561C9C1388009902EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5427F5C1C9C13CA009902EB /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../../fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +126,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				809E65295E0AE684B77F845B /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5427F4F1C9C1388009902EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				C515DCE21C85A25B004A7BD0 /* SimpleChat */,
+				C5427F531C9C1388009902EB /* Simple Chat Screenshots */,
 				C515DCE11C85A25B004A7BD0 /* Products */,
 				4EBC88E474C202FC291DD39F /* Pods */,
 				F3C596A12B850F8400A720A1 /* Frameworks */,
@@ -261,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				C515DCE01C85A25B004A7BD0 /* SimpleChat.app */,
+				C5427F521C9C1388009902EB /* Simple Chat Screenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,6 +305,16 @@
 				73BC632DDB8EE523C573088E /* App.swift */,
 			);
 			path = SimpleChat;
+			sourceTree = "<group>";
+		};
+		C5427F531C9C1388009902EB /* Simple Chat Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				C5427F5C1C9C13CA009902EB /* SnapshotHelper.swift */,
+				C5427F541C9C1388009902EB /* Simple_Chat_Screenshots.swift */,
+				C5427F561C9C1388009902EB /* Info.plist */,
+			);
+			path = "Simple Chat Screenshots";
 			sourceTree = "<group>";
 		};
 		F3C596A12B850F8400A720A1 /* Frameworks */ = {
@@ -313,6 +348,24 @@
 			productReference = C515DCE01C85A25B004A7BD0 /* SimpleChat.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C5427F511C9C1388009902EB /* Simple Chat Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5427F5B1C9C1388009902EB /* Build configuration list for PBXNativeTarget "Simple Chat Screenshots" */;
+			buildPhases = (
+				C5427F4E1C9C1388009902EB /* Sources */,
+				C5427F4F1C9C1388009902EB /* Frameworks */,
+				C5427F501C9C1388009902EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5427F581C9C1388009902EB /* PBXTargetDependency */,
+			);
+			name = "Simple Chat Screenshots";
+			productName = "Simple Chat Screenshots";
+			productReference = C5427F521C9C1388009902EB /* Simple Chat Screenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -325,6 +378,10 @@
 				TargetAttributes = {
 					C515DCDF1C85A25B004A7BD0 = {
 						CreatedOnToolsVersion = 7.2.1;
+					};
+					C5427F511C9C1388009902EB = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = C515DCDF1C85A25B004A7BD0;
 					};
 				};
 			};
@@ -342,6 +399,7 @@
 			projectRoot = "";
 			targets = (
 				C515DCDF1C85A25B004A7BD0 /* SimpleChat */,
+				C5427F511C9C1388009902EB /* Simple Chat Screenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -354,6 +412,13 @@
 				C515DCEE1C85A25B004A7BD0 /* LaunchScreen.storyboard in Resources */,
 				C515DCEB1C85A25B004A7BD0 /* Assets.xcassets in Resources */,
 				C515DCE91C85A25B004A7BD0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5427F501C9C1388009902EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +520,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5427F4E1C9C1388009902EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5427F551C9C1388009902EB /* Simple_Chat_Screenshots.swift in Sources */,
+				C5427F5D1C9C13CA009902EB /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5427F581C9C1388009902EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C515DCDF1C85A25B004A7BD0 /* SimpleChat */;
+			targetProxy = C5427F571C9C1388009902EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C515DCE71C85A25B004A7BD0 /* Main.storyboard */ = {
@@ -584,6 +666,30 @@
 			};
 			name = Release;
 		};
+		C5427F591C9C1388009902EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Simple Chat Screenshots/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maximpervushin.Simple-Chat-Screenshots";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SimpleChat;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		C5427F5A1C9C1388009902EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Simple Chat Screenshots/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maximpervushin.Simple-Chat-Screenshots";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SimpleChat;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -604,6 +710,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C5427F5B1C9C1388009902EB /* Build configuration list for PBXNativeTarget "Simple Chat Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5427F591C9C1388009902EB /* Debug */,
+				C5427F5A1C9C1388009902EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
