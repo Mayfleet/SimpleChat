@@ -25,6 +25,7 @@
 		73BC646C151D0275ED20F12C /* QuickSigninFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */; };
 		73BC64CC68FB62A7E5B95845 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC66EE1FD46CD02DB8A7D7 /* Message.swift */; };
 		73BC64DA0C4B991021C06431 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC69E77ACA5D1918E100B6 /* Request.swift */; };
+		73BC6682E56B6555DF3D1253 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6A47E826B059DC8FEC50 /* ChatController.swift */; };
 		73BC66BE6BA111C59A0B4A59 /* SignupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC68824F3514372A69CD58 /* SignupRequest.swift */; };
 		73BC672ED8434EF9CA8B0BC5 /* SignupFailureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC6908A0D8416A291CC086 /* SignupFailureResponse.swift */; };
 		73BC6769F21918A453CB3A84 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BC678CF4175ACFFB838E10 /* RoundedButton.swift */; };
@@ -96,6 +97,7 @@
 		73BC68E80E37A0E41F889EF6 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		73BC6908A0D8416A291CC086 /* SignupFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFailureResponse.swift; sourceTree = "<group>"; };
 		73BC69E77ACA5D1918E100B6 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		73BC6A47E826B059DC8FEC50 /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		73BC6C32102D7AE5F49A7478 /* QuickSigninFailureResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninFailureResponse.swift; sourceTree = "<group>"; };
 		73BC6CA84191648242329081 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		73BC6D0CC5E82EF43198D788 /* QuickSigninSuccessResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickSigninSuccessResponse.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				73BC6334FC23FBB6CFA54A32 /* LogIn */,
 				73BC6587A880286A59A53015 /* SignUp */,
 				73BC6AAC5F07C44D14C5AE9A /* Root */,
+				73BC6A47E826B059DC8FEC50 /* ChatController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				73BC645B83F8601E6D043AB5 /* BackgroundView.swift in Sources */,
 				73BC634933145A7ACD99E740 /* BackgroundTableView.swift in Sources */,
 				73BC6E41D07B30C8F90A8B71 /* UIColor+Random.swift in Sources */,
+				73BC6682E56B6555DF3D1253 /* ChatController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

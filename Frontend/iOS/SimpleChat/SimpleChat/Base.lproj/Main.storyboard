@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Chat View Controller-->
+        <!--Messages-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ChatViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xlq-Vo-0pm" customClass="JSQMessagesCollectionView">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xlq-Vo-0pm" customClass="JSQMessagesCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fx3-eV-Egf" customClass="JSQMessagesCollectionViewFlowLayout">
@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="HkW-oW-qiT" customClass="JSQMessagesInputToolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="HkW-oW-qiT" customClass="JSQMessagesInputToolbar">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="MTt-n7-An6"/>
@@ -50,13 +50,13 @@
                             <outletCollection property="gestureRecognizers" destination="PMT-xK-Thy" appends="YES" id="VSW-do-TJF"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Messages" id="do5-MI-qsp"/>
                     <navigationItem key="navigationItem" prompt="" id="K1b-PI-e6D"/>
                     <connections>
                         <outlet property="collectionView" destination="Xlq-Vo-0pm" id="LmK-Kg-yuD"/>
                         <outlet property="inputToolbar" destination="HkW-oW-qiT" id="IdQ-VI-3qe"/>
                         <outlet property="toolbarBottomLayoutGuide" destination="kW6-Vq-9aA" id="RTD-66-UaU"/>
                         <outlet property="toolbarHeightConstraint" destination="MTt-n7-An6" id="b5w-0g-vsd"/>
-                        <segue destination="F6K-dr-QLM" kind="presentation" identifier="ShowLogIn" id="n8p-6o-rHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -66,9 +66,9 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1301" y="703"/>
+            <point key="canvasLocation" x="2209" y="703"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Item-->
         <scene sceneID="fqQ-Na-ZVa">
             <objects>
                 <viewController id="X5J-dc-kaf" customClass="SignUpViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -152,8 +152,8 @@
                                     <constraint firstItem="U7z-yI-EzO" firstAttribute="top" secondItem="Z4s-Vm-bQh" secondAttribute="bottom" constant="8" id="zsQ-jE-fkV"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVR-ct-EbF" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
-                                <rect key="frame" x="8" y="28" width="30" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVR-ct-EbF" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
+                                <rect key="frame" x="8" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="YVg-rn-Jdc"/>
@@ -179,11 +179,12 @@
                             <outletCollection property="gestureRecognizers" destination="Eew-3C-PC6" appends="YES" id="YYT-J6-tqE"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ZD7-c2-l7J"/>
                     <connections>
                         <outlet property="containerToBottomLayoutConstraint" destination="Zyi-aj-w0A" id="YYh-f3-Ada"/>
                         <outlet property="containerView" destination="JQA-fS-FWb" id="hGg-vV-EQu"/>
                         <outlet property="passwordTextField" destination="DRH-5R-AAP" id="EqU-7r-6Ms"/>
-                        <outlet property="userNameTextField" destination="Izo-Nk-IK4" id="giB-Ya-n5W"/>
+                        <outlet property="usernameTextField" destination="Izo-Nk-IK4" id="YCp-pZ-ZF0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IoQ-P2-jbM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -193,7 +194,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1301" y="2266"/>
+            <point key="canvasLocation" x="2209" y="2266"/>
         </scene>
         <!--Chats-->
         <scene sceneID="ibu-0I-geM">
@@ -382,14 +383,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Chats" id="qa6-g9-gq6"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="ShowMessages" id="PYD-dg-XIf"/>
+                        <segue destination="1t7-3V-Xez" kind="show" identifier="ShowMessages" id="mEl-WG-WBk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXr-Jr-cqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="557" y="703"/>
         </scene>
-        <!--Log In View Controller-->
+        <!--Item-->
         <scene sceneID="Kr7-Qw-4Fo">
             <objects>
                 <viewController id="F6K-dr-QLM" customClass="LogInViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -409,7 +410,7 @@
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
-                                            <segue destination="X5J-dc-kaf" kind="presentation" identifier="ShowSignUp" id="9yP-Ny-Kb1"/>
+                                            <action selector="signUpButtonAction:" destination="F6K-dr-QLM" eventType="touchUpInside" id="zKY-SY-Sqh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZi-na-5Aw" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
@@ -507,8 +508,8 @@
                                     <constraint firstItem="zjC-h4-l2X" firstAttribute="leading" secondItem="Abe-p1-CgG" secondAttribute="leading" id="xCs-LG-IcM"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-6e-h6v" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
-                                <rect key="frame" x="8" y="28" width="30" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-6e-h6v" customClass="CircleButton" customModule="SimpleChat" customModuleProvider="target">
+                                <rect key="frame" x="8" y="72" width="30" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pWb-6e-h6v" secondAttribute="height" id="eVA-yv-RZ1"/>
@@ -537,6 +538,7 @@
                             <outletCollection property="gestureRecognizers" destination="GjE-KG-ciV" appends="YES" id="vDe-mD-Hlx"/>
                         </connections>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="cCz-eh-Qti"/>
                     <connections>
                         <outlet property="containerToBottomLayoutConstraint" destination="uRE-NE-Zqg" id="FdW-ee-T1u"/>
                         <outlet property="containerView" destination="HZ2-42-fMr" id="1m9-IP-qXz"/>
@@ -551,7 +553,26 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1301" y="1490"/>
+            <point key="canvasLocation" x="2209" y="1490"/>
+        </scene>
+        <!--Chat Controller-->
+        <scene sceneID="A3m-FK-sbh">
+            <objects>
+                <tabBarController id="1t7-3V-Xez" customClass="ChatController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="O89-zy-8mj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="6yL-to-HbP"/>
+                        <segue destination="F6K-dr-QLM" kind="relationship" relationship="viewControllers" id="Y7X-da-kRQ"/>
+                        <segue destination="X5J-dc-kaf" kind="relationship" relationship="viewControllers" id="cri-UM-ShI"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgz-IB-ggh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293" y="703"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdc-Ji-C8j">

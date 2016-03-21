@@ -53,6 +53,18 @@ class Chat: NSObject {
             return
         }
 
+        // TODO: Implement
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC * 2)), dispatch_get_main_queue(), {
+            self.authenticationChanged(false)
+        })
+    }
+
+    func sendSignUp(signUp: SignupRequest) {
+        guard let webSocket = webSocket else {
+            return
+        }
+
+        // TODO: Implement
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC * 2)), dispatch_get_main_queue(), {
             self.authenticationChanged(false)
         })

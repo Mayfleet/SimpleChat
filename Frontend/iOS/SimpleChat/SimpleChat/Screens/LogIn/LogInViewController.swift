@@ -15,11 +15,15 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var containerToBottomLayoutConstraint: NSLayoutConstraint?
 
     @IBAction func closeButtonAction(sender: AnyObject) {
-        onClose?()
+        didClose?()
     }
 
     @IBAction func logInButtonAction(sender: AnyObject) {
-        onLogIn?(username: usernameTextField?.text, password: passwordTextField?.text)
+        didLogIn?(username: usernameTextField?.text, password: passwordTextField?.text)
+    }
+
+    @IBAction func signUpButtonAction(sender: AnyObject) {
+        signUpButtonAction?()
     }
 
     @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
@@ -35,8 +39,9 @@ class LogInViewController: UIViewController {
 
     // MARK: LogInViewController
 
-    var onClose: (Void -> Void)?
-    var onLogIn: ((username: String?, password: String?) -> Void)?
+    var didClose: (Void -> Void)?
+    var didLogIn: ((username: String?, password: String?) -> Void)?
+    var signUpButtonAction: (Void -> Void)?
 
     private func keyboardWillChangeFrameNotification(notification: NSNotification) {
         guard let
@@ -70,15 +75,6 @@ class LogInViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         unsubscribe()
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        if let signUpViewController = segue.destinationViewController as? SignUpViewController {
-            signUpViewController.onClose = {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
