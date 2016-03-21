@@ -36,6 +36,7 @@
                                 <items/>
                             </toolbar>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xlq-Vo-0pm" secondAttribute="bottom" id="3f2-wb-OzP"/>
                             <constraint firstItem="HkW-oW-qiT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4WA-tL-gCP"/>
@@ -45,23 +46,25 @@
                             <constraint firstAttribute="trailing" secondItem="HkW-oW-qiT" secondAttribute="trailing" id="pBu-D4-qFy"/>
                             <constraint firstAttribute="trailing" secondItem="Xlq-Vo-0pm" secondAttribute="trailing" id="sM4-pi-ld6"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="PMT-xK-Thy" appends="YES" id="VSW-do-TJF"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" prompt="" id="K1b-PI-e6D">
-                        <barButtonItem key="rightBarButtonItem" title="Authentication" id="zeb-Ig-KgG">
-                            <connections>
-                                <segue destination="F6K-dr-QLM" kind="presentation" id="gNa-ry-DoG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" prompt="" id="K1b-PI-e6D"/>
                     <connections>
                         <outlet property="collectionView" destination="Xlq-Vo-0pm" id="LmK-Kg-yuD"/>
                         <outlet property="inputToolbar" destination="HkW-oW-qiT" id="IdQ-VI-3qe"/>
                         <outlet property="toolbarBottomLayoutGuide" destination="kW6-Vq-9aA" id="RTD-66-UaU"/>
                         <outlet property="toolbarHeightConstraint" destination="MTt-n7-An6" id="b5w-0g-vsd"/>
-                        <segue destination="F6K-dr-QLM" kind="presentation" identifier="ShowAuthentication" id="2XT-Vx-HYx"/>
+                        <segue destination="F6K-dr-QLM" kind="presentation" identifier="ShowLogIn" id="n8p-6o-rHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" numberOfTouchesRequired="2" id="PMT-xK-Thy">
+                    <connections>
+                        <action selector="doubleTapGesture:" destination="BYZ-38-t0r" id="ZBh-fp-El6"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1301" y="703"/>
         </scene>
@@ -406,7 +409,7 @@
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
-                                            <segue destination="X5J-dc-kaf" kind="presentation" id="9yP-Ny-Kb1"/>
+                                            <segue destination="X5J-dc-kaf" kind="presentation" identifier="ShowSignUp" id="9yP-Ny-Kb1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZi-na-5Aw" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
@@ -538,7 +541,7 @@
                         <outlet property="containerToBottomLayoutConstraint" destination="uRE-NE-Zqg" id="FdW-ee-T1u"/>
                         <outlet property="containerView" destination="HZ2-42-fMr" id="1m9-IP-qXz"/>
                         <outlet property="passwordTextField" destination="uBV-Zm-Blg" id="ZcR-Hl-gVk"/>
-                        <outlet property="userNameTextField" destination="mRw-Ga-K6Z" id="dOc-YA-Dx0"/>
+                        <outlet property="usernameTextField" destination="mRw-Ga-K6Z" id="Da5-L8-b2G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-oI-PHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -573,8 +576,5 @@
         <image name="Arrow Right" width="18" height="30"/>
         <image name="Close" width="18" height="18"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="gNa-ry-DoG"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.13333333333333333" green="0.41960784313725491" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
 </document>

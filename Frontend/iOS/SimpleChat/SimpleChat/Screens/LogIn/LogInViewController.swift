@@ -9,7 +9,7 @@ class LogInViewController: UIViewController {
 
     // MARK: LogInViewController @IB
 
-    @IBOutlet weak var userNameTextField: UITextField?
+    @IBOutlet weak var usernameTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
     @IBOutlet weak var containerView: UIView?
     @IBOutlet weak var containerToBottomLayoutConstraint: NSLayoutConstraint?
@@ -19,14 +19,15 @@ class LogInViewController: UIViewController {
     }
 
     @IBAction func logInButtonAction(sender: AnyObject) {
+        onLogIn?(username: usernameTextField?.text, password: passwordTextField?.text)
     }
 
     @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
     }
 
     @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
-        if userNameTextField?.isFirstResponder() == true {
-            userNameTextField?.resignFirstResponder()
+        if usernameTextField?.isFirstResponder() == true {
+            usernameTextField?.resignFirstResponder()
         } else if passwordTextField?.isFirstResponder() == true {
             passwordTextField?.resignFirstResponder()
         }
@@ -35,6 +36,7 @@ class LogInViewController: UIViewController {
     // MARK: LogInViewController
 
     var onClose: (Void -> Void)?
+    var onLogIn: ((username: String?, password: String?) -> Void)?
 
     private func keyboardWillChangeFrameNotification(notification: NSNotification) {
         guard let

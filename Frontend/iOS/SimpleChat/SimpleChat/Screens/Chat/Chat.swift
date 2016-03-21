@@ -19,6 +19,7 @@ class Chat: NSObject {
     var backendURL: NSURL
     var autoconnect: Bool
 
+    private (set) var authenticationRequired: Bool = false
     private (set) var status = Status.Offline
     private (set) var messages = [Message]()
 
@@ -45,6 +46,16 @@ class Chat: NSObject {
         }
         webSocket.writeString(package)
         DDLogDebug("> " + package)
+    }
+
+    func sendSignIn(signIn: SigninRequest) {
+        guard let webSocket = webSocket else {
+            return
+        }
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC * 2)), dispatch_get_main_queue(), {
+            self.authenticationChanged(false)
+        })
     }
 
     func connect() {
@@ -100,19 +111,30 @@ class Chat: NSObject {
         }
     }
 
-    // Notifications
+    // MARK: Notifications
 
+    static let authenticationChangedNotification = "ChatAuthenticationChangedNotification"
     static let statusChangedNotification = "ChatStatusChangedNotification"
     static let messagesChangedNotification = "ChatMessagesChangedNotification"
+
+    private func authenticationChanged(authenticationRequired: Bool) {
+        self.authenticationRequired = authenticationRequired
+        NSNotificationCenter.defaultCenter().postNotificationName(Chat.authenticationChangedNotification, object: self)
+    }
 
     private func statusChanged(status: Status) {
         self.status = status
         NSNotificationCenter.defaultCenter().postNotificationName(Chat.statusChangedNotification, object: self)
     }
 
-
     private func messagesChanged() {
         NSNotificationCenter.defaultCenter().postNotificationName(Chat.messagesChangedNotification, object: self)
+    }
+
+    // MARK: Debug
+
+    func debug_setAuthenticationRequired(authenticationRequired: Bool) {
+        authenticationChanged(authenticationRequired)
     }
 }
 

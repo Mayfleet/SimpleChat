@@ -11,6 +11,12 @@ import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
 
+    @IBAction func doubleTapGesture(sender: AnyObject) {
+        if let chat = chat {
+            chat.debug_setAuthenticationRequired(!chat.authenticationRequired)
+        }
+    }
+
     // MARK: - ChatViewController
 
     var chat: Chat? {
@@ -18,34 +24,12 @@ class ChatViewController: JSQMessagesViewController {
             let center = NSNotificationCenter.defaultCenter()
             if let chat = chat {
 
-                center.addObserverForName(Chat.statusChangedNotification, object: chat, queue: nil, usingBlock: {
-                    _ in
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let chat = self.chat {
-                            switch chat.status {
-                            case Chat.Status.Online:
-                                self.navigationItem.prompt = NSLocalizedString("Online", comment: "Online Chat Status")
-                                break
-                            case Chat.Status.Offline:
-                                self.navigationItem.prompt = NSLocalizedString("Offline", comment: "Offline Chat Status")
-                                break
-                            }
-                        } else {
-                            self.title = ""
-                        }
-                    })
-                })
-
-                center.addObserverForName(Chat.messagesChangedNotification, object: chat, queue: nil, usingBlock: {
-                    _ in
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.collectionView?.reloadData()
-                    })
-                })
+                center.addObserverForName(Chat.authenticationChangedNotification, object: chat, queue: nil, usingBlock: chatAuthenticationChangedNotification)
+                center.addObserverForName(Chat.statusChangedNotification, object: chat, queue: nil, usingBlock: chatStatusChangedNotification)
+                center.addObserverForName(Chat.messagesChangedNotification, object: chat, queue: nil, usingBlock: chatMessagesChangedNotification)
 
             } else {
+                center.removeObserver(self, name: Chat.authenticationChangedNotification, object: nil)
                 center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
                 center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
             }
@@ -93,14 +77,20 @@ class ChatViewController: JSQMessagesViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
-        
+
         if let logInViewController = segue.destinationViewController as? LogInViewController {
             logInViewController.onClose = {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
+            logInViewController.onLogIn = {
+                (username: String?, password: String?) in
+                if let username = username, password = password {
+                    self.chat?.sendSignIn(SigninRequest(username: username, password: password))
+                }
+            }
         }
     }
-    
+
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData? {
         guard let chat = chat else {
             return nil
@@ -202,4 +192,40 @@ class ChatViewController: JSQMessagesViewController {
     }
 
     private let bubbleFactory = JSQMessagesBubbleImageFactory()
+
+    // MARK: Chat notifications
+
+    private func chatAuthenticationChangedNotification(notification: NSNotification) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if let chat = self.chat where chat.authenticationRequired {
+                self.performSegueWithIdentifier(App.SegueIdentifiers.showLogIn, sender: self)
+            } else {
+                // TODO: Check if presented VC is Log In or Sign Up
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        })
+    }
+
+    private func chatStatusChangedNotification(notification: NSNotification) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if let chat = self.chat {
+                switch chat.status {
+                case Chat.Status.Online:
+                    self.navigationItem.prompt = NSLocalizedString("Online", comment: "Online Chat Status")
+                    break
+                case Chat.Status.Offline:
+                    self.navigationItem.prompt = NSLocalizedString("Offline", comment: "Offline Chat Status")
+                    break
+                }
+            } else {
+                self.title = ""
+            }
+        })
+    }
+
+    private func chatMessagesChangedNotification(notification: NSNotification) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.collectionView?.reloadData()
+        })
+    }
 }
