@@ -68,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="2209" y="703"/>
         </scene>
-        <!--Item-->
+        <!--Sign Up-->
         <scene sceneID="fqQ-Na-ZVa">
             <objects>
                 <viewController id="X5J-dc-kaf" customClass="SignUpViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -179,7 +179,7 @@
                             <outletCollection property="gestureRecognizers" destination="Eew-3C-PC6" appends="YES" id="YYT-J6-tqE"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ZD7-c2-l7J"/>
+                    <tabBarItem key="tabBarItem" title="Sign Up" id="ZD7-c2-l7J"/>
                     <connections>
                         <outlet property="containerToBottomLayoutConstraint" destination="Zyi-aj-w0A" id="YYh-f3-Ada"/>
                         <outlet property="containerView" destination="JQA-fS-FWb" id="hGg-vV-EQu"/>
@@ -390,7 +390,7 @@
             </objects>
             <point key="canvasLocation" x="557" y="703"/>
         </scene>
-        <!--Item-->
+        <!--Log In-->
         <scene sceneID="Kr7-Qw-4Fo">
             <objects>
                 <viewController id="F6K-dr-QLM" customClass="LogInViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -538,7 +538,7 @@
                             <outletCollection property="gestureRecognizers" destination="GjE-KG-ciV" appends="YES" id="vDe-mD-Hlx"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="cCz-eh-Qti"/>
+                    <tabBarItem key="tabBarItem" title="Log In" id="cCz-eh-Qti"/>
                     <connections>
                         <outlet property="containerToBottomLayoutConstraint" destination="uRE-NE-Zqg" id="FdW-ee-T1u"/>
                         <outlet property="containerView" destination="HZ2-42-fMr" id="1m9-IP-qXz"/>

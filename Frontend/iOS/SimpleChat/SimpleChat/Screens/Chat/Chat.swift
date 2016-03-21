@@ -48,7 +48,7 @@ class Chat: NSObject {
         DDLogDebug("> " + package)
     }
 
-    func sendSignIn(signIn: SigninRequest) {
+    func sendSignIn(signIn: SigninRequest?) {
         guard let webSocket = webSocket else {
             return
         }
@@ -59,7 +59,7 @@ class Chat: NSObject {
         })
     }
 
-    func sendSignUp(signUp: SignupRequest) {
+    func sendSignUp(signUp: SignupRequest?) {
         guard let webSocket = webSocket else {
             return
         }

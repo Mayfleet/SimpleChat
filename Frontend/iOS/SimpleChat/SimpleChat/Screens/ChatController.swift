@@ -37,18 +37,14 @@ class ChatController: UITabBarController {
         chatViewController?.chat = chat
         logInViewController?.didLogIn = {
             (username: String?, password: String?) in
-            if let username = username, password = password {
-                self.chat?.sendSignIn(SigninRequest(username: username, password: password))
-            }
+            self.chat?.sendSignIn(SigninRequest(username: username, password: password))
         }
         logInViewController?.signUpButtonAction = {
             self.selectedViewController = self.signUpViewController
         }
         signUpViewController?.didSignUp = {
             (username: String?, password: String?) in
-            if let username = username, password = password {
-                self.chat?.sendSignUp(SignupRequest(username: username, password: password))
-            }
+            self.chat?.sendSignUp(SignupRequest(username: username, password: password))
         }
     }
 

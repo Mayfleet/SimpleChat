@@ -17,6 +17,13 @@ struct SigninRequest: Request {
         self.password = password
     }
 
+    init?(username: String?, password: String?) {
+        if let username = username, password = password {
+            self.init(username: username, password: password)
+        }
+        return nil
+    }
+
     // MARK: Request
 
     var cid: String {
