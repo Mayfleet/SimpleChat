@@ -1,5 +1,5 @@
 //
-//  ChatViewController.swift
+//  MessagesViewController.swift
 //  SimpleChat
 //
 //  Created by Maxim Pervushin on 01/03/16.
@@ -9,7 +9,7 @@
 import UIKit
 import JSQMessagesViewController
 
-class ChatViewController: JSQMessagesViewController {
+class MessagesViewController: JSQMessagesViewController {
 
     @IBAction func doubleTapGesture(sender: AnyObject) {
         // TODO: Remove

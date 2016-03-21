@@ -61,9 +61,9 @@ class ChatController: UITabBarController {
     }
 
 
-    private var chatViewController: ChatViewController? {
+    private var chatViewController: MessagesViewController? {
         if let viewControllers = viewControllers {
-            for case let viewController as ChatViewController in viewControllers {
+            for case let viewController as MessagesViewController in viewControllers {
                 return viewController
             }
         }
