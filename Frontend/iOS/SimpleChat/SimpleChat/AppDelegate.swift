@@ -8,15 +8,17 @@
 
 import UIKit
 import JSQMessagesViewController
+import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let chatDispatcher = ChatDispatcher()
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
 
-        print("Chats: \(App.chatDispatcher.chats.count)")
+        initLogger()
         initAppearance()
 
         return true
@@ -39,5 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         BackgroundTableView.appearance().backgroundColor = UIColor.flatPurpleColorDark()
         BackgroundView.appearance().backgroundColor = UIColor.flatPurpleColorDark()
+    }
+
+    private func initLogger() {
+        DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
     }
 }
