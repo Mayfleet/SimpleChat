@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qe7-O8-YVy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qe7-O8-YVy">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -196,7 +196,7 @@
             </objects>
             <point key="canvasLocation" x="2209" y="2266"/>
         </scene>
-        <!--Chats-->
+        <!--[ChatList.Title]-->
         <scene sceneID="ibu-0I-geM">
             <objects>
                 <tableViewController id="nHv-hX-U8T" customClass="ChatListViewController" customModule="SimpleChat" customModuleProvider="target" sceneMemberID="viewController">
@@ -221,7 +221,7 @@
                                                         <constraint firstAttribute="width" secondItem="eBt-AN-cwn" secondAttribute="height" id="9l8-vJ-xUB"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="[Server Name]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDc-qS-Tki">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="[ChatList.ChatName]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDc-qS-Tki">
                                                     <rect key="frame" x="8" y="0.0" width="508" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.12941176470588237" green="0.18431372549019609" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
@@ -253,17 +253,17 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xV-7x-kjI" userLabel="Editor View">
-                                            <rect key="frame" x="600" y="4" width="255" height="40"/>
+                                            <rect key="frame" x="600" y="4" width="664" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUB-cA-6Tt" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="253" height="40"/>
                                                     <color key="backgroundColor" red="0.1450980392" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="hUB-cA-6Tt" secondAttribute="height" id="zEp-oF-UeK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Autoconnect: Off">
+                                                    <state key="normal" title="[ChatList.AutoconnectButtonTitle]">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -271,14 +271,14 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNc-36-avd" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
-                                                    <rect key="frame" x="140" y="0.0" width="47" height="40"/>
+                                                    <rect key="frame" x="257" y="0.0" width="193" height="40"/>
                                                     <color key="backgroundColor" red="0.1450980392" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="wNc-36-avd" secondAttribute="height" id="sE9-X9-hzD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Edit">
+                                                    <state key="normal" title="[ChatList.EditButtonTitle]">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -286,14 +286,14 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0a-EI-c7s" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
-                                                    <rect key="frame" x="191" y="0.0" width="64" height="40"/>
+                                                    <rect key="frame" x="454" y="0.0" width="210" height="40"/>
                                                     <color key="backgroundColor" red="0.1450980392" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="A0a-EI-c7s" secondAttribute="height" id="lJA-Mi-GhR"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Delete">
+                                                    <state key="normal" title="[ChatList.DeleteButtonTitle]">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -349,7 +349,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODv-05-Cl7" customClass="RoundedView" customModule="SimpleChat" customModuleProvider="target">
                                             <rect key="frame" x="4" y="4" width="592" height="40"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Add Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHo-4z-Eea">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="[ChatList.AddChatTitle]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHo-4z-Eea">
                                                     <rect key="frame" x="0.0" y="0.0" width="592" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
@@ -381,7 +381,7 @@
                             <outlet property="delegate" destination="nHv-hX-U8T" id="sYe-Ls-HGV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Chats" id="qa6-g9-gq6"/>
+                    <navigationItem key="navigationItem" title="[ChatList.Title]" id="qa6-g9-gq6"/>
                     <connections>
                         <segue destination="1t7-3V-Xez" kind="show" identifier="ShowMessages" id="mEl-WG-WBk"/>
                     </connections>
@@ -408,6 +408,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s82-MU-SDx" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
                                         <rect key="frame" x="304" y="8" width="288" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="SignUpButton"/>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
                                             <action selector="signUpButtonAction:" destination="F6K-dr-QLM" eventType="touchUpInside" id="zKY-SY-Sqh"/>
@@ -416,6 +417,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZi-na-5Aw" customClass="RoundedButton" customModule="SimpleChat" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="288" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="ForgotPasswordButton"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="8hZ-sb-HLg"/>
                                         </constraints>
@@ -484,6 +486,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y6X-ex-pWC">
                                         <rect key="frame" x="0.0" y="97" width="600" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="LogInButton"/>
                                         <state key="normal" title="Log In"/>
                                         <connections>
                                             <action selector="logInButtonAction:" destination="F6K-dr-QLM" eventType="touchUpInside" id="0F1-U4-n6C"/>

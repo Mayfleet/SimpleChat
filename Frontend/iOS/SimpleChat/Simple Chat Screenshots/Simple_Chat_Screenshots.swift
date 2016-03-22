@@ -24,6 +24,24 @@ class Simple_Chat_Screenshots: XCTestCase {
     
     func testExample() {
         
+        
+        let app = XCUIApplication()
+        snapshot("01ChatsListScreen")
+        
+        app.tables.cells.staticTexts.elementBoundByIndex(0).tap()
+        snapshot("02ChatScreen")
+        
+        let collectionView = app.otherElements.containingType(.NavigationBar, identifier:"Local:3000").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.CollectionView).element
+
+        collectionView.twoFingerTap()
+        collectionView.twoFingerTap()
+        snapshot("03LogInScreen")
+
+        app.buttons["SignUpButton"].tap()
+        snapshot("04SignUpScreen")
+
+        
+        /*
         let app = XCUIApplication()
         
         snapshot("01ChatsListScreen")
@@ -45,7 +63,23 @@ class Simple_Chat_Screenshots: XCTestCase {
         closeButton.tap()
         closeButton.tap()
         local3000NavigationBar.buttons["Chats"].tap()
+        */
         
+        /*
+        let app = XCUIApplication()
+        snapshot("01ChatsListScreen")
+
+        app.tables.cells.staticTexts.elementBoundByIndex(0).tap()
+        snapshot("02ChatScreen")
+        
+        let collectionView = app.otherElements.containingType(.NavigationBar, identifier:"Local:3000").childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.Other).element.childrenMatchingType(.CollectionView).element
+//        let collectionView = app.otherElements.childrenMatchingType(.CollectionView).element
+        collectionView.twoFingerTap()
+        collectionView.twoFingerTap()
+        snapshot("03LogInScreen")
+
+        app.buttons["SignUpButton"].tap()
+        snapshot("04SignUpScreen")
+        */
     }
-    
 }
