@@ -28,6 +28,14 @@ public class Chat extends Observable {
         return messages;
     }
 
+    public String getName() {
+        return "Hello";
+    }
+
+    public String getBackendURIString() {
+        return "World";
+    }
+
     public Chat() {
         Log.d(TAG, "WS Create");
 
