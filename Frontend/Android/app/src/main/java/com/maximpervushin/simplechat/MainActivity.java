@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void showChat() {
+    public void showChat(Chat chat) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if (null != chatListFragment && chatListFragment.isAdded()) {
             fragmentTransaction.remove(chatListFragment);
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if (null == chatFragment) {
             chatFragment = new ChatFragment();
         }
+        chatFragment.setChat(chat);
         if (!chatFragment.isAdded()) {
             fragmentTransaction.add(R.id.rootView, chatFragment);
         }

@@ -34,7 +34,8 @@ public class ChatListFragment extends Fragment implements Observer {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Activity activity = getActivity();
                 if (activity instanceof MainActivity) {
-                    ((MainActivity) activity).showChat();
+                    Chat chat = (Chat) chatListAdapter.getItem(position);
+                    ((MainActivity) activity).showChat(chat);
                 }
             }
         });

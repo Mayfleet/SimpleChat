@@ -3,6 +3,7 @@ package com.maximpervushin.simplechat;
 import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,7 +109,7 @@ public class Chat extends Observable {
             messageObject.put("text", message.getText());
             String messageString = messageObject.toString();
             webSocketClient.send(messageString);
-        } catch (JSONException e) {
+        } catch (JSONException | WebsocketNotConnectedException e) {
             e.printStackTrace();
         }
     }
@@ -124,7 +125,6 @@ public class Chat extends Observable {
             JSONArray messages = jsonObject.getJSONArray("messages");
             for (int i = 0; i < messages.length(); ++i) {
                 JSONObject messageObject = messages.getJSONObject(i);
-//                String messageText = messageObject.getString("text");
 
                 Message message = new Message(messageObject.getString("senderId"), messageObject.getString("text"));
                 Log.v(TAG, "< history message: " + message);

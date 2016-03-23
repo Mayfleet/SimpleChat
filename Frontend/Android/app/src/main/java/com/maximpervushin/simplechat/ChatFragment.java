@@ -23,6 +23,19 @@ public class ChatFragment extends Fragment implements Observer, View.OnClickList
     private Chat chat;
     private String senderId;
 
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        if (null != this.chat) {
+            this.chat.deleteObserver(this);
+            this.chat.disconnect();
+        }
+        this.chat = chat;
+        this.chat.addObserver(this);
+        this.chat.connect();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,10 +52,6 @@ public class ChatFragment extends Fragment implements Observer, View.OnClickList
 
         Button sendMessageButton = (Button) view.findViewById(R.id.sendMessageButton);
         sendMessageButton.setOnClickListener(this);
-
-        chat = new Chat("Localhost:3000", "ws://10.0.2.2:3000");
-        chat.addObserver(this);
-        chat.connect();
 
         return view;
     }
