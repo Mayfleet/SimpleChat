@@ -19,9 +19,10 @@ import java.util.Random;
 public class ChatFragment extends Fragment implements Observer, View.OnClickListener {
 
     private EditText messageEditText;
-    private MessagesAdapter adapter;
+    private MessageListAdapter adapter;
     private Chat chat;
     private String senderId;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class ChatFragment extends Fragment implements Observer, View.OnClickList
 
         senderId = "Android Client #" + (new Random()).nextInt(1000);
 
-        adapter = new MessagesAdapter(getActivity(), senderId);
+        adapter = new MessageListAdapter(getActivity(), senderId);
 
         ListView listView = (ListView) view.findViewById(R.id.messagesListView);
         listView.setAdapter(adapter);
@@ -39,7 +40,7 @@ public class ChatFragment extends Fragment implements Observer, View.OnClickList
         Button sendMessageButton = (Button) view.findViewById(R.id.sendMessageButton);
         sendMessageButton.setOnClickListener(this);
 
-        chat = new Chat();
+        chat = new Chat("Localhost:3000", "ws://10.0.2.2:3000");
         chat.addObserver(this);
         chat.connect();
 

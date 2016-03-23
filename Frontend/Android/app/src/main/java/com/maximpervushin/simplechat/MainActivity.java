@@ -3,6 +3,8 @@ package com.maximpervushin.simplechat;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,28 +18,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View rootView = findViewById(R.id.rootView);
+        rootView.setFocusableInTouchMode(true);
+        rootView.requestFocus();
+        rootView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (KeyEvent.KEYCODE_BACK == keyCode) {
+                    showChatList();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
         showChatList();
     }
 
     public void showChatList() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        if (null != chatFragment && chatFragment.isAdded()) {
+            fragmentTransaction.remove(chatFragment);
+        }
         if (null == chatListFragment) {
             chatListFragment = new ChatListFragment();
         }
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.rootView, chatListFragment)
-                .commit();
+        if (!chatListFragment.isAdded()) {
+            fragmentTransaction.add(R.id.rootView, chatListFragment);
+        }
+        fragmentTransaction.commit();
     }
 
     public void showChat() {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        if (null != chatListFragment) {
+        if (null != chatListFragment && chatListFragment.isAdded()) {
             fragmentTransaction.remove(chatListFragment);
         }
         if (null == chatFragment) {
             chatFragment = new ChatFragment();
         }
-        fragmentTransaction.add(R.id.rootView, chatFragment);
+        if (!chatFragment.isAdded()) {
+            fragmentTransaction.add(R.id.rootView, chatFragment);
+        }
         fragmentTransaction.commit();
     }
 }

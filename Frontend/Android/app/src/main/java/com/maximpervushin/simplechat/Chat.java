@@ -29,20 +29,23 @@ public class Chat extends Observable {
     }
 
     public String getName() {
-        return "Hello";
+        return name;
     }
 
     public String getBackendURIString() {
-        return "World";
+        return backendURIString;
     }
 
-    public Chat() {
-        Log.d(TAG, "WS Create");
+    private String name;
+    private String backendURIString;
+
+    public Chat(String name, String backendURIString) {
+        this.name = name;
+        this.backendURIString = backendURIString;
 
         URI uri;
         try {
-            uri = new URI("ws://10.0.2.2:3000");
-//            uri = new URI("ws://mf-simple-chat.herokuapp.com:80/");
+            uri = new URI(backendURIString);
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;

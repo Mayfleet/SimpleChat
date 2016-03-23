@@ -42,14 +42,14 @@ public class ChatListAdapter extends BaseAdapter {
         View itemView = convertView;
         if (null == itemView) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            itemView = inflater.inflate(android.R.layout.two_line_list_item, parent, false);
+            itemView = inflater.inflate(R.layout.chat_item_layout, parent, false);
         }
 
         Chat chat = (Chat) getItem(position);
 
-        TextView textView1 = (TextView) itemView.findViewById(android.R.id.text1);
+        TextView textView1 = (TextView) itemView.findViewById(R.id.chat_name_text);
         textView1.setText(chat.getName());
-        TextView textView2 = (TextView) itemView.findViewById(android.R.id.text2);
+        TextView textView2 = (TextView) itemView.findViewById(R.id.chat_backend_text);
         textView2.setText(chat.getBackendURIString());
 
         return itemView;

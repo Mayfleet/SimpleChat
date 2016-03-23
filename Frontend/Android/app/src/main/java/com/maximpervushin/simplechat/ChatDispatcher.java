@@ -18,11 +18,8 @@ public class ChatDispatcher extends Observable {
     }
 
     private ChatDispatcher() {
-        chats.add(new Chat());
-        chats.add(new Chat());
-        chats.add(new Chat());
-        chats.add(new Chat());
-        chats.add(new Chat());
+        chats.add(new Chat("Localhost:3000", "ws://10.0.2.2:3000"));
+        chats.add(new Chat("Heroku", "ws://mf-simple-chat.herokuapp.com:80/"));
     }
 
     public static ChatDispatcher defaultDispatcher() {
