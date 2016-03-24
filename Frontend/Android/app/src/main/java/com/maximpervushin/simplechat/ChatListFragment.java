@@ -3,8 +3,6 @@ package com.maximpervushin.simplechat;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import java.util.Observer;
  */
 public class ChatListFragment extends Fragment implements Observer {
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "ChatListActivity";
     private ChatListAdapter chatListAdapter;
 
     @Override
@@ -33,9 +31,9 @@ public class ChatListFragment extends Fragment implements Observer {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Activity activity = getActivity();
-                if (activity instanceof MainActivity) {
+                if (activity instanceof ChatListActivity) {
                     Chat chat = (Chat) chatListAdapter.getItem(position);
-                    ((MainActivity) activity).showChat(chat);
+                    ((ChatListActivity) activity).showChat(chat);
                 }
             }
         });

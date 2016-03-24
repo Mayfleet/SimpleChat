@@ -6,12 +6,10 @@
     android:orientation="vertical"
     tools:context=".ChatListActivity">
 
-    <ListView
-        android:id="@+id/messagesListView"
+    <fragment
+        android:id="@+id/chat"
+        class="com.maximpervushin.simplechat.ChatFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:stackFromBottom="true"
-        android:transcriptMode="alwaysScroll" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
