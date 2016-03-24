@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * Created by maximpervushin on 22/03/16.
  */
-public class MessagesAdapter extends BaseAdapter {
+public class MessageListAdapter extends BaseAdapter {
 
     private Context context;
     private String senderId;
     private List<Message> messages = new ArrayList<>();
 
-    public MessagesAdapter(Context context, String senderId) {
+    public MessageListAdapter(Context context, String senderId) {
         this.context = context;
         this.senderId = senderId;
     }
@@ -44,17 +44,20 @@ public class MessagesAdapter extends BaseAdapter {
         View itemView = convertView;
         if (null == itemView) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            itemView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            itemView = inflater.inflate(R.layout.message_item_layout, parent, false);
         }
 
         Message message = (Message) getItem(position);
 
-        TextView textView = (TextView) itemView.findViewById(android.R.id.text1);
-        textView.setText(message.getText());
+        TextView senderTextView = (TextView) itemView.findViewById(R.id.message_sender);
+        senderTextView.setText(message.getSender() + ":");
+        TextView textTextView = (TextView) itemView.findViewById(R.id.message_text);
+        textTextView.setText(message.getText());
+
         if (message.getSender().equals(senderId)) {
-            textView.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
+            itemView.setBackgroundColor(context.getResources().getColor(R.color.outgoingMessageBackground));
         } else {
-            textView.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
+            itemView.setBackgroundColor(context.getResources().getColor(R.color.incomingMessageBackground));
         }
 
         return itemView;

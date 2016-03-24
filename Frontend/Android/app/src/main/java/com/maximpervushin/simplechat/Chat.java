@@ -3,6 +3,7 @@ package com.maximpervushin.simplechat;
 import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,13 +29,24 @@ public class Chat extends Observable {
         return messages;
     }
 
-    public Chat() {
-        Log.d(TAG, "WS Create");
+    public String getName() {
+        return name;
+    }
+
+    public String getBackendURIString() {
+        return backendURIString;
+    }
+
+    private String name;
+    private String backendURIString;
+
+    public Chat(String name, String backendURIString) {
+        this.name = name;
+        this.backendURIString = backendURIString;
 
         URI uri;
         try {
-            uri = new URI("ws://10.0.2.2:3000");
-//            uri = new URI("ws://mf-simple-chat.herokuapp.com:80/");
+            uri = new URI(backendURIString);
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -97,7 +109,7 @@ public class Chat extends Observable {
             messageObject.put("text", message.getText());
             String messageString = messageObject.toString();
             webSocketClient.send(messageString);
-        } catch (JSONException e) {
+        } catch (JSONException | WebsocketNotConnectedException e) {
             e.printStackTrace();
         }
     }
@@ -113,7 +125,6 @@ public class Chat extends Observable {
             JSONArray messages = jsonObject.getJSONArray("messages");
             for (int i = 0; i < messages.length(); ++i) {
                 JSONObject messageObject = messages.getJSONObject(i);
-//                String messageText = messageObject.getString("text");
 
                 Message message = new Message(messageObject.getString("senderId"), messageObject.getString("text"));
                 Log.v(TAG, "< history message: " + message);
