@@ -14,6 +14,14 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity);
+        String chatIdentifier = getIntent().getExtras().getString("chat-identifier");
+        Chat chat = ChatDispatcher.defaultDispatcher().getChat(chatIdentifier);
+        if (null != chat) {
+            ChatFragment chatFragment = (ChatFragment) getFragmentManager().findFragmentById(R.id.chat);
+            if (null != chatFragment) {
+                chatFragment.setChat(chat);
+            }
+        }
     }
 
     @Override

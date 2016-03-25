@@ -93,6 +93,10 @@ public class Chat extends Observable {
         Log.d(TAG, "WS Created: " + webSocketClient.toString());
     }
 
+    public String getIdentifier() {
+        return name + " -- " + backendURIString;
+    }
+
     public void connect() {
         webSocketClient.connect();
     }
