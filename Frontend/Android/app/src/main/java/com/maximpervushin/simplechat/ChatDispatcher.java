@@ -29,4 +29,13 @@ public class ChatDispatcher extends Observable {
     public List<Chat> getChats() {
         return chats;
     }
+
+    public Chat getChat(String identifier) {
+        for (Chat chat: chats) {
+            if (identifier.equals(chat.getIdentifier())) {
+                return chat;
+            }
+        }
+        return null;
+    }
 }

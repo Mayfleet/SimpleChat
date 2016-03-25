@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ChatListActivity"
+    android:baselineAligned="false">
+
+    <fragment
+        android:id="@+id/chat_list"
+        class="com.maximpervushin.simplechat.ChatListFragment"
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:layout_height="match_parent" />
+
+    <fragment
+        android:id="@+id/chat"
+        class="com.maximpervushin.simplechat.ChatFragment"
+        android:layout_width="0dp"
+        android:layout_weight="0.75"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
