@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -18,10 +19,13 @@ import java.util.Random;
  */
 public class ChatFragment extends Fragment implements Observer, View.OnClickListener {
 
+    private View noChatContainer;
+    private View chatContainer;
     private EditText messageEditText;
     private MessageListAdapter adapter;
     private Chat chat;
     private String senderId;
+
 
     public Chat getChat() {
         return chat;
@@ -35,11 +39,22 @@ public class ChatFragment extends Fragment implements Observer, View.OnClickList
         this.chat = chat;
         this.chat.addObserver(this);
         this.chat.connect();
+
+        if (null == this.chat) {
+            noChatContainer.setVisibility(View.VISIBLE);
+            chatContainer.setVisibility(View.INVISIBLE);
+        } else {
+            noChatContainer.setVisibility(View.INVISIBLE);
+            chatContainer.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chat_fragment, container, false);
+
+        noChatContainer = view.findViewById(R.id.no_chat_layout);
+        chatContainer = view.findViewById(R.id.chat_layout);
 
         senderId = "Android Client #" + (new Random()).nextInt(1000);
 
