@@ -103,7 +103,7 @@
     }
 
     var backendUrl = getHashValue('server');
-    server = backendUrl || 'ws://localhost:3000/';
+    backendUrl = backendUrl || 'ws://localhost:3000/';
 
     var socket = new WebSocket(backendUrl);
 

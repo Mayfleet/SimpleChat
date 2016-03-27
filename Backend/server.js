@@ -1,5 +1,6 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
+var _ = require('lodash');
 var fs = require('fs');
 
 module.exports.listen = function () {
@@ -50,7 +51,7 @@ module.exports.listen = function () {
     }
 
     function processMessage(connection, data) {
-        if (data['text'].startsWith('--command')) {
+        if (_.startsWith(data['text'], '--command')) {
             var command = data['text'];
             if (command === '--command-help') {
                 console.log("< command help");
