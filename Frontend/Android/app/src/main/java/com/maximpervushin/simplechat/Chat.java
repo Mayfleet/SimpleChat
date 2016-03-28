@@ -43,7 +43,13 @@ public class Chat extends Observable {
     public Chat(String name, String backendURIString) {
         this.name = name;
         this.backendURIString = backendURIString;
+    }
 
+    public String getIdentifier() {
+        return name + " -- " + backendURIString;
+    }
+
+    public void connect() {
         URI uri;
         try {
             uri = new URI(backendURIString);
@@ -91,18 +97,13 @@ public class Chat extends Observable {
         };
 
         Log.d(TAG, "WS Created: " + webSocketClient.toString());
-    }
 
-    public String getIdentifier() {
-        return name + " -- " + backendURIString;
-    }
-
-    public void connect() {
         webSocketClient.connect();
     }
 
     public void disconnect() {
         webSocketClient.close();
+        webSocketClient = null;
     }
 
     public void sendMessage(Message message) {
