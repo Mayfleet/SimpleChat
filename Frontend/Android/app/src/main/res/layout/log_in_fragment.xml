@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/username_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username_hint"
@@ -26,6 +27,7 @@
             android:inputType="textPassword" />
 
         <Button
+            android:id="@+id/log_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/log_in" />
@@ -39,12 +41,14 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/reset_password_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/forgot_password" />
 
         <Button
+            android:id="@+id/show_sign_up_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
