@@ -19,6 +19,15 @@ function Server (config) {
 
 module.exports = Server;
 
+Server.prototype.getConfig = function () {
+    var me = this;
+    var result = {};
+    result.host = _.clone(me._host);
+    result.port = _.clone(me._port);
+    result.backlog = _.clone(me._backlog);
+    return result;
+};
+
 Server.prototype._originIsAllowed = function (origin) {
     // TODO: Put logic here to detect whether the specified origin is allowed.
     return true;
@@ -58,7 +67,21 @@ Server.prototype._handleRequest = function (request) {
     });
 };
 
-Server.prototype.listen = function () {
+Server.prototype.listen = function (cb) {
     var me = this;
-    me._httpServer.listen(me._port, me._host, me._backlog);
+    try {
+        me._httpServer.listen(me._port, me._host, me._backlog, cb);
+    } catch (e) {
+        console.error('ERROR');
+    }
+};
+
+Server.prototype.release = function () {
+    var me = this;
+    console.log('Releasing server resources');
+    _.each(me._connections, function (connection) {
+        if (_.isFunction(connection.close)) {
+            connection.close(1001); // CLOSE_REASON_GOING_AWAY
+        }
+    });
 };
