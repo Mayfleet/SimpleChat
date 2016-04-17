@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono&subset=latin,cyrillic">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="x-main-container">
+
+        <div class="x-incoming-section">
+
+            <div class="x-header-container">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" style="padding: 0;">
+                            <span class="x-header">Log</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="x-incoming-display"></div>
+
+        </div>
+
+        <div class="x-outgoing-section">
+
+            <div class="x-header-container">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-sm-6 col-xs-3" style="padding: 0;">
+                            <span class="x-header">Outgoing</span>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-xs-9" style="padding: 0;">
+
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default dropdown-toggle x-preset-button"
+                                        data-toggle="dropdown">
+                                    Load Preset...<span class="x-shortcut">&nbsp;&#x2303;L</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right x-preset-menu">
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x-textarea-container">
+                <textarea spellcheck="false"></textarea>
+            </div>
+
+            <div class="x-outgoing-toolbar-container">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-lg-offset-6 col-sm-12 col-sm-offset-0 col-xs-12" style="padding: 0;">
+
+                            <button type="button" class="btn btn-primary pull-right x-send-button">Send<span class="x-shortcut">&nbsp;&#x2303;&#x23ce;</span></button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+<script src="js/packet-presets.js"></script>
+<script src="js/tester-app.js"></script>
+
+</html>
