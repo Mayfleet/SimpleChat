@@ -9,24 +9,29 @@ class LogInViewController: UIViewController {
 
     // MARK: LogInViewController @IB
 
-    @IBOutlet weak var userNameTextField: UITextField?
+    @IBOutlet weak var usernameTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
     @IBOutlet weak var containerView: UIView?
     @IBOutlet weak var containerToBottomLayoutConstraint: NSLayoutConstraint?
 
     @IBAction func closeButtonAction(sender: AnyObject) {
-        onClose?()
+        didClose?()
     }
 
     @IBAction func logInButtonAction(sender: AnyObject) {
+        didLogIn?(username: usernameTextField?.text, password: passwordTextField?.text)
+    }
+
+    @IBAction func signUpButtonAction(sender: AnyObject) {
+        signUpButtonAction?()
     }
 
     @IBAction func forgotPasswordButtonAction(sender: AnyObject) {
     }
 
     @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
-        if userNameTextField?.isFirstResponder() == true {
-            userNameTextField?.resignFirstResponder()
+        if usernameTextField?.isFirstResponder() == true {
+            usernameTextField?.resignFirstResponder()
         } else if passwordTextField?.isFirstResponder() == true {
             passwordTextField?.resignFirstResponder()
         }
@@ -34,7 +39,9 @@ class LogInViewController: UIViewController {
 
     // MARK: LogInViewController
 
-    var onClose: (Void -> Void)?
+    var didClose: (Void -> Void)?
+    var didLogIn: ((username: String?, password: String?) -> Void)?
+    var signUpButtonAction: (Void -> Void)?
 
     private func keyboardWillChangeFrameNotification(notification: NSNotification) {
         guard let
@@ -70,15 +77,10 @@ class LogInViewController: UIViewController {
         unsubscribe()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        if let signUpViewController = segue.destinationViewController as? SignUpViewController {
-            signUpViewController.onClose = {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
-
+    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if traitCollection.horizontalSizeClass == .Compact {
             return [.Portrait]

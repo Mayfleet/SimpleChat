@@ -49,9 +49,9 @@ class ChatListViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let
-        chatViewController = segue.destinationViewController as? ChatViewController,
+        chatController = segue.destinationViewController as? ChatController,
         selectedIndexPath = tableView.indexPathForSelectedRow {
-            chatViewController.chat = App.chatDispatcher.chats[selectedIndexPath.row]
+            chatController.chat = App.chatDispatcher.chats[selectedIndexPath.row]
         }
     }
 

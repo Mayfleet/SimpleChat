@@ -23,9 +23,8 @@ import UIKit
             for column in 0.stride(to: columns, by: 1) {
 
                 let rect = CGRect(x: CGFloat(row) * side, y: CGFloat(column) * side, width: side, height: side)
-                CGContextSetFillColorWithColor(ctx, UIColor.randomGrayscaleColor.CGColor)
+                CGContextSetFillColorWithColor(ctx, UIColor.flatPurpleColorDark().randomColor.CGColor)
                 CGContextFillRect(ctx, rect)
-
             }
         }
     }

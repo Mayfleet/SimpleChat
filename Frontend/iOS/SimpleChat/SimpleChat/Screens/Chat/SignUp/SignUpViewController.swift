@@ -9,7 +9,7 @@ class SignUpViewController: UIViewController {
 
     // MARK: SignUpViewController @IB
 
-    @IBOutlet weak var userNameTextField: UITextField?
+    @IBOutlet weak var usernameTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
     @IBOutlet weak var containerView: UIView?
     @IBOutlet weak var containerToBottomLayoutConstraint: NSLayoutConstraint?
@@ -19,11 +19,12 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction func signUpButtonAction(sender: AnyObject) {
+        didSignUp?(username: usernameTextField?.text, password: passwordTextField?.text)
     }
 
     @IBAction func tapGestureRecognizerAction(sender: AnyObject) {
-        if userNameTextField?.isFirstResponder() == true {
-            userNameTextField?.resignFirstResponder()
+        if usernameTextField?.isFirstResponder() == true {
+            usernameTextField?.resignFirstResponder()
         } else if passwordTextField?.isFirstResponder() == true {
             passwordTextField?.resignFirstResponder()
         }
@@ -32,6 +33,7 @@ class SignUpViewController: UIViewController {
     // MARK: SignUpViewController
 
     var onClose: (Void -> Void)?
+    var didSignUp: ((username: String?, password: String?) -> Void)?
 
     private func keyboardWillChangeFrameNotification(notification: NSNotification) {
         guard let
@@ -65,6 +67,10 @@ class SignUpViewController: UIViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         unsubscribe()
+    }
+
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
 
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {

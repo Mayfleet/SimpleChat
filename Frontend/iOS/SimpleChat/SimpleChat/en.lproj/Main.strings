@@ -1,0 +1,54 @@
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "A0a-EI-c7s"; */
+"A0a-EI-c7s.normalTitle" = "Delete";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "DRH-5R-AAP"; */
+"DRH-5R-AAP.placeholder" = "Password";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "Izo-Nk-IK4"; */
+"Izo-Nk-IK4.placeholder" = "User Name";
+
+/* Class = "UILabel"; text = "[ADD_CHAT]"; ObjectID = "PHo-4z-Eea"; */
+"PHo-4z-Eea.text" = "Add Chat";
+
+/* Class = "UIButton"; normalTitle = "Forgot Password?"; ObjectID = "PZi-na-5Aw"; */
+"PZi-na-5Aw.normalTitle" = "Forgot Password?";
+
+/* Class = "UILabel"; text = "[SERVER_NAME]"; ObjectID = "TDc-qS-Tki"; */
+"TDc-qS-Tki.text" = "[SERVER_NAME]";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "U7z-yI-EzO"; */
+"U7z-yI-EzO.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "Y6X-ex-pWC"; */
+"Y6X-ex-pWC.normalTitle" = "Log In";
+
+/* Class = "UITabBarItem"; title = "Sign Up"; ObjectID = "ZD7-c2-l7J"; */
+"ZD7-c2-l7J.title" = "Sign Up";
+
+/* Class = "UITabBarItem"; title = "Log In"; ObjectID = "cCz-eh-Qti"; */
+"cCz-eh-Qti.title" = "Log In";
+
+/* Class = "UITabBarItem"; title = "Messages"; ObjectID = "do5-MI-qsp"; */
+"do5-MI-qsp.title" = "Messages";
+
+/* Class = "UILabel"; text = "[9999]"; ObjectID = "e2v-N5-ocF"; */
+"e2v-N5-ocF.text" = "[9999]";
+
+/* Class = "UIButton"; normalTitle = "Autoconnect: Off"; ObjectID = "hUB-cA-6Tt"; */
+"hUB-cA-6Tt.normalTitle" = "Autoconnect: Off";
+
+/* Class = "UITextField"; placeholder = "User Name"; ObjectID = "mRw-Ga-K6Z"; */
+"mRw-Ga-K6Z.placeholder" = "User Name";
+
+/* Class = "UINavigationItem"; title = "Chats"; ObjectID = "qa6-g9-gq6"; */
+"qa6-g9-gq6.title" = "Chats";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "s82-MU-SDx"; */
+"s82-MU-SDx.normalTitle" = "Sign Up";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "uBV-Zm-Blg"; */
+"uBV-Zm-Blg.placeholder" = "Password";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "wNc-36-avd"; */
+"wNc-36-avd.normalTitle" = "Edit";

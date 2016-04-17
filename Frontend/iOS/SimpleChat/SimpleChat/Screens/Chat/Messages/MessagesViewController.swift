@@ -1,5 +1,5 @@
 //
-//  ChatViewController.swift
+//  MessagesViewController.swift
 //  SimpleChat
 //
 //  Created by Maxim Pervushin on 01/03/16.
@@ -9,52 +9,18 @@
 import UIKit
 import JSQMessagesViewController
 
-class ChatViewController: JSQMessagesViewController {
+class MessagesViewController: JSQMessagesViewController {
+
+    @IBAction func doubleTapGesture(sender: AnyObject) {
+        // TODO: Remove
+        if let chat = chat {
+            chat.debug_setAuthenticationRequired(!chat.authenticationRequired)
+        }
+    }
 
     // MARK: - ChatViewController
 
-    var chat: Chat? {
-        didSet {
-            let center = NSNotificationCenter.defaultCenter()
-            if let chat = chat {
-
-                center.addObserverForName(Chat.statusChangedNotification, object: chat, queue: nil, usingBlock: {
-                    _ in
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let chat = self.chat {
-                            switch chat.status {
-                            case Chat.Status.Online:
-                                self.navigationItem.prompt = NSLocalizedString("Online", comment: "Online Chat Status")
-                                break
-                            case Chat.Status.Offline:
-                                self.navigationItem.prompt = NSLocalizedString("Offline", comment: "Offline Chat Status")
-                                break
-                            }
-                        } else {
-                            self.title = ""
-                        }
-                    })
-                })
-
-                center.addObserverForName(Chat.messagesChangedNotification, object: chat, queue: nil, usingBlock: {
-                    _ in
-
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.collectionView?.reloadData()
-                    })
-                })
-
-            } else {
-                center.removeObserver(self, name: Chat.statusChangedNotification, object: nil)
-                center.removeObserver(self, name: Chat.messagesChangedNotification, object: nil)
-            }
-
-            dispatch_async(dispatch_get_main_queue(), {
-                self.title = self.chat?.name
-            })
-        }
-    }
+    weak var chat: Chat?
 
     override class func nib() -> UINib? {
         return nil
@@ -76,18 +42,6 @@ class ChatViewController: JSQMessagesViewController {
                 button.setTitleColor(UIColor.flatWhiteColor(), forState: .Highlighted)
                 button.setTitleColor(UIColor.flatWhiteColor().colorWithAlphaComponent(0.25), forState: .Disabled)
             }
-        }
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        chat?.connect()
-    }
-
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        if let chat = chat where !chat.autoconnect {
-            chat.disconnect()
         }
     }
 
