@@ -1,0 +1,221 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  position: static;
+  overflow: hidden;
+  height: 100%;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover
+{
+  outline:0px !important;
+  -webkit-appearance:none;
+}
+
+.form-control {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  outline:0px !important;
+  -webkit-appearance:none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+.x-shortcut {
+  opacity: 0.4;
+}
+
+.x-main-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+}
+
+.x-incoming-section {
+  position: absolute;
+  right: 50vw;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.x-outgoing-section {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 50vw;
+  bottom: 0;
+}
+
+@media (max-width: 770px) {
+  .x-incoming-section {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 50vh;
+  }
+
+  .x-outgoing-section {
+    position: absolute;
+    right: 0;
+    top: 50vh;
+    left: 0;
+    bottom: 0;
+  }
+
+  .x-shortcut {
+    display: none;
+  }
+
+}
+
+.x-incoming-display {
+  position: absolute;
+  top: 44px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  background-color: hsl(87, 100%, 98%);
+
+  overflow: scroll;
+}
+
+@media (min-width: 770px) {
+  .x-incoming-display {
+    right: 0;
+  }
+}
+
+.x-incoming-display .x-message {
+  position: relative;
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+  background: none;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.09);
+  min-height: 20px;
+  white-space: pre;
+}
+
+.x-incoming-display .x-message.last {
+  border-bottom: none;
+}
+
+.x-incoming-display .x-message.service {
+  color: #5042A9;
+  font-weight: bold;
+}
+
+.x-incoming-display .x-message.incoming {
+  color: #FF3600;
+}
+
+.x-incoming-display .x-message.outgoing {
+  color: #00804E;
+}
+
+.x-incoming-display .x-message b {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: 'Roboto Mono';
+  font-size: 10px;
+  height: 16px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, .3);
+  padding: 0 4px 0 0;
+}
+
+.x-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 34px;
+  line-height: 34px;
+  font-size: 18px;
+  color: hsla(208,56%,28%,1);
+}
+
+.x-incoming-section .x-header-container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 39px;
+}
+
+.x-outgoing-section .x-header-container {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 39px;
+}
+
+.x-outgoing-section .x-textarea-container {
+  position: absolute;
+  left: 5px;
+  top: 44px;
+  right: 5px;
+  bottom: 44px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  background-color: hsl(212, 100%, 98%);
+}
+
+.x-outgoing-section .x-textarea-container textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+  padding: 5px;
+
+  border-radius: 4px;
+
+  background-color: transparent;
+  color: #555;
+
+  font-family: 'Roboto Mono';
+  font-size: 12px;
+}
+
+.x-outgoing-section .x-outgoing-toolbar-container {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  height: 39px;
+  padding: 5px 0 0 0;
+}
